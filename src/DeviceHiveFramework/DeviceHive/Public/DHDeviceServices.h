@@ -24,9 +24,7 @@ typedef enum : NSUInteger {
 
 
 /**
- `DHDeviceHive` class is a starting point from which you will begin using Device Hive in your app. This class provides a set of methods
- for obtaining a device service which implements and encapsulates device registration logic, command polling and dispatching mechanism
- and also posting notifications.
+ This class provides a set of methods for obtaining a device service which implements and encapsulates device registration logic, command polling and dispatching mechanism and also posting notifications.
  */
 @interface DHDeviceServices : NSObject
 
