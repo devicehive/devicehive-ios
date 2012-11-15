@@ -33,6 +33,7 @@ typedef void (^DHCommandCompletionBlock)(DHCommandResult* result);
 - (BOOL)shouldExecuteCommand:(DHCommand*)command;
 
 /** Execute the given command.
+ You *MUST* call completion block in the end of your implementation
  @param command DHCommand instance to be executed
  @param completion Completion block to be invoked when command execution is finished
  */
