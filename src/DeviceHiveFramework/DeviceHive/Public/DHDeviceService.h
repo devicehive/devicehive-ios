@@ -25,7 +25,7 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 @class DHCommandResult;
 
 /**
- `DHDeviceService` protocol defines common interface for classes which implement and encapsulate device registration logic, command polling and dispatching mechanism and also posting notifications.
+ `DHDeviceService` protocol defines common interface for classes which implement and encapsulate device registration logic, command polling and dispatching mechanism and also posting notifications. Methods of this protocol are not supposed to be called directly. Instead, each device should be initialised with an instance of a class which adopts this protocol.
  */
 @protocol DHDeviceService <NSObject>
 
@@ -38,9 +38,14 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 
 /**
  Minimum time (in seconds) between two poll command requests. 
- Implementers may set reasomable default value of this property (e.g. 3 seconds)
+ Implementers may set reasonable default value of this property (e.g. 3 seconds)
  */
 @property (nonatomic) NSTimeInterval minimumCommandPollInterval;
+
+/**
+ Indicates whether the device service is currently performing poll/receive/execute/update cycle of command execution
+ */
+@property (nonatomic, readonly) BOOL isExecutingCommands;
 
 /** Issues a registration request for the given device.
  @param device DHDevice to be registered

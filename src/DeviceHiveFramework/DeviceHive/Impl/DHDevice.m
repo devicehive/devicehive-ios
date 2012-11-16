@@ -21,7 +21,6 @@
 @interface DHDevice ()
 
 @property (nonatomic, strong, readwrite) id<DHDeviceService> deviceService;
-@property (nonatomic, readwrite) BOOL executingCommands;
 @property (nonatomic, readwrite) BOOL isRegistered;
 
 @end
@@ -36,7 +35,6 @@
     if (self) {
         _deviceData = deviceData;
         _deviceService = deviceService;
-        _executingCommands = NO;
         _isRegistered = NO;
         [self attachEquipments:_deviceData.equipments];
     }
@@ -77,16 +75,20 @@
     if (!self.isRegistered) {
         NSLog(@"Device should be registered in order to be able to execute commands");
     } else {
-        self.executingCommands = YES;
         [self.deviceService beginExecutingCommandsForDevice:self];
     }
 }
 
 - (void)stopExecutingCommands {
-    if (self.isRegistered && self.isExecutingCommands) {
+    if (!self.isRegistered) {
+        NSLog(@"Device should be registered in order to be able to execute commands");
+    } else {
         [self.deviceService stopExecutingCommandsForDevice:self];
     }
-    self.executingCommands = NO;
+}
+
+- (BOOL)isExecutingCommands {
+    return self.deviceService.isExecutingCommands;
 }
 
 - (void)attachEquipments:(NSArray*)equipments {

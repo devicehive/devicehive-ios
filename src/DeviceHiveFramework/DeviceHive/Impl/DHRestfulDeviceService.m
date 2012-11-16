@@ -158,6 +158,9 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 
 - (void)stopExecutingCommandsForDevice:(DHDevice *)device {
      self.isExecutingCommands = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(executeNextCommandForDevice:)
+                                               object:device];
 }
 
 - (void)executeNextCommandForDevice:(DHDevice*)device {
@@ -185,7 +188,8 @@ NSString* encodeToPercentEscapeString(NSString *string) {
         [self executeNextCommandForDevice:device];
     } else {
         [self performSelector:@selector(executeNextCommandForDevice:)
-                   withObject:device afterDelay:self.minimumCommandPollInterval - timeElapsedSinceLastPollRequest];
+                   withObject:device
+                   afterDelay:self.minimumCommandPollInterval - timeElapsedSinceLastPollRequest];
     }
 
 }
