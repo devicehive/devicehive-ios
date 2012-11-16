@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D018A51A165638BA00B4DF29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D018A519165638BA00B4DF29 /* QuartzCore.framework */; };
 		D0569308162C187900237899 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0569307162C187900237899 /* UIKit.framework */; };
 		D056930A162C187900237899 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0569309162C187900237899 /* Foundation.framework */; };
 		D056930C162C187900237899 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D056930B162C187900237899 /* CoreGraphics.framework */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D018A519165638BA00B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D0569303162C187900237899 /* DeviceHiveDevice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceHiveDevice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569307162C187900237899 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D0569309162C187900237899 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -55,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D018A51A165638BA00B4DF29 /* QuartzCore.framework in Frameworks */,
 				D05A7AAB165519B70074078A /* libDeviceHiveFramework.a in Frameworks */,
 				D0569308162C187900237899 /* UIKit.framework in Frameworks */,
 				D056930A162C187900237899 /* Foundation.framework in Frameworks */,
@@ -68,6 +71,7 @@
 		D05692F8162C187900237899 = {
 			isa = PBXGroup;
 			children = (
+				D018A519165638BA00B4DF29 /* QuartzCore.framework */,
 				D05A7AAA165519B70074078A /* libDeviceHiveFramework.a */,
 				D056930D162C187900237899 /* DeviceHiveDevice */,
 				D0569306162C187900237899 /* Frameworks */,

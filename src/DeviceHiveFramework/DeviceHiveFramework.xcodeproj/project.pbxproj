@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D018A5171656341100B4DF29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D018A5161656341100B4DF29 /* QuartzCore.framework */; };
 		D05A7A231655166F0074078A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05A7A221655166F0074078A /* Foundation.framework */; };
 		D05A7A5D165516EF0074078A /* DHCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A33165516AD0074078A /* DHCommand.m */; };
 		D05A7A5E165516EF0074078A /* DHCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A35165516AD0074078A /* DHCommandQueue.m */; };
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D018A5161656341100B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D05A7A1F1655166F0074078A /* libDeviceHiveFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeviceHiveFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05A7A221655166F0074078A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D05A7A261655166F0074078A /* DeviceHiveFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeviceHiveFramework-Prefix.pch"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D018A5171656341100B4DF29 /* QuartzCore.framework in Frameworks */,
 				D05A7A231655166F0074078A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +133,7 @@
 		D05A7A141655166F0074078A = {
 			isa = PBXGroup;
 			children = (
+				D018A5161656341100B4DF29 /* QuartzCore.framework */,
 				D05A7A241655166F0074078A /* DeviceHiveFramework */,
 				D05A7A211655166F0074078A /* Frameworks */,
 				D05A7A201655166F0074078A /* Products */,
@@ -368,6 +372,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DH_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);

@@ -41,13 +41,18 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 @property (nonatomic, strong) id<DHRestfulApiClient> restfulApiClient;
 @property (nonatomic, readwrite) BOOL isExecutingCommands;
 @property (nonatomic, strong) DHCommandQueue* commandQueue;
+@property (nonatomic) NSTimeInterval lastCommandPollRequestTime;
 
 @end
 
 
-@implementation DHRestfulDeviceService
+@implementation DHRestfulDeviceService {
+    NSDate* _lastCommandPollTimestamp;
+    NSTimeInterval _minimumCommandPollInterval;
+}
 
-@synthesize lastCommandPollTimestamp;
+@synthesize lastCommandPollTimestamp = _lastCommandPollTimestamp;
+@synthesize minimumCommandPollInterval = _minimumCommandPollInterval;
 
 - (id)init {
     [self doesNotRecognizeSelector:_cmd];
@@ -60,6 +65,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
         _restfulApiClient = restfulApiClient;
         _isExecutingCommands = NO;
         _commandQueue = [[DHCommandQueue alloc] init];
+        _minimumCommandPollInterval = 3.0;
     }
     return self;
 }
@@ -160,16 +166,28 @@ NSString* encodeToPercentEscapeString(NSString *string) {
             if (command) {
                 [self executeCommand:command forDevice:device completion:^(DHCommandResult *result) {
                     if (self.isExecutingCommands) {
-                        [self executeNextCommandForDevice:device];
+                        [self scheduleExecuteNextCommandForDevice:device];
                     }
                 }];
             } else {
                 if (self.isExecutingCommands) {
-                    [self executeNextCommandForDevice:device];
+                    [self scheduleExecuteNextCommandForDevice:device];
                 }
             }
         }];
     }
+}
+
+- (void)scheduleExecuteNextCommandForDevice:(DHDevice*)device {
+    NSTimeInterval currentTime = CACurrentMediaTime();
+    NSTimeInterval timeElapsedSinceLastPollRequest = currentTime - self.lastCommandPollRequestTime;
+    if (timeElapsedSinceLastPollRequest > self.minimumCommandPollInterval) {
+        [self executeNextCommandForDevice:device];
+    } else {
+        [self performSelector:@selector(executeNextCommandForDevice:)
+                   withObject:device afterDelay:self.minimumCommandPollInterval - timeElapsedSinceLastPollRequest];
+    }
+
 }
 
 - (void)nextCommandForDevice:(DHDevice*)device
@@ -183,6 +201,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
         });
     } else {
         NSString* path = [self commandPollRequestPathForDevice:device];
+        self.lastCommandPollRequestTime = CACurrentMediaTime();
         [self.restfulApiClient get:path
                         parameters:nil
                            success:^(id response) {

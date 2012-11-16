@@ -36,6 +36,12 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
  */
 @property (nonatomic, strong) NSDate* lastCommandPollTimestamp;
 
+/**
+ Minimum time (in seconds) between two poll command requests. 
+ Implementers may set reasomable default value of this property (e.g. 3 seconds)
+ */
+@property (nonatomic) NSTimeInterval minimumCommandPollInterval;
+
 /** Issues a registration request for the given device.
  @param device DHDevice to be registered
  @param success Success completion block. Response object is a DHDeviceData instance
