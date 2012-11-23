@@ -30,7 +30,7 @@ static NSDateFormatter* defaultDateFormatter = nil;
         parameters:(NSDictionary*)parameters
             status:(NSString*)status
             result:(NSString*)result
-         timestamp:(NSDate*)timestamp
+         timestamp:(NSString*)timestamp
           lifetime:(NSNumber*)lifetime
              flags:(NSNumber*)flags {
     self = [super init];
@@ -54,7 +54,7 @@ static NSDateFormatter* defaultDateFormatter = nil;
                    parameters:dictionary[@"parameters"]
                        status:dictionary[@"status"]
                        result:dictionary[@"result"]
-                    timestamp:[defaultDateFormatter dateFromString:dictionary[@"timestamp"]]
+                    timestamp:dictionary[@"timestamp"]
                      lifetime:dictionary[@"lifetime"]
                         flags:dictionary[@"flags"]];
 }
@@ -68,7 +68,7 @@ static NSDateFormatter* defaultDateFormatter = nil;
     [resultDict setObjectIfNotNull:self.status forKey:@"status"];
     [resultDict setObjectIfNotNull:self.lifetime forKey:@"lifetime"];
     [resultDict setObjectIfNotNull:self.flags forKey:@"flags"];
-    [resultDict setObjectIfNotNull:[defaultDateFormatter stringFromDate:self.timeStamp] forKey:@"timestamp"];
+    [resultDict setObjectIfNotNull:self.timeStamp forKey:@"timestamp"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
 }
 

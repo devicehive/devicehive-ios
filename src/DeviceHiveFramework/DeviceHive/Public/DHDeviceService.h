@@ -34,7 +34,7 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
  This value is used as a starting point in time from which every subsequent command (which was posted after this point) will be received and executed by the device. If not initialized, *ALL* existing commands will be received along with the first poll response.
  Clients are suppose to persist the last poll date somewhere(e.g. NSUserDefaults) and restore it when the app relaunched in order to avoid receiving already executed commands.
  */
-@property (nonatomic, strong) NSDate* lastCommandPollTimestamp;
+@property (nonatomic, strong) NSString* lastCommandPollTimestamp;
 
 /**
  Minimum time (in seconds) between two poll command requests. 

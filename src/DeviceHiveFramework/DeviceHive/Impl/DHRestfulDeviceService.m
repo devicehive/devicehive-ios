@@ -47,7 +47,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 
 
 @implementation DHRestfulDeviceService {
-    NSDate* _lastCommandPollTimestamp;
+    NSString* _lastCommandPollTimestamp;
     NSTimeInterval _minimumCommandPollInterval;
 }
 
@@ -197,7 +197,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 - (void)nextCommandForDevice:(DHDevice*)device
                   completion:(DHCommandPollCompletionBlock)completion {
     DHLog(@"Poll next command for device: %@ starting from date: (%@)",
-          device.deviceData.name, [[DHCommand defaultTimestampFormatter] stringFromDate:self.lastCommandPollTimestamp]);
+          device.deviceData.name, self.lastCommandPollTimestamp);
     DHCommand* command = [self.commandQueue dequeue];
     if (command) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -231,10 +231,9 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 - (NSString*)commandPollRequestPathForDevice:(DHDevice*)device {
     NSString* path = nil;
     if (self.lastCommandPollTimestamp) {
-        NSDateFormatter* df = [DHCommand defaultTimestampFormatter];
         path = [NSString stringWithFormat:@"device/%@/command?start=%@",
         //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                device.deviceData.deviceID, encodeToPercentEscapeString([df stringFromDate:self.lastCommandPollTimestamp])];
+                device.deviceData.deviceID, encodeToPercentEscapeString(self.lastCommandPollTimestamp)];
     } else {
         path = [NSString stringWithFormat:@"device/%@/command", device.deviceData.deviceID];
     }

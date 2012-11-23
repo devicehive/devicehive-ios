@@ -22,7 +22,7 @@
 /**
  Command timestamp (UTC)
  */
-@property (nonatomic, strong, readonly) NSDate * timeStamp;
+@property (nonatomic, strong, readonly) NSString * timeStamp;
 
 /**
  Command name
