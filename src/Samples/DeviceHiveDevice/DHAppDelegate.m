@@ -46,18 +46,18 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     NSLog(@"applicationDidEnterBackground");
-    if (self.device.isRegistered && self.device.isExecutingCommands) {
+    if (self.device.isRegistered && self.device.isProcessingCommands) {
         //[self.deviceService stopReceivingCommands];
-        [self.device stopExecutingCommands];
+        [self.device stopProcessingCommands];
     }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     NSLog(@"applicationWillEnterForeground");
-    if (self.device.isRegistered && !self.device.isExecutingCommands) {
+    if (self.device.isRegistered && !self.device.isProcessingCommands) {
         //[self.deviceService beginReceivingCommands];
-        [self.device beginExecutingCommands];
+        [self.device beginProcessingCommands];
     }
 }
 
@@ -75,7 +75,7 @@
     [device registerDeviceWithSuccess:^(id response) {
         NSLog(@"Successfully registered device");
         //[self.deviceService beginReceivingCommands];
-        [device beginExecutingCommands];
+        [device beginProcessingCommands];
     } failure:^(NSError *error) {
         // retry
         [self registerDevice:device];

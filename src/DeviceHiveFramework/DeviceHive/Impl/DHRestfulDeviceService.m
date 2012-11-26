@@ -39,7 +39,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 @interface DHRestfulDeviceService ()
 
 @property (nonatomic, strong) id<DHRestfulApiClient> restfulApiClient;
-@property (nonatomic, readwrite) BOOL isExecutingCommands;
+@property (nonatomic, readwrite) BOOL isProcessingCommands;
 @property (nonatomic, strong) DHCommandQueue* commandQueue;
 @property (nonatomic) NSTimeInterval lastCommandPollRequestTime;
 
@@ -63,7 +63,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
     self = [super init];
     if (self) {
         _restfulApiClient = restfulApiClient;
-        _isExecutingCommands = NO;
+        _isProcessingCommands = NO;
         _commandQueue = [[DHCommandQueue alloc] init];
         _minimumCommandPollInterval = 3.0;
     }
@@ -148,32 +148,32 @@ NSString* encodeToPercentEscapeString(NSString *string) {
      ];
 }
 
-- (void)beginExecutingCommandsForDevice:(DHDevice *)device {
-    if (self.isExecutingCommands) {
-        [self stopExecutingCommandsForDevice:device];
+- (void)beginProcessingCommandsForDevice:(DHDevice *)device {
+    if (self.isProcessingCommands) {
+        [self stopProcessingCommandsForDevice:device];
     }
-    self.isExecutingCommands = YES;
+    self.isProcessingCommands = YES;
     [self executeNextCommandForDevice:device];
 }
 
-- (void)stopExecutingCommandsForDevice:(DHDevice *)device {
-     self.isExecutingCommands = NO;
+- (void)stopProcessingCommandsForDevice:(DHDevice *)device {
+     self.isProcessingCommands = NO;
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(executeNextCommandForDevice:)
                                                object:device];
 }
 
 - (void)executeNextCommandForDevice:(DHDevice*)device {
-    if (self.isExecutingCommands) {
+    if (self.isProcessingCommands) {
         [self nextCommandForDevice:device completion:^(DHCommand *command) {
             if (command) {
                 [self executeCommand:command forDevice:device completion:^(DHCommandResult *result) {
-                    if (self.isExecutingCommands) {
+                    if (self.isProcessingCommands) {
                         [self scheduleExecuteNextCommandForDevice:device];
                     }
                 }];
             } else {
-                if (self.isExecutingCommands) {
+                if (self.isProcessingCommands) {
                     [self scheduleExecuteNextCommandForDevice:device];
                 }
             }

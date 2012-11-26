@@ -45,7 +45,7 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 /**
  Indicates whether the device service is currently performing poll/receive/execute/update cycle of command execution
  */
-@property (nonatomic, readonly) BOOL isExecutingCommands;
+@property (nonatomic, readonly) BOOL isProcessingCommands;
 
 /** Issues a registration request for the given device.
  @param device DHDevice to be registered
@@ -70,11 +70,11 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 /** Starts/Resumes commands receiving/executing/updating process for the given device.
  @param device DHDevice which will receive and execute commands. DHDevice should be registered with the service before executing any commands
  */
-- (void)beginExecutingCommandsForDevice:(DHDevice*)device;
+- (void)beginProcessingCommandsForDevice:(DHDevice*)device;
 
 /** Stops/pauses commands receiving/executing/updating process for the given device.
  @param device DHDevice which should stop command processing
  */
-- (void)stopExecutingCommandsForDevice:(DHDevice*)device;
+- (void)stopProcessingCommandsForDevice:(DHDevice*)device;
 
 @end

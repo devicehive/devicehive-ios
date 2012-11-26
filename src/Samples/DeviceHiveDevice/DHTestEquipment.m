@@ -31,6 +31,15 @@
     completion(YES);
 }
 
+- (void)deviceWillBeginProcessingCommands {
+    NSLog(@"DHTestEquipment:deviceWillBeginProcessingCommands");
+}
+
+
+- (void)deviceDidStopProcessingCommands {
+    NSLog(@"DHTestEquipment:deviceDidStopProcessingCommands");
+}
+
 - (BOOL)shouldExecuteCommand:(DHCommand*)command {
     return YES;
 }

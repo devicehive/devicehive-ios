@@ -71,30 +71,46 @@
                                  }];
 }
 
-- (void)beginExecutingCommands {
+- (void)beginProcessingCommands {
     if (!self.isRegistered) {
         NSLog(@"Device should be registered in order to be able to execute commands");
     } else {
-        [self.deviceService beginExecutingCommandsForDevice:self];
+        [self willBeginProcessingCommandsInternal];
+        [self.deviceService beginProcessingCommandsForDevice:self];
     }
 }
 
-- (void)stopExecutingCommands {
+- (void)stopProcessingCommands {
     if (!self.isRegistered) {
         NSLog(@"Device should be registered in order to be able to execute commands");
     } else {
-        [self.deviceService stopExecutingCommandsForDevice:self];
+        [self.deviceService stopProcessingCommandsForDevice:self];
+        [self didStopProcessingCommandsInternal];
     }
 }
 
-- (BOOL)isExecutingCommands {
-    return self.deviceService.isExecutingCommands;
+- (BOOL)isProcessingCommands {
+    return self.deviceService.isProcessingCommands;
 }
 
 - (void)attachEquipments:(NSArray*)equipments {
     for (DHEquipment* equipment in equipments) {
         equipment.device = self;
     }
+}
+
+- (void)willBeginProcessingCommandsInternal {
+    [self willBeginProcessingCommands];
+    for (DHEquipment* equipment in _deviceData.equipments) {
+        [equipment deviceWillBeginProcessingCommands];
+    }
+}
+
+- (void)didStopProcessingCommandsInternal {
+    for (DHEquipment* equipment in _deviceData.equipments) {
+        [equipment deviceDidStopProcessingCommands];
+    }
+    [self didStopProcessingCommands];
 }
 
 
@@ -107,6 +123,14 @@
 }
 
 - (void)didFailRegistrationWithError:(NSError *)error {
+    
+}
+
+- (void)willBeginProcessingCommands {
+    
+}
+
+- (void)didStopProcessingCommands {
     
 }
 

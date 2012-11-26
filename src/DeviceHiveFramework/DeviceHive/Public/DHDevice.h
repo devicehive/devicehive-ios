@@ -46,9 +46,9 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 @property (nonatomic, strong, readonly) id<DHDeviceService> deviceService;
 
 /**
- Indicates whether the device is currently executing commands, i.e. performs poll/receive/execute/update cycle of command execution 
+ Indicates whether the device is currently processing commands, i.e. performs poll/receive/execute/update cycle of command execution 
  */
-@property (nonatomic, readonly) BOOL isExecutingCommands;
+@property (nonatomic, readonly) BOOL isProcessingCommands;
 
 /**
  Indicates whether the device is registeres with device service. Device should be registered in order to receive commands
@@ -84,12 +84,12 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 /** Starts/Resumes commands receiving/executing/updating process.
  Override DHCommandExecutor protocol methods in order to be able to handle commands
  */
-- (void)beginExecutingCommands;
+- (void)beginProcessingCommands;
 
 /** Stops/Pauses commands execution.
  Override DHCommandExecutor protocol methods in order to be able to handle commands
  */
-- (void)stopExecutingCommands;
+- (void)stopProcessingCommands;
 
 /** @name Callbacks */
 
@@ -108,6 +108,16 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
  @param error An instance of NSError describing the error
  */
 - (void)didFailRegistrationWithError:(NSError*)error;
+
+/** 
+ Called when device is about to start processing commands.
+ */
+- (void)willBeginProcessingCommands;
+
+/**
+ Called when device has just stopped processing commands.
+ */
+- (void)didStopProcessingCommands;
 
 /**
  Called just before device the device will send notification

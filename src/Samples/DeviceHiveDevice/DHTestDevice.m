@@ -56,6 +56,14 @@ NSString* const DHTestDeviceCommandKey = @"DHTestDeviceCommandKey";
     NSLog(@"DHTestDevice:didFailRegistrationWithError: %@", [error description]);
 }
 
+- (void)willBeginProcessingCommands {
+    NSLog(@"DHTestDevice:willBeginProcessingCommands");
+}
+
+- (void)didStopProcessingCommands {
+    NSLog(@"DHTestDevice:didStopProcessingCommands");
+}
+
 - (void)willSendNotification:(DHNotification*)notification {
     NSLog(@"DHTestDevice:willSendNotification: (%@)", notification.name);
 }

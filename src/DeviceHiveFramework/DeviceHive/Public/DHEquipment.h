@@ -63,4 +63,12 @@ typedef void (^DHEquipmentOperationCompletionBlock)(BOOL success);
  */
 - (void)unregisterEquipmentWithCompletion:(DHEquipmentOperationCompletionBlock)completion;
 
+/** Callback method which is called when hosting device is about to start processing commands.
+ */
+- (void)deviceWillBeginProcessingCommands;
+
+/** Callback method which is called when hosting device has just stopped processing commands.
+ */
+- (void)deviceDidStopProcessingCommands;
+
 @end

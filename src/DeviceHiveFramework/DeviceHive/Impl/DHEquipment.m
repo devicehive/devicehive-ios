@@ -55,6 +55,14 @@
     completion(YES);
 }
 
+- (void)deviceWillBeginProcessingCommands {
+    
+}
+
+- (void)deviceDidStopProcessingCommands {
+    
+}
+
 - (BOOL)shouldExecuteCommand:(DHCommand*)command {
     DHLog(@"Abstract equipment received the command: %@. Descendants should override this method in order to be able to execute commands", command.name);
     return NO;
