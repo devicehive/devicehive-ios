@@ -23,7 +23,7 @@
 
 NSString* const kDeviceEquipmentParameter = @"equipment";
 
-typedef void (^DHCommandPollCompletionBlock)(DHCommand* command);
+typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 
 
 NSString* encodeToPercentEscapeString(NSString *string) {
@@ -41,18 +41,16 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 @property (nonatomic, strong) id<DHRestfulApiClient> restfulApiClient;
 @property (nonatomic, readwrite) BOOL isProcessingCommands;
 @property (nonatomic, strong) DHCommandQueue* commandQueue;
-@property (nonatomic) NSTimeInterval lastCommandPollRequestTime;
+@property (nonatomic) BOOL isCommandPollRequestInProgress;
 
 @end
 
 
 @implementation DHRestfulDeviceService {
     NSString* _lastCommandPollTimestamp;
-    NSTimeInterval _minimumCommandPollInterval;
 }
 
 @synthesize lastCommandPollTimestamp = _lastCommandPollTimestamp;
-@synthesize minimumCommandPollInterval = _minimumCommandPollInterval;
 
 - (id)init {
     [self doesNotRecognizeSelector:_cmd];
@@ -64,8 +62,8 @@ NSString* encodeToPercentEscapeString(NSString *string) {
     if (self) {
         _restfulApiClient = restfulApiClient;
         _isProcessingCommands = NO;
+        _isCommandPollRequestInProgress = NO;
         _commandQueue = [[DHCommandQueue alloc] init];
-        _minimumCommandPollInterval = 3.0;
     }
     return self;
 }
@@ -139,7 +137,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
     [self.restfulApiClient put:path
                     parameters:[result classDictionary]
                        success:^(id response) {
-                           DHLog(@"Command updating finished:%@", [response description]);
+                           DHLog(@"Command updating finished:%@", command.name);
                            success([[DHCommand alloc] initWithDictionary:response]);
                        } failure:^(NSError *error) {
                            DHLog(@"Command updating failed with error:%@", error);
@@ -158,84 +156,64 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 
 - (void)stopProcessingCommandsForDevice:(DHDevice *)device {
      self.isProcessingCommands = NO;
-    [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                             selector:@selector(executeNextCommandForDevice:)
-                                               object:device];
 }
 
 - (void)executeNextCommandForDevice:(DHDevice*)device {
     if (self.isProcessingCommands) {
-        [self nextCommandForDevice:device completion:^(DHCommand *command) {
+        if (!self.isCommandPollRequestInProgress) {
+            DHCommand* command = [self.commandQueue dequeue];
             if (command) {
                 [self executeCommand:command forDevice:device completion:^(DHCommandResult *result) {
                     if (self.isProcessingCommands) {
-                        [self scheduleExecuteNextCommandForDevice:device];
+                        [self executeNextCommandForDevice:device];
                     }
                 }];
             } else {
-                if (self.isProcessingCommands) {
-                    [self scheduleExecuteNextCommandForDevice:device];
-                }
+                [self pollNextCommandForDevice:device completion:^(BOOL success) {
+                    [self executeNextCommandForDevice:device];
+                }];
             }
-        }];
+        }
     }
 }
 
-- (void)scheduleExecuteNextCommandForDevice:(DHDevice*)device {
-    NSTimeInterval currentTime = CACurrentMediaTime();
-    NSTimeInterval timeElapsedSinceLastPollRequest = currentTime - self.lastCommandPollRequestTime;
-    if (timeElapsedSinceLastPollRequest > self.minimumCommandPollInterval) {
-        [self executeNextCommandForDevice:device];
-    } else {
-        [self performSelector:@selector(executeNextCommandForDevice:)
-                   withObject:device
-                   afterDelay:self.minimumCommandPollInterval - timeElapsedSinceLastPollRequest];
-    }
-
-}
-
-- (void)nextCommandForDevice:(DHDevice*)device
-                  completion:(DHCommandPollCompletionBlock)completion {
-    DHLog(@"Poll next command for device: %@ starting from date: (%@)",
-          device.deviceData.name, self.lastCommandPollTimestamp);
-    DHCommand* command = [self.commandQueue dequeue];
-    if (command) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(command);
-        });
-    } else {
+- (void)pollNextCommandForDevice:(DHDevice*)device
+                      completion:(DHCommandPollCompletionBlock)completion {
+    // we already have one poll request in progress just wait for it to finish
+    if (!self.isCommandPollRequestInProgress) {
+        DHLog(@"Poll next command for device: %@ starting from date: (%@)",
+              device.deviceData.name, self.lastCommandPollTimestamp);
+        self.isCommandPollRequestInProgress = YES;
         NSString* path = [self commandPollRequestPathForDevice:device];
-        self.lastCommandPollRequestTime = CACurrentMediaTime();
         [self.restfulApiClient get:path
                         parameters:nil
                            success:^(id response) {
                                DHLog(@"Got commands: %@", [response description]);
-                               //self.lastPollTimestamp = [NSDate date];
                                NSArray* commands = [DHCommand commandsFromArrayOfDictionaries:response];
                                if (commands.count > 0) {
                                    self.lastCommandPollTimestamp = [[commands lastObject] timeStamp];
                                }
                                NSUInteger enqueuedCommandCount = [self.commandQueue enqueueAllNotCompleted:commands];
                                DHLog(@"Enqueued commands count: %d", enqueuedCommandCount);
-                               completion([self.commandQueue dequeue]);
+                               self.isCommandPollRequestInProgress = NO;
+                               completion(YES);
                            } failure:^(NSError *error) {
                                DHLog(@"Failed to poll commands with error:%@", error);
-                               // there is no commands to return to the caller
-                               completion(nil);
+                               self.isCommandPollRequestInProgress = NO;
+                               completion(NO);
                            }
          ];
     }
-
 }
 
 - (NSString*)commandPollRequestPathForDevice:(DHDevice*)device {
     NSString* path = nil;
     if (self.lastCommandPollTimestamp) {
-        path = [NSString stringWithFormat:@"device/%@/command?start=%@",
+        path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
         //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
                 device.deviceData.deviceID, encodeToPercentEscapeString(self.lastCommandPollTimestamp)];
     } else {
-        path = [NSString stringWithFormat:@"device/%@/command", device.deviceData.deviceID];
+        path = [NSString stringWithFormat:@"device/%@/command/poll", device.deviceData.deviceID];
     }
     return path;
 }

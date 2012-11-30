@@ -37,12 +37,6 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 @property (nonatomic, strong) NSString* lastCommandPollTimestamp;
 
 /**
- Minimum time (in seconds) between two poll command requests. 
- Implementers may set reasonable default value of this property (e.g. 3 seconds)
- */
-@property (nonatomic) NSTimeInterval minimumCommandPollInterval;
-
-/**
  Indicates whether the device service is currently performing poll/receive/execute/update cycle of command execution
  */
 @property (nonatomic, readonly) BOOL isProcessingCommands;
