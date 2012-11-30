@@ -49,7 +49,7 @@
 /**
  Array of Equipment objects to be associated with the device class
  */
-@property (nonatomic, strong, readonly) NSArray * equipments;
+@property (nonatomic, strong, readonly) NSArray * equipment;
 
 /**
  Init object with given parameters.
@@ -67,7 +67,7 @@
           status:(NSString*)status
          network:(DHNetwork*)network
      deviceClass:(DHDeviceClass*)deviceClass
-      equipments:(NSArray*)equipments;
+       equipment:(NSArray*)equipment;
 
 /**
  Init object with given parameters.

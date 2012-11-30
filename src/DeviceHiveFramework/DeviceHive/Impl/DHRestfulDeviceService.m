@@ -276,7 +276,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
                         completion:(DHEquipmentOperationCompletionBlock)completion {
     NSMutableSet* processedEquipment = [NSMutableSet set];
     NSMutableSet* registeredEquipment = [NSMutableSet set];
-    for (DHEquipment* equipment in device.deviceData.equipments) {
+    for (DHEquipment* equipment in device.deviceData.equipment) {
         [equipment registerEquipmentWithCompletion:^(BOOL success) {
             [processedEquipment addObject:equipment];
             if (success) {
@@ -285,7 +285,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
             } else {
                 DHLog(@"Failed to register equipment: %@", equipment.equipmentData.name);
             }
-            if (processedEquipment.count == device.deviceData.equipments.count) {
+            if (processedEquipment.count == device.deviceData.equipment.count) {
                 completion([processedEquipment isEqualToSet:registeredEquipment]);
             }
         }];
@@ -296,7 +296,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
                           completion:(DHEquipmentOperationCompletionBlock)completion {
     NSMutableSet* processedEquipment = [NSMutableSet set];
     NSMutableSet* unregisteredEquipment = [NSMutableSet set];
-    for (DHEquipment* equipment in device.deviceData.equipments) {
+    for (DHEquipment* equipment in device.deviceData.equipment) {
         [equipment unregisterEquipmentWithCompletion:^(BOOL success) {
             [processedEquipment addObject:equipment];
             if (success) {
@@ -305,7 +305,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
             } else {
                 DHLog(@"Failed to unregister equipment: %@", equipment.equipmentData.name);
             }
-            if (processedEquipment.count == device.deviceData.equipments.count) {
+            if (processedEquipment.count == device.deviceData.equipment.count) {
                 completion([processedEquipment isEqualToSet:unregisteredEquipment]);
             }
             
@@ -314,7 +314,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 }
 
 - (DHEquipment*)equipmentOfDevice:(DHDevice*)device withCode:(NSString*)code {
-    for (DHEquipment* equipment in device.deviceData.equipments) {
+    for (DHEquipment* equipment in device.deviceData.equipment) {
         if ([equipment.equipmentData.code isEqualToString:code]) {
             return equipment;
         }

@@ -36,7 +36,7 @@
         _deviceData = deviceData;
         _deviceService = deviceService;
         _isRegistered = NO;
-        [self attachEquipments:_deviceData.equipments];
+        [self attachEquipments:_deviceData.equipment];
     }
     return self;
 }
@@ -101,13 +101,13 @@
 
 - (void)willBeginProcessingCommandsInternal {
     [self willBeginProcessingCommands];
-    for (DHEquipment* equipment in _deviceData.equipments) {
+    for (DHEquipment* equipment in self.deviceData.equipment) {
         [equipment deviceWillBeginProcessingCommands];
     }
 }
 
 - (void)didStopProcessingCommandsInternal {
-    for (DHEquipment* equipment in _deviceData.equipments) {
+    for (DHEquipment* equipment in self.deviceData.equipment) {
         [equipment deviceDidStopProcessingCommands];
     }
     [self didStopProcessingCommands];

@@ -24,7 +24,7 @@
           status:(NSString *)status
          network:(DHNetwork *)network
      deviceClass:(DHDeviceClass *)deviceClass
-      equipments:(NSArray *)equipments {
+       equipment:(NSArray *)equipment {
     self = [super init];
     if (self) {
         _deviceID = deviceID;
@@ -33,7 +33,7 @@
         _status = status;
         _network = network;
         _deviceClass = deviceClass;
-        _equipments = equipments;
+        _equipment = equipment;
     }
     return self;
 }
@@ -54,11 +54,11 @@
                      status:dictionary[@"status"]
                     network:[[DHNetwork alloc] initWithDictionary:dictionary[@"network"]]
                 deviceClass:[[DHDeviceClass alloc] initWithDictionary:dictionary[@"deviceClass"]]
-                 equipments:[DHEquipmentData equipmentsFromArrayOfDictionaries:dictionary[@"equipment"]]];
+                  equipment:[DHEquipmentData equipmentsFromArrayOfDictionaries:dictionary[@"equipment"]]];
 }
 
 - (NSDictionary *)classDictionary {
-    NSArray* equipmentsDictArray = [DHEquipmentData equipmentsAsArrayOfDictionaries:self.equipments];
+    NSArray* equipmentsDictArray = [DHEquipmentData equipmentsAsArrayOfDictionaries:self.equipment];
     NSDictionary* networkDict = [self.network classDictionary];
     NSDictionary* deviceClassDict = [self.deviceClass classDictionary];
     
