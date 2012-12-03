@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../DeviceHiveFramework/DeviceHiveFramework.xcodeproj">
+      location = "group:../../DeviceHiveFramework/DeviceHiveFramework.xcodeproj">
    </FileRef>
    <FileRef
       location = "container:DeviceHiveDevice.xcodeproj">
