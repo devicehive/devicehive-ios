@@ -1,6 +1,6 @@
 #!/bin/bash
 appledoc \
---project-name "DeviceHive Device Framework" \
+--project-name "DeviceHive Framework" \
 --project-company "DataArt" \
 --company-id "com.dataart" \
 --output "./docs" \
