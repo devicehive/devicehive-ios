@@ -22,26 +22,13 @@
 #import "DHLog.h"
 #import "DHUtils.h"
 
-NSString* const kDeviceEquipmentParameter = @"equipment";
-
-typedef void (^DHCommandPollCompletionBlock)(BOOL success);
-
-
 @interface DHRestfulDeviceService ()
 
 @property (nonatomic, strong) id<DHRestfulApiClient> restfulApiClient;
-@property (nonatomic, readwrite) BOOL isProcessingCommands;
-@property (nonatomic, strong) DHCommandQueue* commandQueue;
-@property (nonatomic) BOOL isCommandPollRequestInProgress;
 
 @end
 
-
-@implementation DHRestfulDeviceService {
-    NSString* _lastCommandPollTimestamp;
-}
-
-@synthesize lastCommandPollTimestamp = _lastCommandPollTimestamp;
+@implementation DHRestfulDeviceService
 
 - (id)init {
     [self doesNotRecognizeSelector:_cmd];
@@ -52,9 +39,6 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
     self = [super init];
     if (self) {
         _restfulApiClient = restfulApiClient;
-        _isProcessingCommands = NO;
-        _isCommandPollRequestInProgress = NO;
-        _commandQueue = [[DHCommandQueue alloc] init];
     }
     return self;
 }
@@ -70,26 +54,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                     parameters:[device.deviceData classDictionary]
                        success:^(id response) {
                            DHLog(@"Registration request finished:%@", [response description]);
-                           DHLog(@"Sending device status notification");
-                           [self sendNotification:[DHDeviceStatusNotification onlineStatusNotification]
-                                        forDevice:device 
-                                          success:^(id response) {
-                                              DHLog(@"Device status notification posted: %@", [response description]);
-                                              DHLog(@"Registering equipment...");
-                                              [self registerEquipmentForDevice:device completion:^(BOOL registered) {
-                                                  if (registered) {
-                                                      DHLog(@"Equipment registered");
-                                                      success([[DHDeviceData alloc] initWithDictionary:response]);
-                                                  } else {
-                                                      DHLog(@"Failed to register equipment");
-                                                      // TODO: construct proper NSError
-                                                      failure(nil);
-                                                  }
-                                              }];
-                                          } failure:^(NSError *error) {
-                                              DHLog(@"Registration request failed with error:%@", error);
-                                              failure(error);
-                                          }];
+                           success([[DHDeviceData alloc] initWithDictionary:response]);
                        } failure:^(NSError *error) {
                            DHLog(@"Registration request failed with error:%@", error);
                            failure(error);
@@ -120,7 +85,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
             forDevice:(DHDevice*)device
            withResult:(DHCommandResult*)result
               success:(DHDeviceServiceSuccessCompletionBlock) success
-              failure:(DHDeviceServiceFailureCompletionBlock) failure; {
+              failure:(DHDeviceServiceFailureCompletionBlock) failure {
     
     [self setupAuthenticationForDevice:device];
     
@@ -137,123 +102,30 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
      ];
 }
 
-- (void)beginProcessingCommandsForDevice:(DHDevice *)device {
-    if (self.isProcessingCommands) {
-        [self stopProcessingCommandsForDevice:device];
-    }
-    self.isProcessingCommands = YES;
-    [self executeNextCommandForDevice:device];
-}
-
-- (void)stopProcessingCommandsForDevice:(DHDevice *)device {
-     self.isProcessingCommands = NO;
-}
-
-- (void)executeNextCommandForDevice:(DHDevice*)device {
-    if (self.isProcessingCommands) {
-        if (!self.isCommandPollRequestInProgress) {
-            DHCommand* command = [self.commandQueue dequeueObject];
-            if (command) {
-                [self executeCommand:command forDevice:device completion:^(DHCommandResult *result) {
-                    if (self.isProcessingCommands) {
-                        [self executeNextCommandForDevice:device];
-                    }
-                }];
-            } else {
-                [self pollNextCommandForDevice:device completion:^(BOOL success) {
-                    [self executeNextCommandForDevice:device];
-                }];
-            }
-        }
-    }
-}
-
-- (void)pollNextCommandForDevice:(DHDevice*)device
-                      completion:(DHCommandPollCompletionBlock)completion {
-    // we already have one poll request in progress just wait for it to finish
-    if (!self.isCommandPollRequestInProgress) {
-        DHLog(@"Poll next command for device: %@ starting from date: (%@)",
-              device.deviceData.name, self.lastCommandPollTimestamp);
-        self.isCommandPollRequestInProgress = YES;
-        NSString* path = [self commandPollRequestPathForDevice:device];
-        [self.restfulApiClient get:path
-                        parameters:nil
-                           success:^(id response) {
-                               DHLog(@"Got commands: %@", [response description]);
-                               NSArray* commands = [DHCommand fromArrayOfDictionaries:response];
-                               if (commands.count > 0) {
-                                   self.lastCommandPollTimestamp = [[commands lastObject] timeStamp];
-                               }
-                               NSUInteger enqueuedCommandCount = [self.commandQueue enqueueAllNotCompleted:commands];
-                               DHLog(@"Enqueued commands count: %d", enqueuedCommandCount);
-                               self.isCommandPollRequestInProgress = NO;
-                               completion(YES);
-                           } failure:^(NSError *error) {
-                               DHLog(@"Failed to poll commands with error:%@", error);
-                               self.isCommandPollRequestInProgress = NO;
-                               completion(NO);
-                           }
-         ];
-    }
-}
-
-- (NSString*)commandPollRequestPathForDevice:(DHDevice*)device {
+- (void)pollCommandsForDevice:(DHDevice *)device
+                        since:(NSString *)lastCommandPollTimestamp
+                   completion:(DHDeviceServiceSuccessCompletionBlock)success
+                      failure:(DHDeviceServiceFailureCompletionBlock)failure {
     NSString* path = nil;
-    if (self.lastCommandPollTimestamp) {
+    if (lastCommandPollTimestamp) {
         path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-        //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                device.deviceData.deviceID, encodeToPercentEscapeString(self.lastCommandPollTimestamp)];
+                //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
+                device.deviceData.deviceID, encodeToPercentEscapeString(lastCommandPollTimestamp)];
     } else {
         path = [NSString stringWithFormat:@"device/%@/command/poll", device.deviceData.deviceID];
     }
-    return path;
-}
-
-- (void)executeCommand:(DHCommand*)command
-             forDevice:(DHDevice*)device
-            completion:(DHCommandCompletionBlock)completion {
+    [self.restfulApiClient get:path
+                    parameters:nil
+                       success:^(id response) {
+                           DHLog(@"Got commands: %@", [response description]);
+                           NSArray* commands = [DHCommand fromArrayOfDictionaries:response];
+                           success(commands);
+                       } failure:^(NSError *error) {
+                           DHLog(@"Failed to poll commands with error:%@", error);
+                           failure(error);
+                       }
+     ];
     
-    DHCommandCompletionBlock commandCompletion = ^(DHCommandResult* result) {
-        [self updateCommand:command
-                  forDevice:device
-                 withResult:result
-                    success:^(id response) {
-                        completion(result);
-                    }
-                    failure:^(NSError *error) {
-                        DHLog(@"Failed to update command's(%@) status(%@): ", command.name, result);
-                        completion(result);
-                    }];
-    };
-    
-    BOOL parametersPresent = command.parameters && (id)command.parameters != (id)[NSNull null];
-    if (!parametersPresent || !command.parameters[kDeviceEquipmentParameter]) {
-        [self executeCommand:command onExecutor:device completion:^(DHCommandResult *result) {
-            commandCompletion(result);
-        }];
-    } else {
-        DHEquipment* equipment = [self equipmentOfDevice:device
-                                                withCode:command.parameters[kDeviceEquipmentParameter]];
-        if (equipment) {
-            [self executeCommand:command onExecutor:equipment completion:^(DHCommandResult *result) {
-                commandCompletion(result);
-            }];
-        } else {
-            commandCompletion([DHCommandResult commandResultWithStatus:DHCommandStatusFailed
-                                                                result:@"Equipment not found"]);
-        }
-    }
-}
-
-- (void)executeCommand:(DHCommand*)command
-            onExecutor:(id<DHCommandExecutor>)executor
-            completion:(DHCommandCompletionBlock)completion{
-    if ([executor shouldExecuteCommand:command]) {
-        [executor executeCommand:command completion:completion];
-    } else {
-        completion([DHCommandResult commandResultWithStatus:DHCommandStatusFailed
-                                                     result:@"Device/Equipment rejected command"]);
-    }
 }
 
 - (void)setupAuthenticationForDevice:(DHDevice*)device {
@@ -261,56 +133,6 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                                value:device.deviceData.deviceID];
     [self.restfulApiClient setHeader:@"Auth-DeviceKey"
                                value:device.deviceData.key];
-}
-
-- (void)registerEquipmentForDevice:(DHDevice*)device
-                        completion:(DHEquipmentOperationCompletionBlock)completion {
-    NSMutableSet* processedEquipment = [NSMutableSet set];
-    NSMutableSet* registeredEquipment = [NSMutableSet set];
-    for (DHEquipment* equipment in device.deviceData.equipment) {
-        [equipment registerEquipmentWithCompletion:^(BOOL success) {
-            [processedEquipment addObject:equipment];
-            if (success) {
-                DHLog(@"Registered equipment: %@", equipment.equipmentData.name);
-                [registeredEquipment addObject:equipment];
-            } else {
-                DHLog(@"Failed to register equipment: %@", equipment.equipmentData.name);
-            }
-            if (processedEquipment.count == device.deviceData.equipment.count) {
-                completion([processedEquipment isEqualToSet:registeredEquipment]);
-            }
-        }];
-    }
-}
-
-- (void)unregisterEquipmentForDevice:(DHDevice*)device
-                          completion:(DHEquipmentOperationCompletionBlock)completion {
-    NSMutableSet* processedEquipment = [NSMutableSet set];
-    NSMutableSet* unregisteredEquipment = [NSMutableSet set];
-    for (DHEquipment* equipment in device.deviceData.equipment) {
-        [equipment unregisterEquipmentWithCompletion:^(BOOL success) {
-            [processedEquipment addObject:equipment];
-            if (success) {
-                DHLog(@"Unregistered equipment: %@", equipment.equipmentData.name);
-                [unregisteredEquipment addObject:equipment];
-            } else {
-                DHLog(@"Failed to unregister equipment: %@", equipment.equipmentData.name);
-            }
-            if (processedEquipment.count == device.deviceData.equipment.count) {
-                completion([processedEquipment isEqualToSet:unregisteredEquipment]);
-            }
-            
-        }];
-    }
-}
-
-- (DHEquipment*)equipmentOfDevice:(DHDevice*)device withCode:(NSString*)code {
-    for (DHEquipment* equipment in device.deviceData.equipment) {
-        if ([equipment.equipmentData.code isEqualToString:code]) {
-            return equipment;
-        }
-    }
-    return nil;
 }
 
 @end

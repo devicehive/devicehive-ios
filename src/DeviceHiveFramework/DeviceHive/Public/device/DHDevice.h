@@ -56,6 +56,13 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 @property (nonatomic, readonly) BOOL isRegistered;
 
 /**
+ The date when last commands poll request was sent to the server(timestamp of the last received command).
+ This value is used as a starting point in time from which every subsequent command (which was posted after this point) will be received and executed by the device. If not initialized, *ALL* existing commands will be received along with the first poll response.
+ Clients are suppose to persist the last poll date somewhere(e.g. NSUserDefaults) and restore it when the app relaunched in order to avoid receiving already executed commands.
+ */
+@property (nonatomic, strong) NSString* lastCommandPollTimestamp;
+
+/**
  Init object with given parameters.
  @param deviceData DHDeviceData instance
  @param deviceService DHDeviceService implementation to be used by the device

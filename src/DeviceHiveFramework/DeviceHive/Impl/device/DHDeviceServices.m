@@ -18,21 +18,6 @@
     return nil;
 }
 
-+ (id<DHDeviceService>)deviceServiceForProtocol:(DHDeviceServiceProcotol)protocol
-                                     serviceUrl:(NSURL*)url {
-    switch (protocol) {
-        case DHDeviceServiceProcotolRestful: {
-            return [self restfulDeviceServiceWithUrl:url];
-            break;
-        }
-        
-        case DHDeviceServiceProcotolBinary:
-        default:
-            DHLog(@"Unrecognized or unimplemented service protocol");
-            return nil;
-    }
-}
-
 + (id<DHDeviceService>)restfulDeviceServiceWithUrl:(NSURL*)url {
     DHDefaultRestfulApiClient* restfulApiClient = [[DHDefaultRestfulApiClient alloc] initWithBaseURL:url];
     restfulApiClient.timeoutInterval = 120; // 2 min

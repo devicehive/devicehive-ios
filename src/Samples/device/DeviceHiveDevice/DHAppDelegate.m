@@ -16,8 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"didFinishLaunchingWithOptions");
-    id<DHDeviceService> deviceService = [DHDeviceServices deviceServiceForProtocol:DHDeviceServiceProcotolRestful
-                                                                        serviceUrl:[NSURL URLWithString:kServerUrl]];
+    id<DHDeviceService> deviceService = [DHDeviceServices restfulDeviceServiceWithUrl:[NSURL URLWithString:kServerUrl]];
     
     self.device = [[DHTestDevice alloc] initWithDeviceService:deviceService];
     
