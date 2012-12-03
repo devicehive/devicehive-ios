@@ -15,11 +15,9 @@
         parameters:(NSDictionary*)parameters
             status:(NSString*)status
             result:(NSString*)result
-         timestamp:(NSDate*)timestamp
-          lifetime:(NSString*)lifetime
-             flags:(NSDate*)flags;
-
-+ (NSArray*)commandsFromArrayOfDictionaries:(NSArray*)commandsDictArray;
+         timestamp:(NSString*)timestamp
+          lifetime:(NSNumber*)lifetime
+             flags:(NSNumber*)flags;
 
 + (NSDateFormatter*)defaultTimestampFormatter;
 

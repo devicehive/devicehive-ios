@@ -15,9 +15,14 @@
 @interface DHNotification : DHEntity
 
 /**
+ Notification identifier.
+ */
+@property (nonatomic, strong, readonly) NSString* notificationID;
+
+/**
  Notification timestamp (UTC)
  */
-@property (nonatomic, strong, readonly) NSDate* timestamp;
+@property (nonatomic, strong, readonly) NSString* timestamp;
 
 /**
  Notification name

@@ -54,4 +54,12 @@
  */
 @property (nonatomic, strong, readonly) NSNumber * flags;
 
+- (id)initWithName:(NSString*)name
+        parameters:(NSDictionary*)parameters;
+
+- (id)initWithName:(NSString*)name
+        parameters:(NSDictionary*)parameters
+          lifetime:(NSNumber*)lifetime
+             flags:(NSNumber*)flags;
+
 @end

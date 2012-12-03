@@ -11,4 +11,12 @@
 
 @implementation DHEntity
 
++ (NSArray*)fromArrayOfDictionaries:(NSArray*)dictArray {
+    NSMutableArray* arrayOfEntities = [NSMutableArray array];
+    for (NSDictionary* entityDict in dictArray) {
+        [arrayOfEntities addObject:[[[self class] alloc] initWithDictionary:entityDict]];
+    }
+    return [NSArray arrayWithArray:arrayOfEntities];
+}
+
 @end

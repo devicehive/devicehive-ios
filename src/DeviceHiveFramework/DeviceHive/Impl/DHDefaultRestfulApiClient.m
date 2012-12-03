@@ -106,6 +106,13 @@
 	[self.client setDefaultHeader:header value:value];
 }
 
+- (void)setAuthorisationWithUsername:(NSString *)username
+                            password:(NSString *)password {
+    
+    [self.client setAuthorizationHeaderWithUsername:username
+                                           password:password];
+}
+
 - (void)setTimeoutInterval:(NSTimeInterval)timeoutInterval {
     self.client.timeoutInterval = timeoutInterval;
 }

@@ -35,6 +35,12 @@
 		D05A7A89165517460074078A /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A7E1655171F0074078A /* AFURLConnectionOperation.m */; };
 		D05A7A8A165517460074078A /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A801655171F0074078A /* AFXMLRequestOperation.m */; };
 		D05A7A8B165517460074078A /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A821655171F0074078A /* UIImageView+AFNetworking.m */; };
+		D0D1840B1668CC0A00413740 /* DHRestfulClientService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D1840A1668CC0900413740 /* DHRestfulClientService.m */; };
+		D0D184111668DB6900413740 /* DHEquipmentState.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D184101668DB6800413740 /* DHEquipmentState.m */; };
+		D0D184141668DE3600413740 /* DHClientServices.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D184131668DE3400413740 /* DHClientServices.m */; };
+		D0D184171668E0B400413740 /* DHDeviceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D184161668E0B100413740 /* DHDeviceClient.m */; };
+		D0D1841A1668E5DE00413740 /* DHQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D184191668E5DD00413740 /* DHQueue.m */; };
+		D0D1841D1668ED9C00413740 /* DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D1841C1668ED9A00413740 /* DHUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,6 +121,19 @@
 		D05A7A801655171F0074078A /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		D05A7A811655171F0074078A /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		D05A7A821655171F0074078A /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		D0D184091668CC0800413740 /* DHRestfulClientService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHRestfulClientService.h; sourceTree = "<group>"; };
+		D0D1840A1668CC0900413740 /* DHRestfulClientService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHRestfulClientService.m; sourceTree = "<group>"; };
+		D0D1840D1668CF2600413740 /* DHClientService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHClientService.h; sourceTree = "<group>"; };
+		D0D1840F1668DB6700413740 /* DHEquipmentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHEquipmentState.h; sourceTree = "<group>"; };
+		D0D184101668DB6800413740 /* DHEquipmentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHEquipmentState.m; sourceTree = "<group>"; };
+		D0D184121668DE3300413740 /* DHClientServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHClientServices.h; sourceTree = "<group>"; };
+		D0D184131668DE3400413740 /* DHClientServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHClientServices.m; sourceTree = "<group>"; };
+		D0D184151668E0B000413740 /* DHDeviceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHDeviceClient.h; sourceTree = "<group>"; };
+		D0D184161668E0B100413740 /* DHDeviceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHDeviceClient.m; sourceTree = "<group>"; };
+		D0D184181668E5DB00413740 /* DHQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHQueue.h; sourceTree = "<group>"; };
+		D0D184191668E5DD00413740 /* DHQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHQueue.m; sourceTree = "<group>"; };
+		D0D1841B1668ECFE00413740 /* DHUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHUtils.h; sourceTree = "<group>"; };
+		D0D1841C1668ED9A00413740 /* DHUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				D05A7A32165516AD0074078A /* DHCommand+Private.h */,
+				D0D1841B1668ECFE00413740 /* DHUtils.h */,
+				D0D1841C1668ED9A00413740 /* DHUtils.m */,
 				D05A7A33165516AD0074078A /* DHCommand.m */,
 				D05A7A34165516AD0074078A /* DHCommandQueue.h */,
 				D05A7A35165516AD0074078A /* DHCommandQueue.m */,
@@ -236,6 +257,17 @@
 				D05A7A5A165516AD0074078A /* DHNetwork.h */,
 				D05A7A5B165516AD0074078A /* DHNotification.h */,
 				D05A7A5C165516AD0074078A /* DHRestfulApiClient.h */,
+				D0D1840D1668CF2600413740 /* DHClientService.h */,
+				D0D184091668CC0800413740 /* DHRestfulClientService.h */,
+				D0D1840A1668CC0900413740 /* DHRestfulClientService.m */,
+				D0D184121668DE3300413740 /* DHClientServices.h */,
+				D0D184131668DE3400413740 /* DHClientServices.m */,
+				D0D1840F1668DB6700413740 /* DHEquipmentState.h */,
+				D0D184101668DB6800413740 /* DHEquipmentState.m */,
+				D0D184151668E0B000413740 /* DHDeviceClient.h */,
+				D0D184161668E0B100413740 /* DHDeviceClient.m */,
+				D0D184181668E5DB00413740 /* DHQueue.h */,
+				D0D184191668E5DD00413740 /* DHQueue.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -352,6 +384,12 @@
 				D05A7A89165517460074078A /* AFURLConnectionOperation.m in Sources */,
 				D05A7A8A165517460074078A /* AFXMLRequestOperation.m in Sources */,
 				D05A7A8B165517460074078A /* UIImageView+AFNetworking.m in Sources */,
+				D0D1840B1668CC0A00413740 /* DHRestfulClientService.m in Sources */,
+				D0D184111668DB6900413740 /* DHEquipmentState.m in Sources */,
+				D0D184141668DE3600413740 /* DHClientServices.m in Sources */,
+				D0D184171668E0B400413740 /* DHDeviceClient.m in Sources */,
+				D0D1841A1668E5DE00413740 /* DHQueue.m in Sources */,
+				D0D1841D1668ED9C00413740 /* DHUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

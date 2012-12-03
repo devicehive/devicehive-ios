@@ -48,6 +48,18 @@ static NSDateFormatter* defaultDateFormatter = nil;
     
 }
 
+- (id)initWithName:(NSString*)name
+        parameters:(NSDictionary*)parameters {
+    return [self initWithName:name parameters:parameters lifetime:nil flags:nil];
+}
+
+- (id)initWithName:(NSString*)name
+        parameters:(NSDictionary*)parameters
+          lifetime:(NSNumber*)lifetime
+             flags:(NSNumber*)flags {
+    return [self initWithName:name commandId:nil parameters:parameters status:nil result:nil timestamp:nil lifetime:lifetime flags:flags];
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     return [self initWithName:dictionary[@"command"]
                     commandId:dictionary[@"id"]
@@ -70,14 +82,6 @@ static NSDateFormatter* defaultDateFormatter = nil;
     [resultDict setObjectIfNotNull:self.flags forKey:@"flags"];
     [resultDict setObjectIfNotNull:self.timeStamp forKey:@"timestamp"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
-}
-
-+ (NSArray*)commandsFromArrayOfDictionaries:(NSArray*)commandsDictArray {
-    NSMutableArray* arrayOfCommands = [NSMutableArray array];
-    for (NSDictionary* commandDict in commandsDictArray) {
-        [arrayOfCommands addObject:[[DHCommand alloc] initWithDictionary:commandDict]];
-    }
-    return [NSArray arrayWithArray:arrayOfCommands];
 }
 
 + (NSDateFormatter*)defaultTimestampFormatter {

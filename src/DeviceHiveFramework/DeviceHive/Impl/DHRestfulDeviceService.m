@@ -20,20 +20,11 @@
 #import "DHDeviceData.h"
 #import "DHCommand+Private.h"
 #import "DHLog.h"
+#import "DHUtils.h"
 
 NSString* const kDeviceEquipmentParameter = @"equipment";
 
 typedef void (^DHCommandPollCompletionBlock)(BOOL success);
-
-
-NSString* encodeToPercentEscapeString(NSString *string) {
-    return (__bridge_transfer NSString *)
-    CFURLCreateStringByAddingPercentEscapes(NULL,
-                                            (CFStringRef) string,
-                                            NULL,
-                                            (CFStringRef) @"!*'();:@&=+$,/?%#[]",
-                                            kCFStringEncodingUTF8);
-}
 
 
 @interface DHRestfulDeviceService ()
@@ -161,7 +152,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
 - (void)executeNextCommandForDevice:(DHDevice*)device {
     if (self.isProcessingCommands) {
         if (!self.isCommandPollRequestInProgress) {
-            DHCommand* command = [self.commandQueue dequeue];
+            DHCommand* command = [self.commandQueue dequeueObject];
             if (command) {
                 [self executeCommand:command forDevice:device completion:^(DHCommandResult *result) {
                     if (self.isProcessingCommands) {
@@ -189,7 +180,7 @@ NSString* encodeToPercentEscapeString(NSString *string) {
                         parameters:nil
                            success:^(id response) {
                                DHLog(@"Got commands: %@", [response description]);
-                               NSArray* commands = [DHCommand commandsFromArrayOfDictionaries:response];
+                               NSArray* commands = [DHCommand fromArrayOfDictionaries:response];
                                if (commands.count > 0) {
                                    self.lastCommandPollTimestamp = [[commands lastObject] timeStamp];
                                }

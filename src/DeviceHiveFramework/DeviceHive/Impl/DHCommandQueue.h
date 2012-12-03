@@ -7,17 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DHQueue.h"
 
 @class DHCommand;
 
-@interface DHCommandQueue : NSObject
+@interface DHCommandQueue : DHQueue
 
-+ (DHCommandQueue*)commandQueue;
-
-- (void)enqueue:(DHCommand*)command;
 - (NSUInteger)enqueueAllNotCompleted:(NSArray*)commands;
-- (void)enqueueAll:(NSArray*)commands;
-- (DHCommand*)dequeue;
-- (NSArray*)dequeueAll;
 
 @end

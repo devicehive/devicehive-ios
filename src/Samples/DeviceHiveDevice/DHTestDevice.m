@@ -30,7 +30,7 @@ NSString* const DHTestDeviceCommandKey = @"DHTestDeviceCommandKey";
                                                          status:DHDeviceStatusOnline
                                                         network:network
                                                     deviceClass:deviceClass
-                                                     equipments:@[equipment]];
+                                                      equipment:@[equipment]];
     
     self  = [super initWithDeviceData:deviceData deviceService:deviceService];
     if (self) {

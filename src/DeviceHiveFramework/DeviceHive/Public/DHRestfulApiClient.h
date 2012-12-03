@@ -69,4 +69,11 @@ typedef void (^DHRestfulApiFailureCompletionBlock)(NSError *error);
 - (void)setHeader:(NSString *)header
             value:(NSString *)value;
 
+/** Set Basic Authorisation header value.
+ @param username Username string.
+ @param password Password string.
+ */
+- (void)setAuthorisationWithUsername:(NSString *)username
+                            password:(NSString *)password;
+
 @end

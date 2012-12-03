@@ -31,7 +31,7 @@
     return [self initWithName:dictionary[@"name"]
                       version:dictionary[@"version"]
                offlineTimeout:dictionary[@"offlineTimeout"]
-                    permanent:[dictionary[@"isPermanent"] isEqualToString:@"true"]];
+                    permanent:[dictionary[@"isPermanent"] boolValue]];
 }
 
 - (NSDictionary *)classDictionary {
