@@ -21,22 +21,22 @@
     return self;
 }
 
-- (void)registerEquipmentWithCompletion:(DHEquipmentOperationCompletionBlock)completion {
-    NSLog(@"DHTestEquipment registering...");
-    completion(YES);
+- (BOOL)registerEquipmentWithDevice:(DHDevice *)device {
+    NSLog(@"DHTestEquipment registering with device: %@", device.deviceData.name);
+    return YES;
 }
 
-- (void)unregisterEquipmentWithCompletion:(DHEquipmentOperationCompletionBlock)completion {
+- (BOOL)unregisterEquipmentWithDevice:(DHDevice *)device {
     NSLog(@"DHTestEquipment unregistering...");
-    completion(YES);
+    return YES;
 }
 
-- (void)deviceWillBeginProcessingCommands {
+- (void)deviceWillBeginProcessingCommands:(DHDevice *)device {
     NSLog(@"DHTestEquipment:deviceWillBeginProcessingCommands");
 }
 
 
-- (void)deviceDidStopProcessingCommands {
+- (void)deviceDidStopProcessingCommands:(DHDevice *)device {
     NSLog(@"DHTestEquipment:deviceDidStopProcessingCommands");
 }
 

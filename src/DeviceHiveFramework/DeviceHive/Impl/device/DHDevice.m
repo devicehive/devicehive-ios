@@ -65,18 +65,17 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                        success:^(DHNotification* notification) {
                            DHLog(@"Device status notification posted: %@", [notification description]);
                            DHLog(@"Registering equipment...");
-                           [self registerEquipmentForDevice:self completion:^(BOOL registered) {
-                               if (registered) {
-                                   DHLog(@"Equipment registered");
-                                   self.isRegistered = YES;
-                                   [self didFinishRegistration];
-                                   success(deviceData);
-                               } else {
-                                   DHLog(@"Failed to register equipment");
-                                   // TODO: construct proper NSError
-                                   failure(nil);
-                               }
-                           }];
+                           BOOL registered = [self registerEquipment];
+                           if (registered) {
+                               DHLog(@"Equipment registered");
+                               self.isRegistered = YES;
+                               [self didFinishRegistration];
+                               success(deviceData);
+                           } else {
+                               DHLog(@"Failed to register equipment");
+                               // TODO: construct proper NSError
+                               failure(nil);
+                           }
                        } failure:^(NSError *error) {
                            DHLog(@"Registration request failed with error:%@", error);
                            [self didFailRegistrationWithError:error];
@@ -220,56 +219,31 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 - (void)willBeginProcessingCommandsInternal {
     [self willBeginProcessingCommands];
     for (DHEquipment* equipment in self.deviceData.equipment) {
-        [equipment deviceWillBeginProcessingCommands];
+        [equipment deviceWillBeginProcessingCommands:self];
     }
 }
 
 - (void)didStopProcessingCommandsInternal {
     for (DHEquipment* equipment in self.deviceData.equipment) {
-        [equipment deviceDidStopProcessingCommands];
+        [equipment deviceDidStopProcessingCommands:self];
     }
     [self didStopProcessingCommands];
 }
 
-- (void)registerEquipmentForDevice:(DHDevice*)device
-                        completion:(DHEquipmentOperationCompletionBlock)completion {
-    NSMutableSet* processedEquipment = [NSMutableSet set];
-    NSMutableSet* registeredEquipment = [NSMutableSet set];
-    for (DHEquipment* equipment in device.deviceData.equipment) {
-        [equipment registerEquipmentWithCompletion:^(BOOL success) {
-            [processedEquipment addObject:equipment];
-            if (success) {
-                DHLog(@"Registered equipment: %@", equipment.equipmentData.name);
-                [registeredEquipment addObject:equipment];
-            } else {
-                DHLog(@"Failed to register equipment: %@", equipment.equipmentData.name);
-            }
-            if (processedEquipment.count == device.deviceData.equipment.count) {
-                completion([processedEquipment isEqualToSet:registeredEquipment]);
-            }
-        }];
+- (BOOL)registerEquipment {
+    BOOL result = YES;
+    for (DHEquipment* equipment in self.deviceData.equipment) {
+        result = result && [equipment registerEquipmentWithDevice:self];
     }
+    return result;
 }
 
-- (void)unregisterEquipmentForDevice:(DHDevice*)device
-                          completion:(DHEquipmentOperationCompletionBlock)completion {
-    NSMutableSet* processedEquipment = [NSMutableSet set];
-    NSMutableSet* unregisteredEquipment = [NSMutableSet set];
-    for (DHEquipment* equipment in device.deviceData.equipment) {
-        [equipment unregisterEquipmentWithCompletion:^(BOOL success) {
-            [processedEquipment addObject:equipment];
-            if (success) {
-                DHLog(@"Unregistered equipment: %@", equipment.equipmentData.name);
-                [unregisteredEquipment addObject:equipment];
-            } else {
-                DHLog(@"Failed to unregister equipment: %@", equipment.equipmentData.name);
-            }
-            if (processedEquipment.count == device.deviceData.equipment.count) {
-                completion([processedEquipment isEqualToSet:unregisteredEquipment]);
-            }
-            
-        }];
+- (BOOL)unregisterEquipment {
+    BOOL result = YES;
+    for (DHEquipment* equipment in self.deviceData.equipment) {
+        result = result && [equipment unregisterEquipmentWithDevice:self];
     }
+    return result;
 }
 
 - (DHEquipment*)equipmentWithCode:(NSString*)code {

@@ -47,19 +47,19 @@
 }
 
 
-- (void)registerEquipmentWithCompletion:(DHEquipmentOperationCompletionBlock)completion {
-    completion(YES);
+- (BOOL)registerEquipmentWithDevice:(DHDevice *)device {
+    return YES;
 }
 
-- (void)unregisterEquipmentWithCompletion:(DHEquipmentOperationCompletionBlock)completion {
-    completion(YES);
+- (BOOL)unregisterEquipmentWithDevice:(DHDevice *)device {
+    return YES;
 }
 
-- (void)deviceWillBeginProcessingCommands {
+- (void)deviceWillBeginProcessingCommands:(DHDevice *)device {
     
 }
 
-- (void)deviceDidStopProcessingCommands {
+- (void)deviceDidStopProcessingCommands:(DHDevice *)device {
     
 }
 
