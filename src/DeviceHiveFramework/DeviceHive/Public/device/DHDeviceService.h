@@ -49,8 +49,8 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
                  success:(DHDeviceServiceSuccessCompletionBlock) success
                  failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
-/** Poll notifications sent from given device starting from given date timestamp. Returns array of DHNotification.
- In the case when no commands were found, the server doesn't return response until a new notification is received. The blocking period is limited.
+/** Poll for commands for given device starting from given date timestamp. Returns an array of DHCommand.
+ In the case when no commands were found, the server doesn't return response until a new command is received. The blocking period is limited.
  @param device DHDevice object which represent target device to receive commands for.
  @param lastCommandPollTimestamp Timestamp of the last received command. If not specified, server timestamp will be used instead.
  @param success Success completion block.
