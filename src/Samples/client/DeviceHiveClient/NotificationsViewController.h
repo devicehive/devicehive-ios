@@ -1,5 +1,5 @@
 //
-//  DeviceViewController.h
+//  NotificationsViewController.h
 //  DeviceHiveClientSample
 //
 //  Created by Kiselev Maxim on 12/10/12.
@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol DHClientService;
 @class DHDeviceClient;
 
-@interface DeviceViewController : UITableViewController
+@interface NotificationsViewController : UITableViewController
 
 @property (nonatomic, strong) DHDeviceClient* deviceClient;
 

@@ -12,6 +12,7 @@
 #import "DHDeviceClass.h"
 #import "DHClientService.h"
 #import "DeviceViewController.h"
+#import "DHDeviceClient.h"
 
 @interface NetworkDevicesViewController ()
 
@@ -21,25 +22,10 @@
 
 @implementation NetworkDevicesViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = self.network.name;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,9 +40,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Device Segue"]) {
-        DeviceViewController* deviceViewController = (DeviceViewController*)segue.destinationViewController;
-        deviceViewController.clientService = self.clientService;
-        deviceViewController.deviceData = [self.devices objectAtIndex:[[self.tableView indexPathForCell:sender] row]];
+        DHDeviceData* deviceData = [self.devices objectAtIndex:[[self.tableView indexPathForCell:sender] row]];
+        if ([segue.destinationViewController respondsToSelector:@selector(setDeviceClient:)]) {
+            [segue.destinationViewController performSelector:@selector(setDeviceClient:)
+                                                  withObject:[[DHDeviceClient alloc] initWithDevice:deviceData
+                                               clientService:self.clientService]];
+        }
     }
 }
 

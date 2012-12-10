@@ -1,5 +1,5 @@
 //
-//  DeviceViewController.h
+//  DeviceTabBarController.h
 //  DeviceHiveClientSample
 //
 //  Created by Kiselev Maxim on 12/10/12.
@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol DHClientService;
-@class DHDeviceClient;
+extern NSString* const DeviceClientDidReceiveNotification;
 
-@interface DeviceViewController : UITableViewController
+@class DHDeviceData;
+@class DHDeviceClient;
+@protocol DHClientService;
+
+@interface DeviceTabBarController : UITabBarController
 
 @property (nonatomic, strong) DHDeviceClient* deviceClient;
 

@@ -1,5 +1,5 @@
 //
-//  DeviceViewController.h
+//  SendCommandViewController.h
 //  DeviceHiveClientSample
 //
 //  Created by Kiselev Maxim on 12/10/12.
@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol DHClientService;
 @class DHDeviceClient;
 
-@interface DeviceViewController : UITableViewController
+@interface SendCommandViewController : UITableViewController
 
 @property (nonatomic, strong) DHDeviceClient* deviceClient;
 
