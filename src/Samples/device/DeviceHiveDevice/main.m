@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "DHAppDelegate.h"
+#import "SampleDeviceAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([DHAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SampleDeviceAppDelegate class]));
     }
 }

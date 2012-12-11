@@ -1,14 +1,14 @@
 //
-//  DHTestEquipment.m
-//  DeviceHiveDevice
+//  SampleEquipment.m
+//  DeviceHiveDeviceSample
 //
 //  Created by Kiselev Maxim on 11/12/12.
 //  Copyright (c) 2012 DataArt. All rights reserved.
 //
 
-#import "DHTestEquipment.h"
+#import "SampleEquipment.h"
 
-@implementation DHTestEquipment
+@implementation SampleEquipment
 
 - (id)init {
     DHEquipmentData* data = [[DHEquipmentData alloc] initWithName:@"Test iOS Equipment"
@@ -22,22 +22,22 @@
 }
 
 - (BOOL)registerEquipmentWithDevice:(DHDevice *)device {
-    NSLog(@"DHTestEquipment registering with device: %@", device.deviceData.name);
+    NSLog(@"SampleEquipment registering with device: %@", device.deviceData.name);
     return YES;
 }
 
 - (BOOL)unregisterEquipmentWithDevice:(DHDevice *)device {
-    NSLog(@"DHTestEquipment unregistering...");
+    NSLog(@"SampleEquipment unregistering...");
     return YES;
 }
 
 - (void)deviceWillBeginProcessingCommands:(DHDevice *)device {
-    NSLog(@"DHTestEquipment:deviceWillBeginProcessingCommands");
+    NSLog(@"SampleEquipment:deviceWillBeginProcessingCommands");
 }
 
 
 - (void)deviceDidStopProcessingCommands:(DHDevice *)device {
-    NSLog(@"DHTestEquipment:deviceDidStopProcessingCommands");
+    NSLog(@"SampleEquipment:deviceDidStopProcessingCommands");
 }
 
 - (BOOL)shouldExecuteCommand:(DHCommand*)command {
@@ -46,9 +46,9 @@
 
 - (void)executeCommand:(DHCommand*)command
             completion:(DHCommandCompletionBlock)completion {
-    NSLog(@"DHTestEquipment received command: %@", command.name);
+    NSLog(@"SampleEquipment received command: %@", command.name);
     completion([DHCommandResult commandResultWithStatus:DHCommandStatusCompleted
-                                                 result:@"DHTestEquipment:Finished!"]);
+                                                 result:@"SampleEquipment:Finished!"]);
 }
 
 @end

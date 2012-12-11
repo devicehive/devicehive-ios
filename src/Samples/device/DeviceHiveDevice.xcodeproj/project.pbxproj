@@ -13,16 +13,19 @@
 		D056930C162C187900237899 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D056930B162C187900237899 /* CoreGraphics.framework */; };
 		D0569312162C187900237899 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0569310162C187900237899 /* InfoPlist.strings */; };
 		D0569314162C187900237899 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0569313162C187900237899 /* main.m */; };
-		D0569318162C187900237899 /* DHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0569317162C187900237899 /* DHAppDelegate.m */; };
+		D0569318162C187900237899 /* SampleDeviceAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0569317162C187900237899 /* SampleDeviceAppDelegate.m */; };
 		D056931A162C187900237899 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D0569319162C187900237899 /* Default.png */; };
 		D056931C162C187900237899 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D056931B162C187900237899 /* Default@2x.png */; };
 		D056931E162C187900237899 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D056931D162C187900237899 /* Default-568h@2x.png */; };
 		D0569321162C187900237899 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D056931F162C187900237899 /* MainStoryboard.storyboard */; };
-		D0569324162C187900237899 /* DHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0569323162C187900237899 /* DHViewController.m */; };
 		D056934E162C3B3900237899 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = D056934D162C3B3900237899 /* Configuration.m */; };
 		D05A7AAB165519B70074078A /* libDeviceHiveFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D05A7AAA165519B70074078A /* libDeviceHiveFramework.a */; };
-		D0808716165103BC003C197B /* DHTestDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D0808715165103BC003C197B /* DHTestDevice.m */; };
-		D080871916510404003C197B /* DHTestEquipment.m in Sources */ = {isa = PBXBuildFile; fileRef = D080871816510404003C197B /* DHTestEquipment.m */; };
+		D0808716165103BC003C197B /* SampleDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D0808715165103BC003C197B /* SampleDevice.m */; };
+		D080871916510404003C197B /* SampleEquipment.m in Sources */ = {isa = PBXBuildFile; fileRef = D080871816510404003C197B /* SampleEquipment.m */; };
+		D0B84FE016774E7A006A293B /* DeviceTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FD916774E79006A293B /* DeviceTabBarController.m */; };
+		D0B84FE116774E7A006A293B /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDB16774E79006A293B /* DeviceViewController.m */; };
+		D0B84FE216774E7A006A293B /* CommandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDD16774E79006A293B /* CommandsViewController.m */; };
+		D0B84FE316774E7A006A293B /* SendNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDF16774E79006A293B /* SendNotificationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,21 +38,27 @@
 		D0569311162C187900237899 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0569313162C187900237899 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D0569315162C187900237899 /* DeviceHiveDevice-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeviceHiveDevice-Prefix.pch"; sourceTree = "<group>"; };
-		D0569316162C187900237899 /* DHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHAppDelegate.h; sourceTree = "<group>"; };
-		D0569317162C187900237899 /* DHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHAppDelegate.m; sourceTree = "<group>"; };
+		D0569316162C187900237899 /* SampleDeviceAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleDeviceAppDelegate.h; sourceTree = "<group>"; };
+		D0569317162C187900237899 /* SampleDeviceAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleDeviceAppDelegate.m; sourceTree = "<group>"; };
 		D0569319162C187900237899 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D056931B162C187900237899 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D056931D162C187900237899 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0569320162C187900237899 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		D0569322162C187900237899 /* DHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHViewController.h; sourceTree = "<group>"; };
-		D0569323162C187900237899 /* DHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHViewController.m; sourceTree = "<group>"; };
 		D056934C162C3B3900237899 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		D056934D162C3B3900237899 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 		D05A7AAA165519B70074078A /* libDeviceHiveFramework.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDeviceHiveFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0808714165103BB003C197B /* DHTestDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHTestDevice.h; sourceTree = "<group>"; };
-		D0808715165103BC003C197B /* DHTestDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHTestDevice.m; sourceTree = "<group>"; };
-		D080871716510404003C197B /* DHTestEquipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHTestEquipment.h; sourceTree = "<group>"; };
-		D080871816510404003C197B /* DHTestEquipment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHTestEquipment.m; sourceTree = "<group>"; };
+		D0808714165103BB003C197B /* SampleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleDevice.h; sourceTree = "<group>"; };
+		D0808715165103BC003C197B /* SampleDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleDevice.m; sourceTree = "<group>"; };
+		D080871716510404003C197B /* SampleEquipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleEquipment.h; sourceTree = "<group>"; };
+		D080871816510404003C197B /* SampleEquipment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleEquipment.m; sourceTree = "<group>"; };
+		D0B84FD816774E79006A293B /* DeviceTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTabBarController.h; sourceTree = "<group>"; };
+		D0B84FD916774E79006A293B /* DeviceTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTabBarController.m; sourceTree = "<group>"; };
+		D0B84FDA16774E79006A293B /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
+		D0B84FDB16774E79006A293B /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
+		D0B84FDC16774E79006A293B /* CommandsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandsViewController.h; sourceTree = "<group>"; };
+		D0B84FDD16774E79006A293B /* CommandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandsViewController.m; sourceTree = "<group>"; };
+		D0B84FDE16774E79006A293B /* SendNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendNotificationViewController.h; sourceTree = "<group>"; };
+		D0B84FDF16774E79006A293B /* SendNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendNotificationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,17 +109,23 @@
 		D056930D162C187900237899 /* DeviceHiveDevice */ = {
 			isa = PBXGroup;
 			children = (
-				D0569316162C187900237899 /* DHAppDelegate.h */,
-				D0569317162C187900237899 /* DHAppDelegate.m */,
+				D0569316162C187900237899 /* SampleDeviceAppDelegate.h */,
+				D0569317162C187900237899 /* SampleDeviceAppDelegate.m */,
 				D056934C162C3B3900237899 /* Configuration.h */,
 				D056934D162C3B3900237899 /* Configuration.m */,
 				D056931F162C187900237899 /* MainStoryboard.storyboard */,
-				D0569322162C187900237899 /* DHViewController.h */,
-				D0569323162C187900237899 /* DHViewController.m */,
-				D0808714165103BB003C197B /* DHTestDevice.h */,
-				D0808715165103BC003C197B /* DHTestDevice.m */,
-				D080871716510404003C197B /* DHTestEquipment.h */,
-				D080871816510404003C197B /* DHTestEquipment.m */,
+				D0808714165103BB003C197B /* SampleDevice.h */,
+				D0808715165103BC003C197B /* SampleDevice.m */,
+				D080871716510404003C197B /* SampleEquipment.h */,
+				D080871816510404003C197B /* SampleEquipment.m */,
+				D0B84FD816774E79006A293B /* DeviceTabBarController.h */,
+				D0B84FD916774E79006A293B /* DeviceTabBarController.m */,
+				D0B84FDA16774E79006A293B /* DeviceViewController.h */,
+				D0B84FDB16774E79006A293B /* DeviceViewController.m */,
+				D0B84FDC16774E79006A293B /* CommandsViewController.h */,
+				D0B84FDD16774E79006A293B /* CommandsViewController.m */,
+				D0B84FDE16774E79006A293B /* SendNotificationViewController.h */,
+				D0B84FDF16774E79006A293B /* SendNotificationViewController.m */,
 				D056930E162C187900237899 /* Supporting Files */,
 			);
 			path = DeviceHiveDevice;
@@ -198,11 +213,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0569314162C187900237899 /* main.m in Sources */,
-				D0569318162C187900237899 /* DHAppDelegate.m in Sources */,
-				D0569324162C187900237899 /* DHViewController.m in Sources */,
+				D0569318162C187900237899 /* SampleDeviceAppDelegate.m in Sources */,
 				D056934E162C3B3900237899 /* Configuration.m in Sources */,
-				D0808716165103BC003C197B /* DHTestDevice.m in Sources */,
-				D080871916510404003C197B /* DHTestEquipment.m in Sources */,
+				D0808716165103BC003C197B /* SampleDevice.m in Sources */,
+				D080871916510404003C197B /* SampleEquipment.m in Sources */,
+				D0B84FE016774E7A006A293B /* DeviceTabBarController.m in Sources */,
+				D0B84FE116774E7A006A293B /* DeviceViewController.m in Sources */,
+				D0B84FE216774E7A006A293B /* CommandsViewController.m in Sources */,
+				D0B84FE316774E7A006A293B /* SendNotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +311,7 @@
 				INFOPLIST_FILE = "DeviceHiveDevice/DeviceHiveDevice-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -305,6 +324,7 @@
 				INFOPLIST_FILE = "DeviceHiveDevice/DeviceHiveDevice-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

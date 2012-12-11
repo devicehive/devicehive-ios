@@ -1,24 +1,24 @@
 //
 //  DHAppDelegate.m
-//  DeviceHiveDevice
+//  DeviceHiveDeviceSample
 //
 //  Created by Kiselev Maxim on 10/15/12.
 //  Copyright (c) 2012 DataArt. All rights reserved.
 //
 
-#import "DHAppDelegate.h"
+#import "SampleDeviceAppDelegate.h"
 #import "Configuration.h"
-#import "DHTestDevice.h"
+#import "SampleDevice.h"
 #import "DHDeviceServices.h"
 
-@implementation DHAppDelegate
+@implementation SampleDeviceAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"didFinishLaunchingWithOptions");
     id<DHDeviceService> deviceService = [DHDeviceServices restfulDeviceServiceWithUrl:[NSURL URLWithString:kServerUrl]];
     
-    self.device = [[DHTestDevice alloc] initWithDeviceService:deviceService];
+    self.device = [[SampleDevice alloc] initWithDeviceService:deviceService];
     
     [self registerDevice:self.device];
     
@@ -46,7 +46,6 @@
 {
     NSLog(@"applicationDidEnterBackground");
     if (self.device.isRegistered && self.device.isProcessingCommands) {
-        //[self.deviceService stopReceivingCommands];
         [self.device stopProcessingCommands];
     }
 }
@@ -55,7 +54,6 @@
 {
     NSLog(@"applicationWillEnterForeground");
     if (self.device.isRegistered && !self.device.isProcessingCommands) {
-        //[self.deviceService beginReceivingCommands];
         [self.device beginProcessingCommands];
     }
 }
@@ -73,7 +71,6 @@
 - (void)registerDevice:(DHDevice*)device {
     [device registerDeviceWithSuccess:^(id response) {
         NSLog(@"Successfully registered device");
-        //[self.deviceService beginReceivingCommands];
         [device beginProcessingCommands];
     } failure:^(NSError *error) {
         // retry
