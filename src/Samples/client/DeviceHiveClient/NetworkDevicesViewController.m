@@ -49,7 +49,9 @@
 
 - (void)reloadDevices {
     [self.clientService getDevicesOfNetwork:self.network completion:^(NSArray* devices) {
-        self.devices = devices;
+        self.devices = [devices sortedArrayUsingComparator:^NSComparisonResult(DHDeviceData* device1, DHDeviceData* device2) {
+            return [device1.name compare:device2.name];
+        }];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"Failed to get devices: %@", [error description]);

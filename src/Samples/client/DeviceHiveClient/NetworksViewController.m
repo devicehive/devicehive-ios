@@ -114,7 +114,9 @@ NSString* const DefaultsKeyPassword = @"Password";
 - (void)queryForNetworks {
     [[DHAppDelegate appDelegate].clientService getNetworksWithCompletion:^(NSArray* networks) {
         NSLog(@"Got networks: %@", [networks description]);
-        self.networks = networks;
+        self.networks = [networks sortedArrayUsingComparator:^NSComparisonResult(DHNetwork* network1, DHNetwork* network2) {
+            return [network1.name compare:network2.name];
+        }];
         [self.tableView reloadData];
         if (self.presentedViewController) {
             [self dismissViewControllerAnimated:YES
