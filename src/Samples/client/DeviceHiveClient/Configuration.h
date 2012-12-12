@@ -9,5 +9,3 @@
 #import <Foundation/Foundation.h>
 
 extern NSString* const kServerUrl;
-extern NSString* const kUsername;
-extern NSString* const kPassword;

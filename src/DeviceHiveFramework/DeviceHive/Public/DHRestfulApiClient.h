@@ -18,6 +18,21 @@ typedef void (^DHRestfulApiSuccessCompletionBlock)(id response);
  */
 typedef void (^DHRestfulApiFailureCompletionBlock)(NSError *error);
 
+/**
+ Key value of `HTTPUrlRequest` object inside userInfo container of `NSError` object.
+ */
+extern NSString* const DHRestfulOperationFailingUrlRequestErrorKey;
+
+/**
+ Key value of `HTTPUrlResponse` object inside userInfo container of `NSError` object.
+ */
+extern NSString* const DHRestfulOperationFailingUrlResponseErrorKey;
+
+/**
+ Error domain.
+ */
+extern NSString* const DHRestfulOperationErrorDomain;
+
 
 /**
  `DHRestfulApiClient` protocol defines common interface for classes which encapsulate low-level network interaction with the server via RESTful HTTP protocol.

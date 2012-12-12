@@ -12,6 +12,4 @@
 
 @interface NetworksViewController : UITableViewController
 
-@property (nonatomic, strong) id<DHClientService> clientService;
-
 @end

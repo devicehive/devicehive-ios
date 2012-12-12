@@ -14,6 +14,9 @@
 @interface DHAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) id<DHClientService> clientService;
+@property (nonatomic, strong, readonly) id<DHClientService> clientService;
+
++ (DHAppDelegate*)appDelegate;
+- (void)setupClientServiceWithUsername:(NSString *)username password:(NSString *)password;
 
 @end

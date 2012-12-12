@@ -10,7 +10,6 @@
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 
-
 @interface DHHttpClient : AFHTTPClient 
 
 @property (nonatomic) NSTimeInterval timeoutInterval;
@@ -29,6 +28,7 @@
 
 @end
 
+NSError* errorFromAFNetworkingError(NSError *inputError);
 
 
 @interface DHDefaultRestfulApiClient()
@@ -68,7 +68,7 @@
                      success(responseObject);
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     failure(error);
+                     failure(errorFromAFNetworkingError(error));
                  }];
 }
 
@@ -83,7 +83,7 @@
                       success(responseObject);
                   }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      failure(error);
+                      failure(errorFromAFNetworkingError(error));
                   }];
 }
 
@@ -98,7 +98,7 @@
                      success(responseObject);
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     failure(error);
+                     failure(errorFromAFNetworkingError(error));
                  }];
 }
 
@@ -121,5 +121,19 @@
     return self.client.timeoutInterval;
 }
 
-
 @end
+
+NSError* errorFromAFNetworkingError(NSError *inputError) {
+    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+    
+    [userInfo setValue:inputError.userInfo[AFNetworkingOperationFailingURLRequestErrorKey]
+                forKey:DHRestfulOperationFailingUrlRequestErrorKey];
+    
+    [userInfo setValue:inputError.userInfo[AFNetworkingOperationFailingURLResponseErrorKey]
+                forKey:DHRestfulOperationFailingUrlResponseErrorKey];
+    
+    return [NSError errorWithDomain:DHRestfulOperationErrorDomain
+                               code:inputError.code
+                           userInfo:userInfo];
+}
+

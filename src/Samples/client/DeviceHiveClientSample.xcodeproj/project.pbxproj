@@ -16,6 +16,7 @@
 		D0744A4A1675E59C002F5758 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0744A491675E59C002F5758 /* DeviceViewController.m */; };
 		D0744A5016761804002F5758 /* SendCommandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0744A4F16761804002F5758 /* SendCommandViewController.m */; };
 		D0744A5316761FFC002F5758 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0744A5216761FFC002F5758 /* NotificationsViewController.m */; };
+		D0B84FED1677818D006A293B /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FEC1677818D006A293B /* AuthViewController.m */; };
 		D0D76FED166CCB88005816C0 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D76FDA166CCB88005816C0 /* Configuration.m */; };
 		D0D76FEE166CCB88005816C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D76FDB166CCB88005816C0 /* Default-568h@2x.png */; };
 		D0D76FEF166CCB88005816C0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D76FDC166CCB88005816C0 /* Default.png */; };
@@ -43,6 +44,8 @@
 		D0744A4F16761804002F5758 /* SendCommandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendCommandViewController.m; sourceTree = "<group>"; };
 		D0744A5116761FFC002F5758 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
 		D0744A5216761FFC002F5758 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
+		D0B84FEB1677818D006A293B /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
+		D0B84FEC1677818D006A293B /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
 		D0D76FD9166CCB88005816C0 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		D0D76FDA166CCB88005816C0 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 		D0D76FDB166CCB88005816C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				D0D76FE2166CCB88005816C0 /* DHAppDelegate.h */,
 				D0D76FE3166CCB88005816C0 /* DHAppDelegate.m */,
 				D0D76FE6166CCB88005816C0 /* MainStoryboard.storyboard */,
+				D0B84FEB1677818D006A293B /* AuthViewController.h */,
+				D0B84FEC1677818D006A293B /* AuthViewController.m */,
 				D0D76FE9166CCB88005816C0 /* NetworkDevicesViewController.h */,
 				D0D76FEA166CCB88005816C0 /* NetworkDevicesViewController.m */,
 				D0D76FEB166CCB88005816C0 /* NetworksViewController.h */,
@@ -221,6 +226,7 @@
 				D0744A4A1675E59C002F5758 /* DeviceViewController.m in Sources */,
 				D0744A5016761804002F5758 /* SendCommandViewController.m in Sources */,
 				D0744A5316761FFC002F5758 /* NotificationsViewController.m in Sources */,
+				D0B84FED1677818D006A293B /* AuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

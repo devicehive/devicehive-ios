@@ -11,6 +11,11 @@
 #import "DHClientServices.h"
 #import "DHDeviceClient.h"
 
+@interface DHAppDelegate ()
+
+@property (nonatomic, strong, readwrite) id<DHClientService> clientService;
+
+@end
 
 
 @implementation DHAppDelegate
@@ -18,22 +23,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"didFinishLaunchingWithOptions");
-    self.clientService = [DHClientServices restfulClientServiceWithUrl:[NSURL URLWithString:kServerUrl]
-                                                              username:kUsername
-                                                              password:kPassword];
-    
-    
-    UIViewController* rootViewController = nil;
-    if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navCtl = (UINavigationController*)_window.rootViewController;
-        rootViewController = [navCtl.viewControllers objectAtIndex:0];
-    } else {
-        rootViewController = self.window.rootViewController;
-    }
-    if ([rootViewController respondsToSelector:@selector(setClientService:)]) {
-        [rootViewController performSelector:@selector(setClientService:) withObject:self.clientService];
-    }
-    
     return YES;
 }
 							
@@ -61,6 +50,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
++ (DHAppDelegate*)appDelegate {
+    return [UIApplication sharedApplication].delegate;
+}
+
+- (void)setupClientServiceWithUsername:(NSString *)username password:(NSString *)password {
+    self.clientService = [DHClientServices restfulClientServiceWithUrl:[NSURL URLWithString:kServerUrl]
+                                                              username:username
+                                                              password:password];
 }
 
 @end

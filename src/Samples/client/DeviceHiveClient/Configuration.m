@@ -9,5 +9,3 @@
 #import "Configuration.h"
 
 NSString* const kServerUrl = @"http://ecloud.dataart.com/ecapi6";
-NSString* const kUsername = @"iOSClient";
-NSString* const kPassword = @"12345";
