@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="EMDeviceClassMO" representedClassName="EMDeviceClassMO" syncable="YES">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isPermanent" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EMDeviceMO" inverseName="deviceClass" inverseEntity="EMDeviceMO" syncable="YES"/>
+        <relationship name="equipment" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EMEquipmentMO" inverseName="deviceClass" inverseEntity="EMEquipmentMO" syncable="YES"/>
+    </entity>
+    <entity name="EMDeviceMO" representedClassName="EMDeviceMO" syncable="YES">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="status" attributeType="String" syncable="YES"/>
+        <relationship name="deviceClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EMDeviceClassMO" inverseName="devices" inverseEntity="EMDeviceClassMO" syncable="YES"/>
+        <relationship name="network" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EMNetworkMO" inverseName="devices" inverseEntity="EMNetworkMO" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EMNotificationMO" inverseName="device" inverseEntity="EMNotificationMO" syncable="YES"/>
+    </entity>
+    <entity name="EMEquipmentMO" representedClassName="EMEquipmentMO" syncable="YES">
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="deviceClass" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EMDeviceClassMO" inverseName="equipment" inverseEntity="EMDeviceClassMO" syncable="YES"/>
+    </entity>
+    <entity name="EMNetworkMO" representedClassName="EMNetworkMO" syncable="YES">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="netwDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EMDeviceMO" inverseName="network" inverseEntity="EMDeviceMO" syncable="YES"/>
+    </entity>
+    <entity name="EMNotificationMO" representedClassName="EMNotificationMO" syncable="YES">
+        <attribute name="equipmentCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="notification" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="device" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="EMDeviceMO" inverseName="notifications" inverseEntity="EMDeviceMO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EMDeviceClassMO" positionX="-1721" positionY="-1719" width="128" height="135"/>
+        <element name="EMDeviceMO" positionX="-1962" positionY="-1710" width="128" height="135"/>
+        <element name="EMEquipmentMO" positionX="-1739" positionY="-1524" width="128" height="120"/>
+        <element name="EMNetworkMO" positionX="-2216" positionY="-1743" width="128" height="105"/>
+        <element name="EMNotificationMO" positionX="-2234" positionY="-1539" width="128" height="135"/>
+    </elements>
+</model>
