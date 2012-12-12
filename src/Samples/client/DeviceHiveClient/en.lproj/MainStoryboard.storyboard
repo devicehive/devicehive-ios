@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--Networks View Controller - Root View Controller-->
+        <!--Networks View Controller - Networks-->
         <scene sceneID="wRM-NB-UTD">
             <objects>
                 <tableViewController id="A8z-wO-MCb" customClass="NetworksViewController" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="4yq-hu-UPO">
+                    <navigationItem key="navigationItem" title="Networks" id="4yq-hu-UPO">
                         <barButtonItem key="leftBarButtonItem" title="Auth" id="Wzh-Pw-cbn">
                             <connections>
                                 <action selector="authButtonClicked:" destination="A8z-wO-MCb" id="voe-zw-Pqw"/>
@@ -52,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="615" y="1"/>
         </scene>
-        <!--Network Devices View Controller-->
+        <!--Network Devices View Controller - Devices-->
         <scene sceneID="nvd-oo-OPi">
             <objects>
                 <tableViewController id="g5Y-Oe-kCr" customClass="NetworkDevicesViewController" sceneMemberID="viewController">
@@ -92,7 +92,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="FRH-Lv-J8V"/>
+                    <navigationItem key="navigationItem" title="Devices" id="FRH-Lv-J8V"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uW-7l-rCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -109,7 +109,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Device Info Cell" textLabel="FVE-lN-YzR" detailTextLabel="fVM-lf-m6y" style="IBUITableViewCellStyleValue1" id="wzE-hq-6cl">
-                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -133,6 +133,22 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Equipment Cell" textLabel="QKU-Fp-Z6y" style="IBUITableViewCellStyleDefault" id="HHf-hP-UIP">
+                                <rect key="frame" x="0.0" y="91" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKU-Fp-Z6y">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -145,6 +161,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtj-5W-pKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2831" y="-845"/>
+        </scene>
+        <!--Equipment View Controller - Equipment-->
+        <scene sceneID="Gwm-DB-pi5">
+            <objects>
+                <tableViewController id="KW7-3N-1UE" customClass="EquipmentViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="237-i0-ZPy">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Equipment Info Cell" textLabel="Quo-0T-Mtu" detailTextLabel="uPX-84-qBu" style="IBUITableViewCellStyleValue1" id="Xa0-ab-ffD">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quo-0T-Mtu">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-84-qBu">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KW7-3N-1UE" id="sQ4-R3-Rre"/>
+                            <outlet property="delegate" destination="KW7-3N-1UE" id="nCN-0n-E7D"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Equipment" id="OUx-8f-FfH"/>
+                    <navigationItem key="navigationItem" title="Equipment" id="j0O-aD-xzh"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mmw-oW-syP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2856" y="571"/>
         </scene>
         <!--Send Command View Controller - Send Command-->
         <scene sceneID="dqg-rz-Xmx">
@@ -431,21 +490,22 @@
             </objects>
             <point key="canvasLocation" x="81" y="1"/>
         </scene>
-        <!--Device Tab Bar Controller-->
+        <!--Device Tab Bar Controller - Device Summary-->
         <scene sceneID="Gfb-W9-lWX">
             <objects>
                 <tabBarController id="kGa-rk-mid" customClass="DeviceTabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="i9l-rK-kyL"/>
+                    <navigationItem key="navigationItem" title="Device Summary" id="i9l-rK-kyL"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="k4h-qY-0nt">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="nrE-Y7-QoZ" kind="relationship" relationship="viewControllers" id="VjK-8j-TPo"/>
-                        <segue destination="rJt-aX-p62" kind="relationship" relationship="viewControllers" id="Ztm-dN-aly"/>
-                        <segue destination="Imc-Xa-7Ht" kind="relationship" relationship="viewControllers" id="JJ6-3n-7jX"/>
+                        <segue destination="nrE-Y7-QoZ" kind="relationship" relationship="viewControllers" id="H6e-HP-K48"/>
+                        <segue destination="KW7-3N-1UE" kind="relationship" relationship="viewControllers" id="KB1-38-VqA"/>
+                        <segue destination="rJt-aX-p62" kind="relationship" relationship="viewControllers" id="BBm-oG-Jcu"/>
+                        <segue destination="Imc-Xa-7Ht" kind="relationship" relationship="viewControllers" id="PYE-iR-aWm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ley-3R-01E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -457,8 +517,6 @@
         <class className="AuthViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AuthViewController.h"/>
             <relationships>
-                <relationship kind="action" name="authenticateButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="cancelButtonClicked:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
@@ -470,6 +528,9 @@
         <class className="DeviceViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceViewController.h"/>
         </class>
+        <class className="EquipmentViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentViewController.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -478,9 +539,6 @@
         </class>
         <class className="NetworksViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworksViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="authButtonClicked:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="NotificationsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotificationsViewController.h"/>
@@ -491,7 +549,6 @@
         <class className="SendCommandViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SendCommandViewController.h"/>
             <relationships>
-                <relationship kind="action" name="sendCommandButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="commandNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="equipmentCodeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>

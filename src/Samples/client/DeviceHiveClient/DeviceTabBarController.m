@@ -29,11 +29,11 @@ NSString* const DeviceClientDidReceiveNotification = @"DeviceClientDidReceiveNot
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController {
-    [super setSelectedViewController:selectedViewController];
     if ([selectedViewController respondsToSelector:@selector(setDeviceClient:)]) {
         [selectedViewController performSelector:@selector(setDeviceClient:)
                                      withObject:self.deviceClient];
     }
+    [super setSelectedViewController:selectedViewController];
 }
 
 - (void)setDeviceClient:(DHDeviceClient *)deviceClient {

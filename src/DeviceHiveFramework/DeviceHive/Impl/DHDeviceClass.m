@@ -13,12 +13,17 @@
 @implementation DHDeviceClass
 
 - (id)initWithName:(NSString *)name version:(NSString *)version {
-    return [self initWithName:name version:version offlineTimeout:0 permanent:NO];
+    return [self initWithId:nil name:name version:version offlineTimeout:0 permanent:NO];
 }
 
-- (id)initWithName:(NSString *)name version:(NSString *)version offlineTimeout:(NSNumber*)offlineTimeout permanent:(BOOL)permanent {
+- (id)initWithId:(NSNumber *)deviceClassID
+            name:(NSString *)name
+         version:(NSString *)version
+  offlineTimeout:(NSNumber *)offlineTimeout
+       permanent:(BOOL)permanent {
     self = [super init];
     if (self) {
+        _deviceClassID = deviceClassID;
         _name = name;
         _version = version;
         _offlineTimeout = offlineTimeout;
@@ -28,14 +33,16 @@
 }
 
 - (id)initWithDictionary:(NSDictionary*)dictionary {
-    return [self initWithName:dictionary[@"name"]
-                      version:dictionary[@"version"]
-               offlineTimeout:dictionary[@"offlineTimeout"]
-                    permanent:[dictionary[@"isPermanent"] boolValue]];
+    return [self initWithId:dictionary[@"id"]
+                       name:dictionary[@"name"]
+                    version:dictionary[@"version"]
+             offlineTimeout:dictionary[@"offlineTimeout"]
+                  permanent:[dictionary[@"isPermanent"] boolValue]];
 }
 
 - (NSDictionary *)classDictionary {
     NSMutableDictionary* resultDict = [NSMutableDictionary dictionary];
+    [resultDict setObjectIfNotNull:self.deviceClassID forKey:@"id"];
     [resultDict setObjectIfNotNull:self.name forKey:@"name"];
     [resultDict setObjectIfNotNull:self.version forKey:@"version"];
     [resultDict setObjectIfNotNull:self.offlineTimeout forKey:@"offlineTimeout"];

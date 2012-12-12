@@ -29,7 +29,6 @@ NSString* const DefaultsKeyPassword = @"Password";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Available Networks";
 }
 
 - (void)viewWillAppear:(BOOL)animated {

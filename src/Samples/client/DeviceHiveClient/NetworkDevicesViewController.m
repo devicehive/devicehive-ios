@@ -25,13 +25,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.network.name;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.clientService getDevicesOfNetwork:self.network completion:^(id response) {
-        self.devices = response;
+    [self.clientService getDevicesOfNetwork:self.network completion:^(NSArray* devices) {
+        self.devices = devices;
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"Failed to get devices: %@", [error description]);
