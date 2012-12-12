@@ -16,7 +16,7 @@
 /**
  Equipment identifier
  */
-@property (nonatomic, strong, readonly) NSString* equipmentID;
+@property (nonatomic, strong, readonly) NSNumber* equipmentID;
 
 /**
  Equipment display name
@@ -35,12 +35,24 @@
 
 /**
  Init object with given parameters.
+ @param equipmentID Equipment identifier.
  @param name Equipment display name
  @param code Equipment code
  @param type Equipment type
  */
-- (id)initWithName:(NSString*)name
-              code:(NSString*)code
-              type:(NSString*)type;
+- (id)initWithId:(NSNumber *)equipmentID
+            name:(NSString *)name
+            code:(NSString *)code
+            type:(NSString *)type;
+
+/**
+ Init object with given parameters.
+ @param name Equipment display name
+ @param code Equipment code
+ @param type Equipment type
+ */
+- (id)initWithName:(NSString *)name
+              code:(NSString *)code
+              type:(NSString *)type;
 
 @end

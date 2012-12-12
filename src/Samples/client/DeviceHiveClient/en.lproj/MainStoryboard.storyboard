@@ -240,7 +240,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="87" id="pBa-It-BAw"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -258,40 +258,32 @@
                                             <constraint firstItem="e6E-fh-OQ4" firstAttribute="leading" secondItem="Pxh-Jj-dnw" secondAttribute="leading" constant="112" id="HQt-fX-g7a"/>
                                             <constraint firstItem="UoE-hp-SI5" firstAttribute="centerY" secondItem="Pxh-Jj-dnw" secondAttribute="centerY" type="default" id="Pr7-IE-x2k"/>
                                             <constraint firstItem="e6E-fh-OQ4" firstAttribute="top" secondItem="Pxh-Jj-dnw" secondAttribute="top" constant="12" id="XFz-sQ-hck"/>
-                                            <constraint firstItem="UoE-hp-SI5" firstAttribute="leading" secondItem="Pxh-Jj-dnw" secondAttribute="leading" constant="30" id="YxR-Kx-wS1"/>
+                                            <constraint firstItem="UoE-hp-SI5" firstAttribute="leading" secondItem="Pxh-Jj-dnw" secondAttribute="leading" constant="21" type="user" id="YxR-Kx-wS1"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="53" id="PEY-WN-6Yn">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="a8C-vJ-jEE" detailTextLabel="nvu-Sl-Gck" rowHeight="53" style="IBUITableViewCellStyleValue1" id="PEY-WN-6Yn">
                                         <rect key="frame" x="0.0" y="99" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="52"/>
+                                            <rect key="frame" x="10" y="0.0" width="280" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Eq. code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWx-9Y-xq2">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="132" id="UXY-Q8-Drv"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Equipment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8C-vJ-jEE">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYR-fm-9rY">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="178" id="mm6-dh-3jy"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="None" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvu-Sl-Gck">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="RYR-fm-9rY" firstAttribute="leading" secondItem="PEY-WN-6Yn" secondAttribute="leading" constant="112" id="VNd-Q6-NlD"/>
-                                            <constraint firstItem="RYR-fm-9rY" firstAttribute="centerY" secondItem="PEY-WN-6Yn" secondAttribute="centerY" type="default" id="drs-st-f1F"/>
-                                            <constraint firstItem="ZWx-9Y-xq2" firstAttribute="baseline" secondItem="RYR-fm-9rY" secondAttribute="baseline" type="default" id="eE4-A4-SYW"/>
-                                            <constraint firstItem="ZWx-9Y-xq2" firstAttribute="leading" secondItem="PEY-WN-6Yn" secondAttribute="leading" constant="30" id="iGj-fH-KIy"/>
-                                        </constraints>
+                                        <connections>
+                                            <segue destination="gXv-lU-2iP" kind="modal" identifier="Equipment Selector Segue" id="tVK-l6-JKr"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="51" id="h9H-P2-zeI">
                                         <rect key="frame" x="0.0" y="152" width="320" height="52"/>
@@ -364,13 +356,67 @@
                     <tabBarItem key="tabBarItem" title="Send Command" id="PwM-en-SJC"/>
                     <connections>
                         <outlet property="commandNameTextField" destination="e6E-fh-OQ4" id="G3Q-vY-kTl"/>
-                        <outlet property="equipmentCodeTextField" destination="RYR-fm-9rY" id="LdO-VT-gPP"/>
                         <outlet property="logTextView" destination="H49-AF-Ecn" id="j6s-mV-ibb"/>
+                        <outlet property="selectedEquimentLabel" destination="nvu-Sl-Gck" id="4uo-Qc-t1g"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1o-E7-oNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2848" y="-120"/>
+            <point key="canvasLocation" x="2483" y="-107"/>
+        </scene>
+        <!--Equipment Selector View Controller-->
+        <scene sceneID="nUf-3q-Bfv">
+            <objects>
+                <tableViewController id="gXv-lU-2iP" customClass="EquipmentSelectorViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FfL-t5-lr0">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Klb-21-nZ3">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Select equipment" id="Ypy-Jm-w5u">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Lga-Rv-X79">
+                                        <connections>
+                                            <action selector="cancelButtonClicked:" destination="gXv-lU-2iP" id="Nv0-ZD-XZS"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" systemItem="done" id="7d4-nQ-bRy">
+                                        <connections>
+                                            <action selector="doneButtonClicked:" destination="gXv-lU-2iP" id="CGx-Er-BuI"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Equipment Cell" textLabel="F7e-XH-8LK" style="IBUITableViewCellStyleDefault" id="EDI-pP-btb">
+                                <rect key="frame" x="0.0" y="80" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7e-XH-8LK">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gXv-lU-2iP" id="JKV-Oc-fgL"/>
+                            <outlet property="delegate" destination="gXv-lU-2iP" id="s0y-VQ-WVw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JUR-uf-6Ct" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2874" y="-112"/>
         </scene>
         <!--Notifications View Controller - Notifications-->
         <scene sceneID="Tmt-bM-o9s">
@@ -530,6 +576,8 @@
         <class className="AuthViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AuthViewController.h"/>
             <relationships>
+                <relationship kind="action" name="authenticateButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="cancelButtonClicked:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
@@ -541,6 +589,13 @@
         <class className="DeviceViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceViewController.h"/>
         </class>
+        <class className="EquipmentSelectorViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentSelectorViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonClicked:"/>
+                <relationship kind="action" name="doneButtonClicked:" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
         <class className="EquipmentViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentViewController.h"/>
         </class>
@@ -549,9 +604,16 @@
         </class>
         <class className="NetworkDevicesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworkDevicesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="NetworksViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworksViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="authButtonClicked:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="NotificationsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotificationsViewController.h"/>
@@ -562,9 +624,10 @@
         <class className="SendCommandViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SendCommandViewController.h"/>
             <relationships>
+                <relationship kind="action" name="sendCommandButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="commandNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="equipmentCodeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="selectedEquimentLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

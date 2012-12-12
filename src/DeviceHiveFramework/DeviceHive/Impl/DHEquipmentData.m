@@ -13,11 +13,13 @@
 
 @implementation DHEquipmentData
 
-- (id)initWithName:(NSString*)name
-              code:(NSString*)code
-              type:(NSString*)type {
+- (id)initWithId:(NSNumber *)equipmentID
+            name:(NSString *)name
+            code:(NSString *)code
+            type:(NSString *)type {
     self  = [super init];
     if (self) {
+        _equipmentID = equipmentID;
         _name = name;
         _code = code;
         _type = type;
@@ -25,14 +27,22 @@
     return self;
 }
 
+- (id)initWithName:(NSString *)name
+              code:(NSString *)code
+              type:(NSString *)type {
+    return [self initWithId:nil name:name code:code type:type];
+}
+
 - (id)initWithDictionary:(NSDictionary*)dictionary {
-    return [self initWithName:dictionary[@"name"]
-                         code:dictionary[@"code"]
-                         type:dictionary[@"type"]];
+    return [self initWithId:dictionary[@"id"]
+                       name:dictionary[@"name"]
+                       code:dictionary[@"code"]
+                       type:dictionary[@"type"]];
 }
 
 - (NSDictionary *)classDictionary {
     NSMutableDictionary* resultDict = [NSMutableDictionary dictionary];
+    [resultDict setObjectIfNotNull:self.equipmentID forKey:@"id"];
     [resultDict setObjectIfNotNull:self.name forKey:@"name"];
     [resultDict setObjectIfNotNull:self.code forKey:@"code"];
     [resultDict setObjectIfNotNull:self.type forKey:@"type"];

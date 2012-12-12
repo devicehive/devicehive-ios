@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D012A2801678BE150075D632 /* EquipmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D012A27F1678BE150075D632 /* EquipmentViewController.m */; };
+		D012A2841678D8D30075D632 /* EquipmentSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D012A2831678D8D30075D632 /* EquipmentSelectorViewController.m */; };
 		D018A51A165638BA00B4DF29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D018A519165638BA00B4DF29 /* QuartzCore.framework */; };
 		D0569308162C187900237899 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0569307162C187900237899 /* UIKit.framework */; };
 		D056930A162C187900237899 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0569309162C187900237899 /* Foundation.framework */; };
@@ -33,6 +34,8 @@
 /* Begin PBXFileReference section */
 		D012A27E1678BE140075D632 /* EquipmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentViewController.h; sourceTree = "<group>"; };
 		D012A27F1678BE150075D632 /* EquipmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentViewController.m; sourceTree = "<group>"; };
+		D012A2821678D8D30075D632 /* EquipmentSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentSelectorViewController.h; sourceTree = "<group>"; };
+		D012A2831678D8D30075D632 /* EquipmentSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentSelectorViewController.m; sourceTree = "<group>"; };
 		D018A519165638BA00B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D0569303162C187900237899 /* DeviceHiveClientSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceHiveClientSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569307162C187900237899 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -136,6 +139,8 @@
 				D0744A5216761FFC002F5758 /* NotificationsViewController.m */,
 				D012A27E1678BE140075D632 /* EquipmentViewController.h */,
 				D012A27F1678BE150075D632 /* EquipmentViewController.m */,
+				D012A2821678D8D30075D632 /* EquipmentSelectorViewController.h */,
+				D012A2831678D8D30075D632 /* EquipmentSelectorViewController.m */,
 				D0D76FFA166CCBB6005816C0 /* Supporting Files */,
 			);
 			path = DeviceHiveClient;
@@ -233,6 +238,7 @@
 				D0744A5316761FFC002F5758 /* NotificationsViewController.m in Sources */,
 				D0B84FED1677818D006A293B /* AuthViewController.m in Sources */,
 				D012A2801678BE150075D632 /* EquipmentViewController.m in Sources */,
+				D012A2841678D8D30075D632 /* EquipmentSelectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

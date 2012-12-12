@@ -9,22 +9,36 @@
 #import "SendCommandViewController.h"
 #import "DHDeviceClient.h"
 #import "DHCommand.h"
+#import "EquipmentSelectorViewController.h"
+#import "DHEquipmentData.h"
 
-@interface SendCommandViewController () <UITextFieldDelegate>
+@interface SendCommandViewController () <UITextFieldDelegate, EquipmentSelectorViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *commandNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *equipmentCodeTextField;
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
+@property (weak, nonatomic) IBOutlet UILabel *selectedEquimentLabel;
+
+@property (nonatomic, strong) NSArray* equipment;
+@property (nonatomic, strong) DHEquipmentData* selectedEquipment;
 
 @end
 
 @implementation SendCommandViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.deviceClient.clientService getEquipmentOfDeviceClass:self.deviceClient.deviceData.deviceClass
+                                                    completion:^(NSArray* equipment) {
+                                                        self.equipment = equipment;
+                                                    } failure:^(NSError *error) {
+                                                        NSLog(@"Failed to get equipment for device: %@", [error description]);
+                                                    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.commandNameTextField.delegate = self;
-    self.equipmentCodeTextField.delegate = self;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -39,7 +53,7 @@
     }
     
     NSMutableDictionary* parameters = nil;
-    NSString* equipmentCode =self.equipmentCodeTextField.text;
+    NSString* equipmentCode = self.selectedEquipment.code;
     if (equipmentCode && equipmentCode.length > 0) {
         parameters = [NSMutableDictionary dictionary];
         parameters[@"equipment"] = equipmentCode;
@@ -55,5 +69,33 @@
     }];
 
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Equipment Selector Segue"]) {
+        EquipmentSelectorViewController* selectorViewController = segue.destinationViewController;
+        selectorViewController.equipment = self.equipment;
+        selectorViewController.selectedEquipment = self.selectedEquipment;
+        selectorViewController.delegate = self;
+    }
+}
+
+#pragma mark - EquipmentSelectorViewControllerDelegate
+
+- (void)equipmentSelectorViewController:(EquipmentSelectorViewController *)viewController
+didSelectEquipment:(DHEquipmentData *)equipment {
+    
+    self.selectedEquipment = equipment;
+    if (self.selectedEquipment) {
+        self.selectedEquimentLabel.text = self.selectedEquipment.name;
+    } else {
+        self.selectedEquimentLabel.text = @"None";
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)equipmentSelectorViewControllerDidCancel:(EquipmentSelectorViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
