@@ -83,6 +83,14 @@ Override method in order to be able to receive notifications.
             success:(DHDeviceClientSuccessCompletionBlock)success
             failure:(DHDeviceClientFailureCompletionBlock)failure;
 
+/**
+ Reload device data from the server. Sync current device state with data from the server.
+ @param success Success completion block.
+ @param failure Failure completion block.
+ */
+- (void)reloadDeviceDataWithSuccess:(DHDeviceClientSuccessCompletionBlock)success
+                            failure:(DHDeviceClientFailureCompletionBlock)failure;
+
 @end
 
 /**

@@ -77,7 +77,7 @@
                     parameters:nil
                        success:^(id response) {
                            DHLog(@"Received device:%@", [response description]);
-                           success(response);
+                           success([[DHDeviceData alloc] initWithDictionary:response]);
                        } failure:^(NSError *error) {
                            DHLog(@"Failed to retrieve device(%@) with error:%@", deviceId, error);
                            failure(error);

@@ -29,12 +29,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.clientService getDevicesOfNetwork:self.network completion:^(NSArray* devices) {
-        self.devices = devices;
-        [self.tableView reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"Failed to get devices: %@", [error description]);
-    }];
+    [self reloadDevices];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -46,6 +41,26 @@
                                                clientService:self.clientService]];
         }
     }
+}
+
+- (IBAction)refreshButtonClicked:(UIBarButtonItem *)sender {
+    [self reloadDevices];
+}
+
+- (void)reloadDevices {
+    [self.clientService getDevicesOfNetwork:self.network completion:^(NSArray* devices) {
+        self.devices = devices;
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"Failed to get devices: %@", [error description]);
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                            message:@"Failed to get devices. Please, retry."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+
 }
 
 #pragma mark - Table view data source

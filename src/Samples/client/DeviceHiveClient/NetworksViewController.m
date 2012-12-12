@@ -47,6 +47,10 @@ NSString* const DefaultsKeyPassword = @"Password";
     [self showAuthViewController];
 }
 
+- (IBAction)refreshButtonClicked:(UIBarButtonItem *)sender {
+    [self queryForNetworks];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

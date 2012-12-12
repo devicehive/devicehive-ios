@@ -46,6 +46,11 @@
                                 <segue destination="7h0-As-4Xn" kind="modal" identifier="Auth Segue" id="iNa-TJ-tuE"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="wBR-8C-I9e">
+                            <connections>
+                                <action selector="refreshButtonClicked:" destination="A8z-wO-MCb" id="hjp-oJ-uRY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykZ-rQ-2UN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -92,7 +97,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Devices" id="FRH-Lv-J8V"/>
+                    <navigationItem key="navigationItem" title="Devices" id="FRH-Lv-J8V">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="KbH-4z-5el">
+                            <connections>
+                                <action selector="refreshButtonClicked:" destination="g5Y-Oe-kCr" id="1J9-fj-OIX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uW-7l-rCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,7 +115,7 @@
             <objects>
                 <tableViewController id="nrE-Y7-QoZ" customClass="DeviceViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QqI-13-eUs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -157,6 +168,8 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Device" id="mmE-cU-k5S"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtj-5W-pKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -131,4 +131,14 @@ typedef void (^DHNotificationPollCompletionBlock)(BOOL success);
     }];
 }
 
+- (void)reloadDeviceDataWithSuccess:(DHDeviceClientSuccessCompletionBlock)success
+                            failure:(DHDeviceClientFailureCompletionBlock)failure {
+    [self.clientService getDeviceWithId:self.deviceData.deviceID completion:^(DHDeviceData* deviceData) {
+        self.deviceData = deviceData;
+        success(deviceData);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 @end
