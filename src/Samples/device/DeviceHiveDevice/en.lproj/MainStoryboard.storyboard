@@ -49,7 +49,50 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtj-5W-pKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1397" y="-785"/>
+            <point key="canvasLocation" x="1175" y="-785"/>
+        </scene>
+        <!--Equipment View Controller - Equipment-->
+        <scene sceneID="STU-cd-OBM">
+            <objects>
+                <tableViewController id="YOZ-5X-MIq" customClass="EquipmentViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="IGV-Jq-VWg">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Equipment Info Cell" textLabel="jyC-l1-Wp2" detailTextLabel="PUC-GU-zmh" style="IBUITableViewCellStyleValue1" id="2gh-Og-6GZ">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyC-l1-Wp2">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUC-GU-zmh">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="YOZ-5X-MIq" id="wWt-W1-O8Y"/>
+                            <outlet property="delegate" destination="YOZ-5X-MIq" id="6dq-Iv-ibP"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Equipment" id="LEA-2U-CEI"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y0Z-Mu-jN6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2226" y="-785"/>
         </scene>
         <!--Send Notification View Controller - Send Notification-->
         <scene sceneID="dqg-rz-Xmx">
@@ -170,7 +213,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H49-AF-Ecn">
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="283" id="vdM-cn-rhr"/>
                                                         <constraint firstAttribute="height" constant="190" id="yrM-DH-i5Y"/>
@@ -224,7 +266,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAt-IK-dd6">
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="260" id="2N3-6R-hiI"/>
                                                         <constraint firstAttribute="height" constant="357" id="Nwo-Qc-3II"/>
@@ -285,8 +326,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="nrE-Y7-QoZ" kind="relationship" relationship="viewControllers" id="VjK-8j-TPo"/>
-                        <segue destination="rJt-aX-p62" kind="relationship" relationship="viewControllers" id="Ztm-dN-aly"/>
-                        <segue destination="Imc-Xa-7Ht" kind="relationship" relationship="viewControllers" id="JJ6-3n-7jX"/>
+                        <segue destination="YOZ-5X-MIq" kind="relationship" relationship="viewControllers" id="Ba2-PY-wV0"/>
+                        <segue destination="rJt-aX-p62" kind="relationship" relationship="viewControllers" id="XHa-de-EAA"/>
+                        <segue destination="Imc-Xa-7Ht" kind="relationship" relationship="viewControllers" id="6LQ-cs-6Gt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ley-3R-01E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -307,12 +349,16 @@
         <class className="DeviceViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceViewController.h"/>
         </class>
+        <class className="EquipmentViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentViewController.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
         <class className="SendNotificationViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SendNotificationViewController.h"/>
             <relationships>
+                <relationship kind="action" name="sendNotificationButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="equipmentCodeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="notificationNameTextField" candidateClass="UITextField"/>

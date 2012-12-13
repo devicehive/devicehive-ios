@@ -26,6 +26,7 @@
 		D0B84FE116774E7A006A293B /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDB16774E79006A293B /* DeviceViewController.m */; };
 		D0B84FE216774E7A006A293B /* CommandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDD16774E79006A293B /* CommandsViewController.m */; };
 		D0B84FE316774E7A006A293B /* SendNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDF16774E79006A293B /* SendNotificationViewController.m */; };
+		D0EABF671679FBBF008BE310 /* EquipmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EABF651679FAA5008BE310 /* EquipmentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		D0B84FDD16774E79006A293B /* CommandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandsViewController.m; sourceTree = "<group>"; };
 		D0B84FDE16774E79006A293B /* SendNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendNotificationViewController.h; sourceTree = "<group>"; };
 		D0B84FDF16774E79006A293B /* SendNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendNotificationViewController.m; sourceTree = "<group>"; };
+		D0EABF641679FAA5008BE310 /* EquipmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquipmentViewController.h; sourceTree = "<group>"; };
+		D0EABF651679FAA5008BE310 /* EquipmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EquipmentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				D0B84FDD16774E79006A293B /* CommandsViewController.m */,
 				D0B84FDE16774E79006A293B /* SendNotificationViewController.h */,
 				D0B84FDF16774E79006A293B /* SendNotificationViewController.m */,
+				D0EABF641679FAA5008BE310 /* EquipmentViewController.h */,
+				D0EABF651679FAA5008BE310 /* EquipmentViewController.m */,
 				D056930E162C187900237899 /* Supporting Files */,
 			);
 			path = DeviceHiveDevice;
@@ -221,6 +226,7 @@
 				D0B84FE116774E7A006A293B /* DeviceViewController.m in Sources */,
 				D0B84FE216774E7A006A293B /* CommandsViewController.m in Sources */,
 				D0B84FE316774E7A006A293B /* SendNotificationViewController.m in Sources */,
+				D0EABF671679FBBF008BE310 /* EquipmentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
