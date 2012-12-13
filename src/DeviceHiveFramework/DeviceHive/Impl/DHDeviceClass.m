@@ -13,7 +13,15 @@
 @implementation DHDeviceClass
 
 - (id)initWithName:(NSString *)name version:(NSString *)version {
-    return [self initWithId:nil name:name version:version offlineTimeout:0 permanent:NO];
+    return [self initWithId:nil name:name version:version offlineTimeout:nil permanent:NO];
+}
+
+- (id)initWithName:(NSString *)name version:(NSString *)version offlineTimeout:(NSNumber *)offlineTimeout {
+    return [self initWithId:nil name:name version:version offlineTimeout:offlineTimeout permanent:NO];
+}
+
+- (id)initWithName:(NSString *)name version:(NSString *)version offlineTimeout:(NSNumber *)offlineTimeout permanent:(BOOL)permanent {
+    return [self initWithId:nil name:name version:version offlineTimeout:offlineTimeout permanent:permanent];
 }
 
 - (id)initWithId:(NSNumber *)deviceClassID
@@ -46,7 +54,7 @@
     [resultDict setObjectIfNotNull:self.name forKey:@"name"];
     [resultDict setObjectIfNotNull:self.version forKey:@"version"];
     [resultDict setObjectIfNotNull:self.offlineTimeout forKey:@"offlineTimeout"];
-    [resultDict setObjectIfNotNull:self.isPermanent ? @"\"true\"" : @"\"false\"" forKey:@"isPermanent"];
+    [resultDict setObjectIfNotNull:[NSNumber numberWithBool:self.isPermanent] forKey:@"isPermanent"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
 }
 

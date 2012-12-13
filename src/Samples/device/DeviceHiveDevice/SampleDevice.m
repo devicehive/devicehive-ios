@@ -16,17 +16,18 @@ NSString* const SampleDeviceCommandKey = @"SampleDeviceCommandKey";
 @implementation SampleDevice
 
 - (id)initWithDeviceService:(id<DHDeviceService>)deviceService {
-    DHNetwork* network = [[DHNetwork alloc] initWithName:@"Test iOS Network(Device Framwork)"
-                                             description:@"Test iOS Device Network(Device Framwork)"];
+    DHNetwork* network = [[DHNetwork alloc] initWithName:@"Test iOS Network(Device Framework)"
+                                             description:@"Test iOS Device Network(Device Framework)"];
     
     DHEquipment* equipment = [[SampleEquipment alloc] init];
     
-    DHDeviceClass* deviceClass = [[DHDeviceClass alloc] initWithName:@"Test iOS Device Class(Device Framwork)"
-                                                             version:@"1.0"];
+    DHDeviceClass* deviceClass = [[DHDeviceClass alloc] initWithName:@"Test iOS Device Class(Device Framework)"
+                                                             version:@"1.0"
+                                                      offlineTimeout:0];
     
     DHDeviceData* deviceData = [[DHDeviceData alloc] initWithID:kDeviceId
                                                             key:kDeviceKey
-                                                           name:@"Test iOS Device(Device Framwork)"
+                                                           name:@"Test iOS Device(Device Framework)"
                                                          status:DHDeviceStatusOnline
                                                         network:network
                                                     deviceClass:deviceClass

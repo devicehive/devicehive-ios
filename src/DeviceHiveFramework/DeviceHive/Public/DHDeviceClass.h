@@ -49,6 +49,28 @@
 
 /**
  Init object with given parameters.
+ @param name Device display name
+ @param version Device class version
+ @param offlineTimeout Timeout in seconds before the framework changes device status to 'Offline'.
+ */
+- (id)initWithName:(NSString *)name
+           version:(NSString *)version
+    offlineTimeout:(NSNumber *)offlineTimeout;
+
+/**
+ Init object with given parameters.
+ @param name Device display name
+ @param version Device class version
+ @param offlineTimeout Timeout in seconds before the framework changes device status to 'Offline'.
+ @param permanent Indicates whether device class is permanent.
+ */
+- (id)initWithName:(NSString *)name
+           version:(NSString *)version
+    offlineTimeout:(NSNumber *)offlineTimeout
+         permanent:(BOOL)permanent;
+
+/**
+ Init object with given parameters.
  @param id Device class identifier.
  @param name Device display name.
  @param version Device class version.
