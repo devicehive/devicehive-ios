@@ -1,5 +1,5 @@
 //
-//  AuthViewController.m
+//  SettingsViewController.m
 //  DeviceHiveClientSample
 //
 //  Created by Kiselev Maxim on 12/11/12.
