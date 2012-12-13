@@ -43,7 +43,7 @@
                     <navigationItem key="navigationItem" title="Networks" id="4yq-hu-UPO">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="Wzh-Pw-cbn">
                             <connections>
-                                <action selector="authButtonClicked:" destination="A8z-wO-MCb" id="voe-zw-Pqw"/>
+                                <action selector="settingsButtonClicked:" destination="A8z-wO-MCb" id="Uq0-jo-eUa"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="wBR-8C-I9e">
@@ -54,7 +54,7 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="oGv-MX-BUZ" kind="modal" identifier="Auth Segue" id="c7s-xo-o4F"/>
+                        <segue destination="oGv-MX-BUZ" kind="modal" identifier="Settings Segue" id="c7s-xo-o4F"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykZ-rQ-2UN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -472,10 +472,10 @@
             </objects>
             <point key="canvasLocation" x="2337" y="650"/>
         </scene>
-        <!--Auth View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="hO4-lP-Phs">
             <objects>
-                <tableViewController id="oGv-MX-BUZ" customClass="AuthViewController" sceneMemberID="viewController">
+                <tableViewController id="oGv-MX-BUZ" customClass="SettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="f0P-YO-JaH">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -603,15 +603,6 @@
         </scene>
     </scenes>
     <classes>
-        <class className="AuthViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AuthViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="serverUrlTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
         <class className="DeviceTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceTabBarController.h"/>
         </class>
@@ -620,6 +611,10 @@
         </class>
         <class className="EquipmentSelectorViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentSelectorViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonClicked:"/>
+                <relationship kind="action" name="doneButtonClicked:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="EquipmentViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentViewController.h"/>
@@ -635,10 +630,6 @@
         </class>
         <class className="NetworksViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworksViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="authButtonClicked:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="NotificationsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotificationsViewController.h"/>
@@ -653,6 +644,15 @@
                 <relationship kind="outlet" name="commandNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="selectedEquimentLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="serverUrlTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
     </classes>

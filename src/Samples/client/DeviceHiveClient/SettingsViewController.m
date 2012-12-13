@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 DataArt. All rights reserved.
 //
 
-#import "AuthViewController.h"
+#import "SettingsViewController.h"
 
-@interface AuthViewController () <UITextFieldDelegate>
+@interface SettingsViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation AuthViewController
+@implementation SettingsViewController
 
 - (void)viewDidLoad
 {
@@ -52,7 +52,7 @@
 }
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender {
-    [self.delegate authViewControllerDidCancel:self];
+    [self.delegate settingsViewControllerDidCancel:self];
 }
 
 - (void)doneButtonClicked:(UIBarButtonItem *)sender {
@@ -78,10 +78,10 @@
                                                   otherButtonTitles:nil];
         [alertView show];
     } else {
-        [self.delegate authViewController:self
-                       didChangeServerURL:self.serverUrlTextField.text
-                                 username:self.usernameTextField.text
-                                 password:self.passwordTextField.text];
+        [self.delegate settingsViewController:self
+                           didChangeServerURL:self.serverUrlTextField.text
+                                     username:self.usernameTextField.text
+                                     password:self.passwordTextField.text];
     }
 }
 

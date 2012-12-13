@@ -10,7 +10,7 @@
 #import "DHClientService.h"
 #import "DHNetwork.h"
 #import "NetworkDevicesViewController.h"
-#import "AuthViewController.h"
+#import "SettingsViewController.h"
 #import "DHAppDelegate.h"
 #import "DHClientServices.h"
 #import "Configuration.h"
@@ -19,7 +19,7 @@ NSString* const DefaultsKeyUsername = @"Username";
 NSString* const DefaultsKeyPassword = @"Password";
 NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
 
-@interface NetworksViewController () <AuthViewControllerDelegate>
+@interface NetworksViewController () <SettingsViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray* networks;
 
@@ -36,7 +36,7 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
     [super viewWillAppear:animated];
     if (![[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyUsername] ||
         ![[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword]) {
-        [self performSelector:@selector(showAuthViewController) withObject:nil afterDelay:0.1];
+        [self performSelector:@selector(showSettingsViewController) withObject:nil afterDelay:0.1];
     } else {
         NSString* serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyServerUrl];
         [[DHAppDelegate appDelegate] setupClientServiceWithServerUrl:serverUrl ? serverUrl : kServerUrl
@@ -46,8 +46,8 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
     }
 }
 
-- (IBAction)authButtonClicked:(UIBarButtonItem *)sender {
-    [self showAuthViewController];
+- (IBAction)settingsButtonClicked:(UIBarButtonItem *)sender {
+    [self showSettingsViewController];
 }
 
 - (IBAction)refreshButtonClicked:(UIBarButtonItem *)sender {
@@ -83,23 +83,23 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
         NetworkDevicesViewController* networkDeviceViewController = (NetworkDevicesViewController*)segue.destinationViewController;
         networkDeviceViewController.clientService = [DHAppDelegate appDelegate].clientService;
         networkDeviceViewController.network = [self.networks objectAtIndex:[[self.tableView indexPathForCell:sender] row]];
-    } else if ([segue.identifier isEqualToString:@"Auth Segue"]) {
-        AuthViewController* authViewController = (AuthViewController*)segue.destinationViewController;
-        authViewController.delegate = self;
-        authViewController.cancelable = YES;
-        authViewController.lastUsername = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyUsername];
-        authViewController.lastPassword = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword];
+    } else if ([segue.identifier isEqualToString:@"Settings Segue"]) {
+        SettingsViewController* settingsViewController = (SettingsViewController*)segue.destinationViewController;
+        settingsViewController.delegate = self;
+        settingsViewController.cancelable = YES;
+        settingsViewController.lastUsername = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyUsername];
+        settingsViewController.lastPassword = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword];
         NSString* serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyServerUrl];
-        authViewController.lastServerUrl = serverUrl ? serverUrl : kServerUrl;
+        settingsViewController.lastServerUrl = serverUrl ? serverUrl : kServerUrl;
     }
 }
 
-#pragma mark - AuthViewControllerDelegate
+#pragma mark - SettingsViewControllerDelegate
 
-- (void)authViewController:(AuthViewController *)authViewController
-        didChangeServerURL:(NSString *)url
-                  username:(NSString *)username
-                  password:(NSString *)password {
+- (void)settingsViewController:(SettingsViewController *)settingsViewController
+            didChangeServerURL:(NSString *)url
+                      username:(NSString *)username
+                      password:(NSString *)password {
     
     [[NSUserDefaults standardUserDefaults] setObject:url
                                               forKey:DefaultsKeyServerUrl];
@@ -118,7 +118,7 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
     [self queryForNetworks];
 }
 
-- (void)authViewControllerDidCancel:(AuthViewController *)authViewController {
+- (void)settingsViewControllerDidCancel:(SettingsViewController *)settingsViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -155,7 +155,7 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
             }
         } else {
             if (response.statusCode == 401) {
-                [self showAuthViewController];
+                [self showSettingsViewController];
             } else {
                 UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                                     message:@"Failed to query networks. Please, check network settings and retry."
@@ -168,8 +168,8 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
     }];
 }
 
-- (void)showAuthViewController {
-    [self performSegueWithIdentifier:@"Auth Segue" sender:self];
+- (void)showSettingsViewController {
+    [self performSegueWithIdentifier:@"Settings Segue" sender:self];
 }
 
 @end
