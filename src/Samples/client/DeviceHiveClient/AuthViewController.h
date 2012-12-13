@@ -10,12 +10,13 @@
 
 @protocol AuthViewControllerDelegate;
 
-@interface AuthViewController : UIViewController
+@interface AuthViewController : UITableViewController
 
 @property (nonatomic, weak) id<AuthViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) NSString* lastUsername;
 @property (nonatomic, strong) NSString* lastPassword;
+@property (nonatomic, strong) NSString* lastServerUrl;
 
 @property (nonatomic) BOOL cancelable;
 
@@ -25,7 +26,8 @@
 @protocol AuthViewControllerDelegate <NSObject>
 
 - (void)authViewController:(AuthViewController *)authViewController
-         didObtainUsername:(NSString *)username
+        didChangeServerURL:(NSString *)url
+                  username:(NSString *)username
                   password:(NSString *)password;
 
 - (void)authViewControllerDidCancel:(AuthViewController *)authViewController;

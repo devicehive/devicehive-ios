@@ -56,8 +56,11 @@
     return [UIApplication sharedApplication].delegate;
 }
 
-- (void)setupClientServiceWithUsername:(NSString *)username password:(NSString *)password {
-    self.clientService = [DHClientServices restfulClientServiceWithUrl:[NSURL URLWithString:kServerUrl]
+- (void)setupClientServiceWithServerUrl:(NSString *)url
+                               username:(NSString *)username
+                               password:(NSString *)password {
+    
+    self.clientService = [DHClientServices restfulClientServiceWithUrl:[NSURL URLWithString:url]
                                                               username:username
                                                               password:password];
 }

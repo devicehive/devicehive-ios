@@ -17,6 +17,7 @@
 
 NSString* const DefaultsKeyUsername = @"Username";
 NSString* const DefaultsKeyPassword = @"Password";
+NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
 
 @interface NetworksViewController () <AuthViewControllerDelegate>
 
@@ -37,8 +38,10 @@ NSString* const DefaultsKeyPassword = @"Password";
         ![[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword]) {
         [self performSelector:@selector(showAuthViewController) withObject:nil afterDelay:0.1];
     } else {
-        [[DHAppDelegate appDelegate] setupClientServiceWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyUsername]
-                                                           password:[[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword]];
+        NSString* serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyServerUrl];
+        [[DHAppDelegate appDelegate] setupClientServiceWithServerUrl:serverUrl ? serverUrl : kServerUrl
+                                                            username:[[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyUsername]
+                                                            password:[[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword]];
         [self queryForNetworks];
     }
 }
@@ -86,14 +89,21 @@ NSString* const DefaultsKeyPassword = @"Password";
         authViewController.cancelable = YES;
         authViewController.lastUsername = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyUsername];
         authViewController.lastPassword = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyPassword];
+        NSString* serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyServerUrl];
+        authViewController.lastServerUrl = serverUrl ? serverUrl : kServerUrl;
     }
 }
 
 #pragma mark - AuthViewControllerDelegate
 
 - (void)authViewController:(AuthViewController *)authViewController
-         didObtainUsername:(NSString *)username
+        didChangeServerURL:(NSString *)url
+                  username:(NSString *)username
                   password:(NSString *)password {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:url
+                                              forKey:DefaultsKeyServerUrl];
+    
     [[NSUserDefaults standardUserDefaults] setObject:username
                                               forKey:DefaultsKeyUsername];
     
@@ -101,8 +111,9 @@ NSString* const DefaultsKeyPassword = @"Password";
                                               forKey:DefaultsKeyPassword];
     
 
-    [[DHAppDelegate appDelegate] setupClientServiceWithUsername:username
-                                                       password:password];
+    [[DHAppDelegate appDelegate] setupClientServiceWithServerUrl:url
+                                                        username:username
+                                                        password:password];
     
     [self queryForNetworks];
 }
@@ -125,17 +136,33 @@ NSString* const DefaultsKeyPassword = @"Password";
     } failure:^(NSError *error) {
         NSLog(@"Failed to get networks: %@", [error description]);
         NSHTTPURLResponse* response = error.userInfo[DHRestfulOperationFailingUrlResponseErrorKey];
-        // auth failed
-        if (response.statusCode == 401) {
-            if (self.presentedViewController) {
+        
+        if (self.presentedViewController) {
+            if (response.statusCode == 401) {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                                        message:@"Failed to authenticate with these credentials."
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+            } else {
                 UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                                    message:@"Failed to aythenticate with these credentials."
+                                                                    message:@"Failed to connect to the server."
                                                                    delegate:self
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                 [alertView show];
-            } else {
+            }
+        } else {
+            if (response.statusCode == 401) {
                 [self showAuthViewController];
+            } else {
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                                    message:@"Failed to query networks. Please, check network settings and retry."
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                [alertView show];
             }
         }
     }];

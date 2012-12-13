@@ -29,6 +29,8 @@
 		D0D76FF6166CCB88005816C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D76FE8166CCB88005816C0 /* main.m */; };
 		D0D76FF7166CCB88005816C0 /* NetworkDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D76FEA166CCB88005816C0 /* NetworkDevicesViewController.m */; };
 		D0D76FF8166CCB88005816C0 /* NetworksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D76FEC166CCB88005816C0 /* NetworksViewController.m */; };
+		D0EABF5D1679D4E2008BE310 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D0EABF5B1679D4E2008BE310 /* Icon.png */; };
+		D0EABF5E1679D4E2008BE310 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0EABF5C1679D4E2008BE310 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		D0D76FEA166CCB88005816C0 /* NetworkDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkDevicesViewController.m; sourceTree = "<group>"; };
 		D0D76FEB166CCB88005816C0 /* NetworksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworksViewController.h; sourceTree = "<group>"; };
 		D0D76FEC166CCB88005816C0 /* NetworksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworksViewController.m; sourceTree = "<group>"; };
+		D0EABF5B1679D4E2008BE310 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D0EABF5C1679D4E2008BE310 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,8 @@
 				D0D76FDB166CCB88005816C0 /* Default-568h@2x.png */,
 				D0D76FDC166CCB88005816C0 /* Default.png */,
 				D0D76FDD166CCB88005816C0 /* Default@2x.png */,
+				D0EABF5B1679D4E2008BE310 /* Icon.png */,
+				D0EABF5C1679D4E2008BE310 /* Icon@2x.png */,
 				D0D76FDE166CCB88005816C0 /* DeviceHiveClientSample-Info.plist */,
 				D0D76FDF166CCB88005816C0 /* DeviceHiveClientSample-Prefix.pch */,
 				D0D76FE4166CCB88005816C0 /* InfoPlist.strings */,
@@ -217,6 +223,8 @@
 				D0D76FF0166CCB88005816C0 /* Default@2x.png in Resources */,
 				D0D76FF4166CCB88005816C0 /* InfoPlist.strings in Resources */,
 				D0D76FF5166CCB88005816C0 /* MainStoryboard.storyboard in Resources */,
+				D0EABF5D1679D4E2008BE310 /* Icon.png in Resources */,
+				D0EABF5E1679D4E2008BE310 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,9 @@
 @property (nonatomic, strong, readonly) id<DHClientService> clientService;
 
 + (DHAppDelegate*)appDelegate;
-- (void)setupClientServiceWithUsername:(NSString *)username password:(NSString *)password;
+
+- (void)setupClientServiceWithServerUrl:(NSString *)url
+                               username:(NSString *)username
+                               password:(NSString *)password;
 
 @end
