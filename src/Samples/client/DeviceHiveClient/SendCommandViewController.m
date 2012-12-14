@@ -11,15 +11,19 @@
 #import "DHCommand.h"
 #import "EquipmentSelectorViewController.h"
 #import "DHEquipmentData.h"
+#import "ParametersViewController.h"
 
-@interface SendCommandViewController () <UITextFieldDelegate, EquipmentSelectorViewControllerDelegate>
+@interface SendCommandViewController () <UITextFieldDelegate, EquipmentSelectorViewControllerDelegate, ParametersViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *commandNameTextField;
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
 @property (weak, nonatomic) IBOutlet UILabel *selectedEquimentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *parametersCountLabel;
 
 @property (nonatomic, strong) NSArray* equipment;
 @property (nonatomic, strong) DHEquipmentData* selectedEquipment;
+
+@property (nonatomic, strong) NSDictionary* parameters;
 
 @end
 
@@ -39,6 +43,7 @@
 {
     [super viewDidLoad];
     self.commandNameTextField.delegate = self;
+    self.parametersCountLabel.text = [NSString stringWithFormat:@"%d item(s)", self.parameters.count];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -52,10 +57,12 @@
         commandName = @"TestCommand";
     }
     
-    NSMutableDictionary* parameters = nil;
+    NSMutableDictionary* parameters = [self.parameters mutableCopy];
     NSString* equipmentCode = self.selectedEquipment.code;
-    if (equipmentCode && equipmentCode.length > 0) {
-        parameters = [NSMutableDictionary dictionary];
+    if (equipmentCode.length > 0) {
+        if (!parameters) {
+            parameters = [NSMutableDictionary dictionary];
+        }
         parameters[@"equipment"] = equipmentCode;
     }
     
@@ -76,13 +83,17 @@
         selectorViewController.equipment = self.equipment;
         selectorViewController.selectedEquipment = self.selectedEquipment;
         selectorViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Parameters Segue"]) {
+        ParametersViewController* parametersViewController = segue.destinationViewController;
+        parametersViewController.parameters = self.parameters;
+        parametersViewController.delegate = self;
     }
 }
 
 #pragma mark - EquipmentSelectorViewControllerDelegate
 
 - (void)equipmentSelectorViewController:(EquipmentSelectorViewController *)viewController
-didSelectEquipment:(DHEquipmentData *)equipment {
+                     didSelectEquipment:(DHEquipmentData *)equipment {
     
     self.selectedEquipment = equipment;
     if (self.selectedEquipment) {
@@ -94,6 +105,19 @@ didSelectEquipment:(DHEquipmentData *)equipment {
 }
 
 - (void)equipmentSelectorViewControllerDidCancel:(EquipmentSelectorViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - ParametersViewControllerDelegate
+
+- (void)parametersViewController:(ParametersViewController *)viewController
+      didFinishEditingParameters:(NSDictionary *)parameters {
+    self.parameters = parameters;
+    self.parametersCountLabel.text = [NSString stringWithFormat:@"%d item(s)", self.parameters.count];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)parametersViewControllerDidCancel:(ParametersViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

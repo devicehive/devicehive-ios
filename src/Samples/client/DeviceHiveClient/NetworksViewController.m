@@ -69,7 +69,7 @@ NSString* const DefaultsKeyServerUrl = @"DefaultsKeyServerUrl";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Network Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     DHNetwork* network = [self.networks objectAtIndex:indexPath.row];
     cell.textLabel.text = network.name;

@@ -19,6 +19,7 @@
 		D0744A5016761804002F5758 /* SendCommandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0744A4F16761804002F5758 /* SendCommandViewController.m */; };
 		D0744A5316761FFC002F5758 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0744A5216761FFC002F5758 /* NotificationsViewController.m */; };
 		D0B84FED1677818D006A293B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FEC1677818D006A293B /* SettingsViewController.m */; };
+		D0C840B3167A27210070C039 /* ParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C840B2167A27210070C039 /* ParametersViewController.m */; };
 		D0D76FED166CCB88005816C0 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D76FDA166CCB88005816C0 /* Configuration.m */; };
 		D0D76FEE166CCB88005816C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D76FDB166CCB88005816C0 /* Default-568h@2x.png */; };
 		D0D76FEF166CCB88005816C0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D76FDC166CCB88005816C0 /* Default.png */; };
@@ -54,6 +55,8 @@
 		D0744A5216761FFC002F5758 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		D0B84FEB1677818D006A293B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		D0B84FEC1677818D006A293B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		D0C840B1167A27210070C039 /* ParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParametersViewController.h; sourceTree = "<group>"; };
+		D0C840B2167A27210070C039 /* ParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParametersViewController.m; sourceTree = "<group>"; };
 		D0D76FD9166CCB88005816C0 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		D0D76FDA166CCB88005816C0 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 		D0D76FDB166CCB88005816C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				D012A27F1678BE150075D632 /* EquipmentViewController.m */,
 				D012A2821678D8D30075D632 /* EquipmentSelectorViewController.h */,
 				D012A2831678D8D30075D632 /* EquipmentSelectorViewController.m */,
+				D0C840B1167A27210070C039 /* ParametersViewController.h */,
+				D0C840B2167A27210070C039 /* ParametersViewController.m */,
 				D0D76FFA166CCBB6005816C0 /* Supporting Files */,
 			);
 			path = DeviceHiveClient;
@@ -247,6 +252,7 @@
 				D0B84FED1677818D006A293B /* SettingsViewController.m in Sources */,
 				D012A2801678BE150075D632 /* EquipmentViewController.m in Sources */,
 				D012A2841678D8D30075D632 /* EquipmentSelectorViewController.m in Sources */,
+				D0C840B3167A27210070C039 /* ParametersViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../DeviceHiveFramework/DeviceHive/Public/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -320,7 +326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../DeviceHiveFramework/DeviceHive/Public/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -335,7 +341,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DeviceHiveClient/DeviceHiveClientSample-Prefix.pch";
 				INFOPLIST_FILE = "DeviceHiveClient/DeviceHiveClientSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = DeviceHiveClientSample;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -349,7 +355,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DeviceHiveClient/DeviceHiveClientSample-Prefix.pch";
 				INFOPLIST_FILE = "DeviceHiveClient/DeviceHiveClientSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = DeviceHiveClientSample;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 1;
