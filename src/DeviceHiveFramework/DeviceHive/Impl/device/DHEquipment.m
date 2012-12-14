@@ -16,6 +16,7 @@
 @interface DHEquipment ()
 
 @property (nonatomic, weak, readwrite) DHDevice* device;
+@property (nonatomic, strong, readwrite) DHEquipmentData* equipmentData;
 
 @end
 
@@ -62,6 +63,27 @@
 - (void)deviceDidStopProcessingCommands:(DHDevice *)device {
     
 }
+
+#pragma mark - DHEquipmentProtocol
+
+- (NSNumber *)equipmentID {
+    return self.equipmentData.equipmentID;
+}
+
+- (NSString *)code {
+    return self.equipmentData.code;
+}
+
+- (NSString *)name {
+    return self.equipmentData.name;
+}
+
+- (NSString *)type {
+    return self.equipmentData.type;
+}
+
+
+#pragma mark - DHCommandExecutor
 
 - (BOOL)shouldExecuteCommand:(DHCommand*)command {
     DHLog(@"Abstract equipment received the command: %@. Descendants should override this method in order to be able to execute commands", command.name);

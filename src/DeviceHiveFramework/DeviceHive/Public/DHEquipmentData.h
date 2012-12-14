@@ -7,31 +7,12 @@
 //
 
 #import "DHEntity.h"
+#import "DHEquipmentProtocol.h"
 
 /**
  Represents equipment's serializable data.
  */
-@interface DHEquipmentData : DHEntity
-
-/**
- Equipment identifier
- */
-@property (nonatomic, strong, readonly) NSNumber* equipmentID;
-
-/**
- Equipment display name
- */
-@property (nonatomic, strong, readonly) NSString* name;
-
-/**
- Equipment code. It's used to reference particular equipment and it should be unique within a device class.
- */
-@property (nonatomic, strong, readonly) NSString* code;
-
-/**
- Equipment type. An arbitrary string representing equipment capabilities
- */
-@property (nonatomic, strong, readonly) NSString* type;
+@interface DHEquipmentData : DHEntity<DHEquipmentProtocol>
 
 /**
  Init object with given parameters.

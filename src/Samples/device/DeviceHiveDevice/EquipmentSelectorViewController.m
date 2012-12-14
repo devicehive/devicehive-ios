@@ -1,8 +1,8 @@
 //
 //  EquipmentSelectorViewController.m
-//  DeviceHiveClientSample
+//  DeviceHiveDeviceSample
 //
-//  Created by Kiselev Maxim on 12/12/12.
+//  Created by Kiselev Maxim on 12/14/12.
 //  Copyright (c) 2012 DataArt. All rights reserved.
 //
 
@@ -54,7 +54,7 @@
     } else {
         id<DHEquipmentProtocol> eq = [self.equipment objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = eq.name;
-        if ([self.selectedEquipment.equipmentID isEqual:eq.equipmentID]) {
+        if ([self.selectedEquipment.code isEqualToString:eq.code]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }

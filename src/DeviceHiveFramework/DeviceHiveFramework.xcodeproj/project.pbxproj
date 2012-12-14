@@ -59,6 +59,7 @@
 /* Begin PBXFileReference section */
 		D012A27B1678920E0075D632 /* DHRestfulApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHRestfulApiClient.m; sourceTree = "<group>"; };
 		D018A5161656341100B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D05691BB167B2ABD0054F182 /* DHEquipmentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHEquipmentProtocol.h; sourceTree = "<group>"; };
 		D05A7A1F1655166F0074078A /* libDeviceHiveFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeviceHiveFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05A7A221655166F0074078A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D05A7A261655166F0074078A /* DeviceHiveFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeviceHiveFramework-Prefix.pch"; sourceTree = "<group>"; };
@@ -308,6 +309,7 @@
 				D0D77047166CDC64005816C0 /* DHDeviceData.h */,
 				D0D77048166CDC64005816C0 /* DHEntity.h */,
 				D0D77049166CDC64005816C0 /* DHEquipmentData.h */,
+				D05691BB167B2ABD0054F182 /* DHEquipmentProtocol.h */,
 				D0D7704A166CDC64005816C0 /* DHNetwork.h */,
 				D0D7704B166CDC64005816C0 /* DHNotification.h */,
 				D0D7704C166CDC64005816C0 /* DHRestfulApiClient.h */,

@@ -11,5 +11,6 @@
 @interface DHEquipment (Private)
 
 @property (nonatomic, weak, readwrite) DHDevice* device;
+@property (nonatomic, strong, readonly) DHEquipmentData* equipmentData;
 
 @end

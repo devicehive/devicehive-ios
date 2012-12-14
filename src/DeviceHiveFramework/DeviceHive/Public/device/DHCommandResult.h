@@ -1,5 +1,5 @@
 //
-//  DHEquipment.h
+//  DHCommandResult.h
 //  DeviceHiveDevice
 //
 //  Created by Maxim Kiselev on 11/08/12.

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D018A51A165638BA00B4DF29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D018A519165638BA00B4DF29 /* QuartzCore.framework */; };
+		D05691B7167B237A0054F182 /* ParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D05691B5167B23520054F182 /* ParametersViewController.m */; };
+		D05691BA167B27510054F182 /* EquipmentSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D05691B9167B27510054F182 /* EquipmentSelectorViewController.m */; };
 		D0569308162C187900237899 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0569307162C187900237899 /* UIKit.framework */; };
 		D056930A162C187900237899 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0569309162C187900237899 /* Foundation.framework */; };
 		D056930C162C187900237899 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D056930B162C187900237899 /* CoreGraphics.framework */; };
@@ -31,6 +33,10 @@
 
 /* Begin PBXFileReference section */
 		D018A519165638BA00B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D05691B4167B23520054F182 /* ParametersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParametersViewController.h; sourceTree = "<group>"; };
+		D05691B5167B23520054F182 /* ParametersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParametersViewController.m; sourceTree = "<group>"; };
+		D05691B8167B27510054F182 /* EquipmentSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentSelectorViewController.h; sourceTree = "<group>"; };
+		D05691B9167B27510054F182 /* EquipmentSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentSelectorViewController.m; sourceTree = "<group>"; };
 		D0569303162C187900237899 /* DeviceHiveDevice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceHiveDevice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569307162C187900237899 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D0569309162C187900237899 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +137,10 @@
 				D0B84FDF16774E79006A293B /* SendNotificationViewController.m */,
 				D0EABF641679FAA5008BE310 /* EquipmentViewController.h */,
 				D0EABF651679FAA5008BE310 /* EquipmentViewController.m */,
+				D05691B4167B23520054F182 /* ParametersViewController.h */,
+				D05691B5167B23520054F182 /* ParametersViewController.m */,
+				D05691B8167B27510054F182 /* EquipmentSelectorViewController.h */,
+				D05691B9167B27510054F182 /* EquipmentSelectorViewController.m */,
 				D056930E162C187900237899 /* Supporting Files */,
 			);
 			path = DeviceHiveDevice;
@@ -227,6 +237,8 @@
 				D0B84FE216774E7A006A293B /* CommandsViewController.m in Sources */,
 				D0B84FE316774E7A006A293B /* SendNotificationViewController.m in Sources */,
 				D0EABF671679FBBF008BE310 /* EquipmentViewController.m in Sources */,
+				D05691B7167B237A0054F182 /* ParametersViewController.m in Sources */,
+				D05691BA167B27510054F182 /* EquipmentSelectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

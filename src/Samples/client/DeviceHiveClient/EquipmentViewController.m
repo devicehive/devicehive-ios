@@ -10,7 +10,7 @@
 #import "DHDeviceData.h"
 #import "DHDeviceClass.h"
 #import "DHDeviceClient.h"
-#import "DHEquipmentData.h"
+#import "DHEquipmentProtocol.h"
 
 @interface EquipmentViewController ()
 
@@ -55,7 +55,7 @@
     static NSString *CellIdentifier = @"Equipment Info Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    DHEquipmentData* eq = [self.equipment objectAtIndex:indexPath.section];
+    id<DHEquipmentProtocol> eq = [self.equipment objectAtIndex:indexPath.section];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"Code";
         cell.detailTextLabel.text = eq.code;
@@ -67,7 +67,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    DHEquipmentData* eq = [self.equipment objectAtIndex:section];
+    id<DHEquipmentProtocol> eq = [self.equipment objectAtIndex:section];
     return eq.name;
 }
 

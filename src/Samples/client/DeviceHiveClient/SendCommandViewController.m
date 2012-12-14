@@ -10,7 +10,7 @@
 #import "DHDeviceClient.h"
 #import "DHCommand.h"
 #import "EquipmentSelectorViewController.h"
-#import "DHEquipmentData.h"
+#import "DHEquipmentProtocol.h"
 #import "ParametersViewController.h"
 
 @interface SendCommandViewController () <UITextFieldDelegate, EquipmentSelectorViewControllerDelegate, ParametersViewControllerDelegate>
@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *parametersCountLabel;
 
 @property (nonatomic, strong) NSArray* equipment;
-@property (nonatomic, strong) DHEquipmentData* selectedEquipment;
+@property (nonatomic, strong) id<DHEquipmentProtocol> selectedEquipment;
 
 @property (nonatomic, strong) NSDictionary* parameters;
 
@@ -93,7 +93,7 @@
 #pragma mark - EquipmentSelectorViewControllerDelegate
 
 - (void)equipmentSelectorViewController:(EquipmentSelectorViewController *)viewController
-                     didSelectEquipment:(DHEquipmentData *)equipment {
+                     didSelectEquipment:(id<DHEquipmentProtocol>)equipment {
     
     self.selectedEquipment = equipment;
     if (self.selectedEquipment) {

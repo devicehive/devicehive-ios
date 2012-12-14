@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DHEntity.h"
 
-@class DHNetwork, DHDeviceClass, DHEquipment;
+@class DHNetwork, DHDeviceClass;
 
 /**
  Represents device's serializable data.

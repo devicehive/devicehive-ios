@@ -1,5 +1,5 @@
 //
-//  DHEquipment.m
+//  DHCommandResult.m
 //  DeviceHiveDevice
 //
 //  Created by Alex Maydanik on 10/27/12.

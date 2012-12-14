@@ -1,8 +1,8 @@
 //
 //  ParametersViewController.h
-//  DeviceHiveClientSample
+//  DeviceHiveDeviceSample
 //
-//  Created by Kiselev Maxim on 12/13/12.
+//  Created by Kiselev Maxim on 12/14/12.
 //  Copyright (c) 2012 DataArt. All rights reserved.
 //
 

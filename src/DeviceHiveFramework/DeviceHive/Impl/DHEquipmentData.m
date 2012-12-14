@@ -7,9 +7,19 @@
 //
 
 #import "DHEquipment.h"
+#import "DHEquipment+Private.h"
 #import "DHEquipmentData.h"
 #import "DHEquipmentData+Private.h"
 #import "NSMutableDictionary+DHEntitySerialization.h"
+
+@interface DHEquipmentData ()
+
+@property (nonatomic, strong, readwrite) NSNumber* equipmentID;
+@property (nonatomic, strong, readwrite) NSString* name;
+@property (nonatomic, strong, readwrite) NSString* code;
+@property (nonatomic, strong, readwrite) NSString* type;
+
+@end
 
 @implementation DHEquipmentData
 

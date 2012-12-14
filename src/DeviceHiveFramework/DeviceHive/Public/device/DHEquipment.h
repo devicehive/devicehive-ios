@@ -22,12 +22,7 @@ typedef void (^DHEquipmentOperationCompletionBlock)(BOOL success);
 /**
  Represents an equipment which is installed on devices.
  */
-@interface DHEquipment : NSObject<DHCommandExecutor>
-
-/**
- Equipment data describing serializable equipment parameters.
- */
-@property (nonatomic, strong, readonly) DHEquipmentData* equipmentData;
+@interface DHEquipment : NSObject<DHEquipmentProtocol, DHCommandExecutor>
 
 /**
  Corresponding DHDevice object. This property is set by the device during its initialization

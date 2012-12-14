@@ -248,7 +248,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 
 - (DHEquipment*)equipmentWithCode:(NSString*)code {
     for (DHEquipment* equipment in self.deviceData.equipment) {
-        if ([equipment.equipmentData.code isEqualToString:code]) {
+        if ([equipment.code isEqualToString:code]) {
             return equipment;
         }
     }

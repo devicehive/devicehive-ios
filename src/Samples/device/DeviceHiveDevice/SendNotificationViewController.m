@@ -9,12 +9,21 @@
 #import "SendNotificationViewController.h"
 #import "DHDevice.h"
 #import "DHNotification.h"
+#import "DHEquipmentProtocol.h"
+#import "ParametersViewController.h"
+#import "EquipmentSelectorViewController.h"
 
-@interface SendNotificationViewController () <UITextFieldDelegate>
+@interface SendNotificationViewController () <UITextFieldDelegate, EquipmentSelectorViewControllerDelegate, ParametersViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *notificationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *equipmentCodeTextField;
+@property (weak, nonatomic) IBOutlet UILabel *selectedEquimentLabel;
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
+@property (weak, nonatomic) IBOutlet UILabel *parametersCountLabel;
+
+@property (nonatomic, strong) id<DHEquipmentProtocol> selectedEquipment;
+
+@property (nonatomic, strong) NSDictionary* parameters;
 
 @end
 
@@ -25,6 +34,7 @@
     [super viewDidLoad];
     self.notificationNameTextField.delegate = self;
     self.equipmentCodeTextField.delegate = self;
+    self.parametersCountLabel.text = [NSString stringWithFormat:@"%d item(s)", self.parameters.count];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -33,19 +43,21 @@
 }
 
 - (IBAction)sendNotificationButtonClicked:(UIButton *)sender {
-    NSString* commandName = self.notificationNameTextField.text;
-    if (!commandName || !commandName.length) {
-        commandName = @"TestCommand";
+    NSString* notificationName = self.notificationNameTextField.text;
+    if (!notificationName || !notificationName.length) {
+        notificationName = @"TestNotification";
     }
     
-    NSMutableDictionary* parameters = nil;
-    NSString* equipmentCode =self.equipmentCodeTextField.text;
-    if (equipmentCode && equipmentCode.length > 0) {
-        parameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary* parameters = [self.parameters mutableCopy];
+    NSString* equipmentCode = self.selectedEquipment.code;
+    if (equipmentCode.length > 0) {
+        if (!parameters) {
+            parameters = [NSMutableDictionary dictionary];
+        }
         parameters[@"equipment"] = equipmentCode;
     }
     
-    DHNotification* notification = [[DHNotification alloc] initWithName:commandName parameters:parameters];
+    DHNotification* notification = [[DHNotification alloc] initWithName:notificationName parameters:parameters];
     [self.device sendNotification:notification success:^(id response) {
         NSLog(@"Notification has been sent");
         self.logTextView.text = [NSString stringWithFormat:@"%@\n%@", self.logTextView.text, [notification description]];
@@ -54,6 +66,50 @@
         self.logTextView.text = [NSString stringWithFormat:@"%@Failed to send notification:\n%@", self.logTextView.text, [error description]];
     }];
 
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Equipment Selector Segue"]) {
+        EquipmentSelectorViewController* selectorViewController = segue.destinationViewController;
+        selectorViewController.equipment = self.device.deviceData.equipment;
+        selectorViewController.selectedEquipment = self.selectedEquipment;
+        selectorViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Parameters Segue"]) {
+        ParametersViewController* parametersViewController = segue.destinationViewController;
+        parametersViewController.parameters = self.parameters;
+        parametersViewController.delegate = self;
+    }
+}
+
+#pragma mark - EquipmentSelectorViewControllerDelegate
+
+- (void)equipmentSelectorViewController:(EquipmentSelectorViewController *)viewController
+                     didSelectEquipment:(id<DHEquipmentProtocol>)equipment {
+    
+    self.selectedEquipment = equipment;
+    if (self.selectedEquipment) {
+        self.selectedEquimentLabel.text = self.selectedEquipment.name;
+    } else {
+        self.selectedEquimentLabel.text = @"None";
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)equipmentSelectorViewControllerDidCancel:(EquipmentSelectorViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - ParametersViewControllerDelegate
+
+- (void)parametersViewController:(ParametersViewController *)viewController
+      didFinishEditingParameters:(NSDictionary *)parameters {
+    self.parameters = parameters;
+    self.parametersCountLabel.text = [NSString stringWithFormat:@"%d item(s)", self.parameters.count];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)parametersViewControllerDidCancel:(ParametersViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
