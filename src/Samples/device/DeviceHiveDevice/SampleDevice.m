@@ -78,16 +78,16 @@ NSString* const SampleDeviceCommandKey = @"SampleDeviceCommandKey";
     NSLog(@"SampleDevice:didFailSendNotification: (%@): withError: %@", notification.name, [error description]);
 }
 
-- (BOOL)shouldExecuteCommand:(DHCommand*)command {
-    NSLog(@"SampleDevice:shouldExecuteCommand: (%@)", command.name);
-    return YES;
+- (void)willExecuteCommand:(DHCommand *)command {
+    NSLog(@"SampleDevice:willExecuteCommand: (%@)", command.name);
+    [[NSNotificationCenter defaultCenter] postNotificationName:SampleDeviceDidReceiveCommandNotification
+                                                        object:self userInfo:@{SampleDeviceCommandKey : command}];
 }
 
 - (void)executeCommand:(DHCommand*)command
             completion:(DHCommandCompletionBlock)completion {
     NSLog(@"SampleDevice:executeCommand: %@", command.name);
-    [[NSNotificationCenter defaultCenter] postNotificationName:SampleDeviceDidReceiveCommandNotification
-                                                        object:self userInfo:@{SampleDeviceCommandKey : command}];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         completion([DHCommandResult commandResultWithStatus:DHCommandStatusCompleted
                                                      result:@"SampleDevice:Finished!"]);

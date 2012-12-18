@@ -25,12 +25,16 @@ typedef void (^DHCommandCompletionBlock)(DHCommandResult* result);
  */
 @protocol DHCommandExecutor <NSObject>
 
-/** Check if the executor should execute the given command.
- @param command DHCommand instance to be executed
- @return YES if the command should be executed(leads to subsequent `executeCommand:(DHCommand*)command
- completion:(DHCommandCompletionBlock)completion` method call), otherwise return NO. If this methods returns NO the command won't be executed
+@optional
+
+/**
+ Called right before command is executed either by the device itself or one of its equipment.
+ @param command {@link Command} to be executed. This method is called for the device before each
+ * command execution (either by the device itself or one of its equipment).
  */
-- (BOOL)shouldExecuteCommand:(DHCommand*)command;
+- (void)willExecuteCommand:(DHCommand *)command;
+
+@required
 
 /** Execute the given command.
  You *MUST* call completion block in the end of your implementation

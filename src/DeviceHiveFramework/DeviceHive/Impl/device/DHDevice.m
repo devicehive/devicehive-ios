@@ -184,12 +184,18 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                                   }];
     };
     
+    if ([self respondsToSelector:@selector(willExecuteCommand:)]) {
+        [self willExecuteCommand:command];
+    }
     BOOL parametersPresent = command.parameters && (id)command.parameters != (id)[NSNull null];
     if (!parametersPresent || !command.parameters[kDeviceEquipmentParameter]) {
         [self executeCommand:command onExecutor:self completion:commandCompletion];
     } else {
         DHEquipment* equipment = [self equipmentWithCode:command.parameters[kDeviceEquipmentParameter]];
         if (equipment) {
+            if ([equipment respondsToSelector:@selector(willExecuteCommand:)]) {
+                [equipment willExecuteCommand:command];
+            }
             [self executeCommand:command onExecutor:equipment completion:commandCompletion];
         } else {
             commandCompletion([DHCommandResult commandResultWithStatus:DHCommandStatusFailed
@@ -200,13 +206,10 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 
 - (void)executeCommand:(DHCommand*)command
             onExecutor:(id<DHCommandExecutor>)executor
-            completion:(DHCommandCompletionBlock)completion{
-    if ([executor shouldExecuteCommand:command]) {
-        [executor executeCommand:command completion:completion];
-    } else {
-        completion([DHCommandResult commandResultWithStatus:DHCommandStatusFailed
-                                                     result:@"Device/Equipment rejected command"]);
-    }
+            completion:(DHCommandCompletionBlock)completion {
+    
+    [executor executeCommand:command
+                  completion:completion];
 }
 
 
