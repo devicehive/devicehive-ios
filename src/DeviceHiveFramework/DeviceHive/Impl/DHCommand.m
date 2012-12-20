@@ -3,7 +3,7 @@
 //  DeviceHiveDevice
 //
 //  Created by Alex Maydanik on 10/27/12.
-//  Copyright (c) 2012 DataArt. All rights reserved.
+//  Copyright (c) 2012 DataArt Apps. All rights reserved.
 //
 
 #import "DHCommand.h"
