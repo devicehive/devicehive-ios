@@ -9,12 +9,12 @@
 #import "DHNotification.h"
 
 /**
- `OK` device status
+ `OK` device status.
  */
 extern NSString* const DHDeviceStatusOk;
 
 /**
- `Online` device status
+ `Online` device status.
  */
 extern NSString* const DHDeviceStatusOnline;
 
@@ -28,15 +28,15 @@ extern NSString* const DHDeviceStatusOnline;
  Init notification with given status.
  @param deviceStatus Status value (see DHDeviceStatusOnline, DHDeviceStatusOK).
  */
-- (id)initWithDeviceStatus:(NSString*)deviceStatus;
+- (id)initWithDeviceStatus:(NSString *)deviceStatus;
 
 /**
- Constructs DHDeviceStatusNotification object with DHDeviceStatusOnline status
+ Constructs DHDeviceStatusNotification object with DHDeviceStatusOnline status.
  */
 + (id)onlineStatusNotification;
 
 /**
- Constructs DHDeviceStatusNotification object with DHDeviceStatusOk status
+ Constructs DHDeviceStatusNotification object with DHDeviceStatusOk status.
  */
 + (id)okStatusNotification;
 

@@ -17,9 +17,9 @@
 /**
  Init object with given parameters.
  @param equipmentID Equipment identifier.
- @param name Equipment display name
- @param code Equipment code
- @param type Equipment type
+ @param name Equipment display name.
+ @param code Equipment code.
+ @param type Equipment type.
  */
 - (id)initWithId:(NSNumber *)equipmentID
             name:(NSString *)name
@@ -28,9 +28,9 @@
 
 /**
  Init object with given parameters.
- @param name Equipment display name
- @param code Equipment code
- @param type Equipment type
+ @param name Equipment display name.
+ @param code Equipment code.
+ @param type Equipment type.
  */
 - (id)initWithName:(NSString *)name
               code:(NSString *)code

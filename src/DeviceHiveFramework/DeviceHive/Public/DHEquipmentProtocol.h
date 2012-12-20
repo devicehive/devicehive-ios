@@ -14,12 +14,12 @@
 @protocol DHEquipmentProtocol <NSObject>
 
 /**
- Equipment identifier
+ Equipment identifier.
  */
 @property (nonatomic, strong, readonly) NSNumber* equipmentID;
 
 /**
- Equipment display name
+ Equipment display name.
  */
 @property (nonatomic, strong, readonly) NSString* name;
 
@@ -29,7 +29,7 @@
 @property (nonatomic, strong, readonly) NSString* code;
 
 /**
- Equipment type. An arbitrary string representing equipment capabilities
+ Equipment type. An arbitrary string representing equipment capabilities.
  */
 @property (nonatomic, strong, readonly) NSString* type;
 

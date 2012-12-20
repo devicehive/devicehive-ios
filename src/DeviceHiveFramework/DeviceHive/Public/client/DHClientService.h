@@ -33,15 +33,15 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
 
 /** Get a list of networks available for current client. As a result this method returns an array of DHNetwork objects.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)getNetworksWithCompletion:(DHClientSuccessCompletionBlock)success
                           failure:(DHClientFailureCompletionBlock)failure;
 
 /** Get a list of device which belong to given network. As a result this method returns an array of DHDeviceData objects.
- @param deviceClass DHDeviceClass object which represent device class.
+ @param network DHNetwork object which represent network.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)getDevicesOfNetwork:(DHNetwork *)network
                  completion:(DHClientSuccessCompletionBlock)success
@@ -50,7 +50,7 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
 /** Get a device data with given device identifier. As a result this method returns DHDeviceData object.
  @param deviceId Device identifier.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)getDeviceWithId:(NSString *)deviceId
              completion:(DHClientSuccessCompletionBlock)success
@@ -59,7 +59,7 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
 /** Get a list of equipment for given device class. As a result this method returns an array of DHEquipmentData objects.
  @param deviceClass DHDeviceClass object which represent device class.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)getEquipmentOfDeviceClass:(DHDeviceClass *)deviceClass
                        completion:(DHClientSuccessCompletionBlock)success
@@ -70,7 +70,7 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
  @param device DHDeviceData object which represent target device to receive notifications from.
  @param lastNotificationPollTimestamp Timestamp of the last received notification from the device. If not specified, server timestamp will be used instead.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)pollDeviceNotifications:(DHDeviceData *)device
                           since:(NSString *)lastNotificationPollTimestamp
@@ -82,7 +82,7 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
  @param device DHDeviceData object which represent target device to receive notifications from.
  @param lastNotificationPollTimestamp Timestamp of the last received notification from the device. If not specified, server timestamp will be used instead.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)getDeviceNotifications:(DHDeviceData *)device
                          since:(NSString *)lastNotificationPollTimestamp
@@ -90,10 +90,10 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
                        failure:(DHClientFailureCompletionBlock)failure;
 
 /** Send command to given device. As a result returns DHCommand returned by the server as a response.
- @param command DHCommand to be sent
+ @param command DHCommand to be sent.
  @param device DHDevice object which represents recipient device.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)sendCommand:(DHCommand *)command
           forDevice:(DHDeviceData *)device

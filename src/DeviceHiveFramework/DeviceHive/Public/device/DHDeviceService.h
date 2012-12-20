@@ -16,7 +16,7 @@ typedef void (^DHDeviceServiceSuccessCompletionBlock)(id response);
 
 /**
  Completion block which is used and invoked in context of device service operation if corresponding operation fails.
- @param error An instance of NSError describing the error
+ @param error An instance of NSError describing the error.
  */
 typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 
@@ -30,22 +30,22 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 @protocol DHDeviceService <NSObject>
 
 /** Issues a registration request for the given device.
- @param device DHDevice to be registered
- @param success Success completion block. Response object is a DHDeviceData instance
- @param failure Failure completion block
+ @param device DHDevice to be registered.
+ @param success Success completion block. Response object is a DHDeviceData instance.
+ @param failure Failure completion block.
  */
-- (void)registerDevice:(DHDevice*)device
+- (void)registerDevice:(DHDevice *)device
                success:(DHDeviceServiceSuccessCompletionBlock) success
                failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
 /** Sends notification on behalf of the given device.
- @param notification Notification to be sent
- @param device Sender DHDevice object 
+ @param notification Notification to be sent.
+ @param device Sender DHDevice object. 
  @param success Success completion block. 
  @param failure Failure completion block
  */
-- (void)sendNotification:(DHNotification*)notification
-               forDevice:(DHDevice*)device
+- (void)sendNotification:(DHNotification *)notification
+               forDevice:(DHDevice *)device
                  success:(DHDeviceServiceSuccessCompletionBlock) success
                  failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
@@ -54,7 +54,7 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
  @param device DHDevice object which represent target device to receive commands for.
  @param lastCommandPollTimestamp Timestamp of the last received command. If not specified, server timestamp will be used instead.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)pollCommandsForDevice:(DHDevice *)device
                         since:(NSString *)lastCommandPollTimestamp
@@ -66,11 +66,11 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
  @param device DHDevice object which represents target device.
  @param result DHCommandResult instance reperesenting command execution result.
  @param success Success completion block.
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
-- (void)updateCommand:(DHCommand*)command
-            forDevice:(DHDevice*)device
-           withResult:(DHCommandResult*)result
+- (void)updateCommand:(DHCommand *)command
+            forDevice:(DHDevice *)device
+           withResult:(DHCommandResult *)result
               success:(DHDeviceServiceSuccessCompletionBlock) success
               failure:(DHDeviceServiceFailureCompletionBlock) failure;
 

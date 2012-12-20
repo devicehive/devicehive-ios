@@ -18,32 +18,32 @@ typedef enum : NSUInteger {
 } DHCommandStatus;
 
 /**
- Represents command execution result which is reported to the server
+ Represents command execution result which is reported to the server.
  */
 @interface DHCommandResult : DHEntity
 
 /**
- Command status, as reported by device or related infrastructure
+ Command status, as reported by device or related infrastructure.
  */
 @property (nonatomic, readonly) DHCommandStatus status;
 
 /**
- Command execution result
+ Command execution result.
  */
 @property (nonatomic, strong, readonly) NSString* result;
 
 /**
  Creates object with status and result.
- @param status Command status
- @param result Command execution result
+ @param status Command status.
+ @param result Command execution result.
  */
 + (id)commandResultWithStatus:(DHCommandStatus)status
                        result:(NSString*)result;
 
 /**
  Init object with status and result.
- @param status Command status
- @param result Command execution result
+ @param status Command status.
+ @param result Command execution result.
  */
 - (id)initWithStatus:(DHCommandStatus)status
               result:(NSString*)result;

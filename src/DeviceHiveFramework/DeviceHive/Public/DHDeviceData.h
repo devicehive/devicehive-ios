@@ -17,49 +17,49 @@
 @interface DHDeviceData : DHEntity
 
 /**
- Device unique identifier
+ Device unique identifier.
  */
 @property (nonatomic, strong, readonly) NSString * deviceID;
 
 /**
- Device authentication key. The key maximum length is 64 characters
+ Device authentication key. The key maximum length is 64 characters.
  */
 @property (nonatomic, strong, readonly) NSString * key;
 
 /**
- Device display name
+ Device display name.
  */
 @property (nonatomic, strong, readonly) NSString * name;
 
 /**
- Device operation status
+ Device operation status.
  */
 @property (nonatomic, strong, readonly) NSString * status;
 
 /**
- Associated DHNetwork object
+ Associated DHNetwork object.
  */
 @property (nonatomic, strong, readonly) DHNetwork  * network;
 
 /**
- Associated DHDeviceClass object
+ Associated DHDeviceClass object.
  */
 @property (nonatomic, strong, readonly) DHDeviceClass * deviceClass;
 
 /**
- Array of Equipment objects to be associated with the device class
+ Array of equipment objects to be associated with the device class.
  */
 @property (nonatomic, strong, readonly) NSArray * equipment;
 
 /**
  Init object with given parameters.
- @param deviceID Device unique identifier
- @param key Device authentication key
- @param name Device display name
- @param status Device operation status
- @param network Associated DHNetwork object
- @param deviceClass Associated DHDeviceClass object
- @param equipments Array of Equipment objects
+ @param deviceID Device unique identifier.
+ @param key Device authentication key.
+ @param name Device display name.
+ @param status Device operation status.
+ @param network Associated DHNetwork object.
+ @param deviceClass Associated DHDeviceClass object.
+ @param equipment Array of Equipment objects.
  */
 - (id)initWithID:(NSString*)deviceID
              key:(NSString*)key
@@ -71,12 +71,12 @@
 
 /**
  Init object with given parameters.
- @param deviceID Device unique identifier
- @param key Device authentication key
- @param name Device display name
- @param status Device operation status
- @param network Associated DHNetwork object
- @param deviceClass Associated DHDeviceClass object
+ @param deviceID Device unique identifier.
+ @param key Device authentication key.
+ @param name Device display name.
+ @param status Device operation status.
+ @param network Associated DHNetwork object.
+ @param deviceClass Associated DHDeviceClass object.
  */
 - (id)initWithID:(NSString*)deviceID
              key:(NSString*)key

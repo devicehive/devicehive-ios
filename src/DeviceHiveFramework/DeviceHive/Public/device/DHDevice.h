@@ -26,93 +26,93 @@ typedef void (^DHDeviceSuccessCompletionBlock)(id response);
 
 /**
  Completion block which is used and invoked if corresponding operation fails.
- @param error An instance of NSError describing the error
+ @param error An instance of NSError describing the error.
  */
 typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 
 /**
- Represents a device, a unit that executes commands and communicates to the server
+ Represents a device, a unit that executes commands and communicates to the server.
  */
 @interface DHDevice : NSObject<DHCommandExecutor>
 
 /**
- Device data describing serializable device parameters
+ Device data describing serializable device parameters.
  */
 @property (nonatomic, strong, readonly) DHDeviceData* deviceData;
 
 /**
- Corresponding DHDeviceService object
+ Corresponding DHDeviceService object.
  */
 @property (nonatomic, strong, readonly) id<DHDeviceService> deviceService;
 
 /**
- Indicates whether the device is currently processing commands, i.e. performs poll/receive/execute/update cycle of command execution 
+ Indicates whether the device is currently processing commands, i.e. performs poll/receive/execute/update cycle of command execution.
  */
 @property (nonatomic, readonly) BOOL isProcessingCommands;
 
 /**
- Indicates whether the device is registeres with device service. Device should be registered in order to receive commands
+ Indicates whether the device is registeres with device service. Device should be registered in order to receive commands.
  */
 @property (nonatomic, readonly) BOOL isRegistered;
 
 /**
  The date when last commands poll request was sent to the server(timestamp of the last received command).
  This value is used as a starting point in time from which every subsequent command (which was posted after this point) will be received and executed by the device. If not initialized, *ALL* existing commands will be received along with the first poll response.
- Clients are suppose to persist the last poll date somewhere(e.g. NSUserDefaults) and restore it when the app relaunched in order to avoid receiving already executed commands.
+ Clients are suppose to persist the last poll date somewhere(e.g. NSUserDefaults) and restore it when the app is relaunched in order to avoid receiving already executed commands.
  */
 @property (nonatomic, strong) NSString* lastCommandPollTimestamp;
 
 /**
  Init object with given parameters.
- @param deviceData DHDeviceData instance
- @param deviceService DHDeviceService implementation to be used by the device
+ @param deviceData DHDeviceData instance.
+ @param deviceService DHDeviceService implementation to be used by the device.
  */
 - (id)initWithDeviceData:(DHDeviceData*)deviceData
            deviceService:(id<DHDeviceService>)deviceService;
 
 /**
- Perform device registration
- @param success Success completion block
- @param failure Failure completion block
+ Perform device registration.
+ @param success Success completion block.
+ @param failure Failure completion block.
  */
 - (void)registerDeviceWithSuccess:(DHDeviceSuccessCompletionBlock)success
                           failure:(DHDeviceFailureCompletionBlock)failure;
 
 /**
- Send notification
- @param notification DHNotification instance to be sent
- @param success Success completion block
- @param failure Failure completion block
+ Send notification.
+ @param notification DHNotification instance to be sent.
+ @param success Success completion block.
+ @param failure Failure completion block.
  */
 - (void)sendNotification:(DHNotification*)notification
                  success:(DHDeviceSuccessCompletionBlock)success
                  failure:(DHDeviceFailureCompletionBlock)failure;
 
 /** Starts/Resumes commands receiving/executing/updating process.
- Override DHCommandExecutor protocol methods in order to be able to handle commands
+ Override DHCommandExecutor protocol methods in order to be able to handle commands.
  */
 - (void)beginProcessingCommands;
 
 /** Stops/Pauses commands execution.
- Override DHCommandExecutor protocol methods in order to be able to handle commands
+ Override DHCommandExecutor protocol methods in order to be able to handle commands.
  */
 - (void)stopProcessingCommands;
 
 /** @name Callbacks */
 
 /**
- Called just before starting device registration process
+ Called just before starting device registration process.
  */
 - (void)willStartRegistration;
 
 /**
- Called right after device registration is finished
+ Called right after device registration is finished.
  */
 - (void)didFinishRegistration;
 
 /**
  Called if device registration is failed
- @param error An instance of NSError describing the error
+ @param error An instance of NSError describing the error.
  */
 - (void)didFailRegistrationWithError:(NSError*)error;
 
@@ -127,21 +127,21 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 - (void)didStopProcessingCommands;
 
 /**
- Called just before device the device will send notification
- @param notification DHNotification instance
+ Called just before the device will send notification.
+ @param notification DHNotification instance.
  */
 - (void)willSendNotification:(DHNotification*)notification;
 
 /**
- Called right after device the device sent notification
- @param notification DHNotification instance
+ Called right after the device sent notification.
+ @param notification DHNotification instance.
  */
 - (void)didSendNotification:(DHNotification*)notification;
 
 /**
- Called if device is failed to send notification
- @param notification DHNotification instance
- @param error An instance of NSError describing the error
+ Called if device is failed to send notification.
+ @param notification DHNotification instance.
+ @param error An instance of NSError describing the error.
  */
 - (void)didFailSendNotification:(DHNotification*)notification
                       withError:(NSError*)error;

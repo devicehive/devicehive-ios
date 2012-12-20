@@ -1,7 +1,7 @@
 #!/bin/bash
 appledoc \
 --project-name "DeviceHive Framework" \
---project-company "DataArt" \
+--project-company "DataArt Apps" \
 --company-id "com.dataart" \
 --output "./docs" \
 --create-html \

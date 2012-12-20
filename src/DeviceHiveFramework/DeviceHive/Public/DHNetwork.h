@@ -17,37 +17,37 @@
 /**
  Network identifier
  */
-@property (nonatomic, strong) NSString* networkID;
+@property (nonatomic, strong, readonly) NSString* networkID;
 
 /**
- Network display name
+ Network display name.
  */
-@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong, readonly) NSString* name;
 
 /**
- Network description
+ Network description.
  */
-@property (nonatomic, strong) NSString* description;
+@property (nonatomic, strong, readonly) NSString* description;
 
 /**
- Optional key that is used to protect the network from unauthorized device registrations
+ Optional key that is used to protect the network from unauthorized device registrations.
  */
-@property (nonatomic, strong) NSString* key;
+@property (nonatomic, strong, readonly) NSString* key;
 
 /**
  Init object with name and parameters.
- @param name Network display name
- @param description Network description
+ @param name Network display name.
+ @param description Network description.
  */
 - (id)initWithName:(NSString*)name
        description:(NSString*)description;
 
 /**
  Init object with given parameters.
- @param name Network display name
- @param networkId Network identifier
- @param description Network description
- @param key Network key
+ @param name Network display name.
+ @param networkId Network identifier.
+ @param description Network description.
+ @param key Network key.
  */
 - (id)initWithName:(NSString*)name
          networkId:(NSString*)networkId

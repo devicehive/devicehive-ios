@@ -17,14 +17,14 @@
 @interface DHDeviceServices : NSObject
 
 /** Get RESTful device service implementation for given service URL address.
- @param url URL address of the server
- @return Device service implementation which is used by the Device for performing it's tasks
+ @param url URL address of the server.
+ @return Device service implementation which is used by the Device for performing it's tasks.
  */
 + (id<DHDeviceService>)restfulDeviceServiceWithUrl:(NSURL*)url;
 
 /** Get RESTful device service implementation with given DHRestfulApiClient implementation.
- @param restfulApiClient DHRestfulApiClient implemetation which will be used to init device service 
- @return Device service implementation which is used by the Device for performing it's tasks
+ @param restfulApiClient DHRestfulApiClient implemetation which will be used to init device service .
+ @return Device service implementation which is used by the Device for performing it's tasks.
  */
 + (id<DHDeviceService>)restfulDeviceServiceWithApiClient:(id<DHRestfulApiClient>)restfulApiClient;
 

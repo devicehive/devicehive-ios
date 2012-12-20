@@ -10,56 +10,68 @@
 #import "DHEntity.h"
 
 /**
- Represents a device command, a unit of information sent to devices
+ Represents a device command, a unit of information sent to devices.
  */
 @interface DHCommand : DHEntity
 
 /**
- Command identifier
+ Command identifier.
  */
 @property (nonatomic, strong, readonly) NSNumber * commandID;
 
 /**
- Command timestamp (UTC)
+ Command timestamp (UTC).
  */
 @property (nonatomic, strong, readonly) NSString * timeStamp;
 
 /**
- Command name
+ Command name.
  */
 @property (nonatomic, strong, readonly) NSString * name;
 
 /**
- Command parameters
+ Command parameters.
  */
 @property (nonatomic, strong, readonly) NSDictionary * parameters;
 
 /**
- Command status
+ Command status.
  */
 @property (nonatomic, strong, readonly) NSString * status;
 
 /**
- Command execution result
+ Command execution result.
  */
 @property (nonatomic, strong, readonly) NSString * result;
 
 /**
- Command lifetime, a number of seconds until this command expires
+ Command lifetime, a number of seconds until this command expires.
  */
 @property (nonatomic, strong, readonly) NSNumber * lifetime;
 
 /**
- Command identifier
+ Command flags. Optional value that could be supplied for device or related infrastructure.
  */
 @property (nonatomic, strong, readonly) NSNumber * flags;
 
-- (id)initWithName:(NSString*)name
-        parameters:(NSDictionary*)parameters;
+/**
+ Init object with given parameters.
+ @param name Command name.
+ @param parameters Command parameters dictionary.
+ */
+- (id)initWithName:(NSString *)name
+        parameters:(NSDictionary *)parameters;
 
-- (id)initWithName:(NSString*)name
-        parameters:(NSDictionary*)parameters
-          lifetime:(NSNumber*)lifetime
-             flags:(NSNumber*)flags;
+/**
+ Init object with given parameters.
+ @param name Command name.
+ @param parameters Command parameters dictionary.
+ @param lifetime Number of seconds until this command expires.
+ @param flags Command flags.
+ */
+- (id)initWithName:(NSString *)name
+        parameters:(NSDictionary *)parameters
+          lifetime:(NSNumber *)lifetime
+             flags:(NSNumber *)flags;
 
 @end

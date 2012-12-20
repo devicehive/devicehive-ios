@@ -15,12 +15,12 @@
 
 /**
  Init object with given parameters.
- @param equipmentCode Equipment code
- @param name Parameters key name in the `Notification`'s parameters
- @param value Equipment parameters
+ @param equipmentCode Equipment code.
+ @param name Parameters key name in the `Notification`'s parameters.
+ @param value Equipment parameters.
  */
-- (id)initWithEquipmentCode:(NSString*)equipmentCode
-             parametersName:(NSString*)name
-                 parameters:(NSDictionary*)value;
+- (id)initWithEquipmentCode:(NSString *)equipmentCode
+             parametersName:(NSString *)name
+                 parameters:(NSDictionary *)value;
 
 @end

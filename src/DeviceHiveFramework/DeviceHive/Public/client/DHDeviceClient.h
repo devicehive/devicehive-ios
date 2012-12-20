@@ -21,7 +21,7 @@ typedef void (^DHDeviceClientSuccessCompletionBlock)(id response);
 
 /**
  Completion block which is used and invoked if corresponding operation fails.
- @param error An instance of NSError describing the error
+ @param error An instance of NSError describing the error.
  */
 typedef void (^DHDeviceClientFailureCompletionBlock)(NSError *error);
 
@@ -33,12 +33,12 @@ typedef void (^DHDeviceClientFailureCompletionBlock)(NSError *error);
 @interface DHDeviceClient : NSObject
 
 /**
- Device data describing device parameters
+ Device data describing device parameters.
  */
 @property (nonatomic, strong, readonly) DHDeviceData* deviceData;
 
 /**
- Corresponding DHClientService object
+ Corresponding DHClientService object.
  */
 @property (nonatomic, strong, readonly) id<DHClientService> clientService;
 
@@ -103,7 +103,7 @@ Override method in order to be able to receive notifications.
 /**
  Called when client receives new notification from the device.
  @param client `DHDeviceClient` instance.
- @param notification DHNotification instance
+ @param notification DHNotification instance.
  */
 - (void)deviceClient:(DHDeviceClient *)client didReceiveNotification:(DHNotification *)notification;
 
@@ -136,7 +136,7 @@ Override method in order to be able to receive notifications.
 /**
  Called if client is failed to send command to the device.
  @param client `DHDeviceClient` instance.
- @param command DHCommand instance
+ @param command DHCommand instance.
  @param error An instance of NSError describing the error.
  */
 - (void)deviceClient:(DHDeviceClient *)client didFailSendCommand:(DHCommand *)command withError:(NSError *)error;

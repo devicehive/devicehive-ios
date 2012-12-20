@@ -14,8 +14,8 @@
 @interface DHDefaultRestfulApiClient : NSObject<DHRestfulApiClient>
 
 /**
- Init object with the given server's URL address.
- @param url Server's URL address
+ Init object with the given server URL address.
+ @param url Server's URL address.
  */
 - (id)initWithBaseURL:(NSURL*)url;
 

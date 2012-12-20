@@ -15,7 +15,7 @@
 
 /**
  Completion block which is invoked by an equipment when corresponding operation is finished.
- @param success YES if operation succeeds, otherwise returns NO
+ @param success YES if operation succeeds, otherwise returns NO.
  */
 typedef void (^DHEquipmentOperationCompletionBlock)(BOOL success);
 
@@ -25,22 +25,22 @@ typedef void (^DHEquipmentOperationCompletionBlock)(BOOL success);
 @interface DHEquipment : NSObject<DHEquipmentProtocol, DHCommandExecutor>
 
 /**
- Corresponding DHDevice object. This property is set by the device during its initialization
+ Corresponding DHDevice object. This property is set by the device during its initialization.
  */
 @property (nonatomic, weak, readonly) DHDevice* device;
 
 /**
  Init object with equipment data.
- @param equipmentData DHEquipmentData instance
+ @param equipmentData DHEquipmentData instance.
  */
-- (id)initWithEquipmentData:(DHEquipmentData*)equipmentData;
+- (id)initWithEquipmentData:(DHEquipmentData *)equipmentData;
 
 /** Send equipment notification.
- @param notification DHEquipmentNotification instance
- @param success Success completion block
- @param failure Failure completion block
+ @param notification DHEquipmentNotification instance.
+ @param success Success completion block.
+ @param failure Failure completion block.
  */
-- (void)sendNotification:(DHEquipmentNotification*)notification
+- (void)sendNotification:(DHEquipmentNotification *)notification
                  success:(DHDeviceSuccessCompletionBlock)success
                  failure:(DHDeviceFailureCompletionBlock)failure;
 

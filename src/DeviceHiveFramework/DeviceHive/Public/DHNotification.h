@@ -20,24 +20,24 @@
 @property (nonatomic, strong, readonly) NSString* notificationID;
 
 /**
- Notification timestamp (UTC)
+ Notification timestamp (UTC).
  */
 @property (nonatomic, strong, readonly) NSString* timestamp;
 
 /**
- Notification name
+ Notification name.
  */
 @property (nonatomic, strong, readonly) NSString* name;
 
 /**
- Notification parameters
+ Notification parameters.
  */
 @property (nonatomic, strong, readonly) NSDictionary* parameters;
 
 /**
  Init object with name and parameters.
- @param name Notification name
- @param parameters Notification parameters
+ @param name Notification name.
+ @param parameters Notification parameters.
  */
 - (id)initWithName:(NSString*)name
         parameters:(NSDictionary*)parameters;
