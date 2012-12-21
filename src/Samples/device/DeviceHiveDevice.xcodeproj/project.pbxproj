@@ -22,10 +22,11 @@
 		D056931C162C187900237899 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D056931B162C187900237899 /* Default@2x.png */; };
 		D056931E162C187900237899 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D056931D162C187900237899 /* Default-568h@2x.png */; };
 		D0569321162C187900237899 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D056931F162C187900237899 /* MainStoryboard.storyboard */; };
-		D056934E162C3B3900237899 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = D056934D162C3B3900237899 /* Configuration.m */; };
+		D056934E162C3B3900237899 /* Confstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D056934D162C3B3900237899 /* Confstants.m */; };
 		D05A7AAB165519B70074078A /* libDeviceHiveFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D05A7AAA165519B70074078A /* libDeviceHiveFramework.a */; };
 		D0808716165103BC003C197B /* SampleDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D0808715165103BC003C197B /* SampleDevice.m */; };
 		D080871916510404003C197B /* SampleEquipment.m in Sources */ = {isa = PBXBuildFile; fileRef = D080871816510404003C197B /* SampleEquipment.m */; };
+		D0B00D0816845F71008EF57E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B00D0716845F70008EF57E /* SettingsViewController.m */; };
 		D0B84FE016774E7A006A293B /* DeviceTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FD916774E79006A293B /* DeviceTabBarController.m */; };
 		D0B84FE116774E7A006A293B /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDB16774E79006A293B /* DeviceViewController.m */; };
 		D0B84FE216774E7A006A293B /* CommandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B84FDD16774E79006A293B /* CommandsViewController.m */; };
@@ -55,13 +56,15 @@
 		D056931B162C187900237899 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D056931D162C187900237899 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0569320162C187900237899 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		D056934C162C3B3900237899 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
-		D056934D162C3B3900237899 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		D056934C162C3B3900237899 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D056934D162C3B3900237899 /* Confstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Confstants.m; sourceTree = "<group>"; };
 		D05A7AAA165519B70074078A /* libDeviceHiveFramework.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDeviceHiveFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0808714165103BB003C197B /* SampleDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleDevice.h; sourceTree = "<group>"; };
 		D0808715165103BC003C197B /* SampleDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleDevice.m; sourceTree = "<group>"; };
 		D080871716510404003C197B /* SampleEquipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleEquipment.h; sourceTree = "<group>"; };
 		D080871816510404003C197B /* SampleEquipment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleEquipment.m; sourceTree = "<group>"; };
+		D0B00D0616845F70008EF57E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		D0B00D0716845F70008EF57E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		D0B84FD816774E79006A293B /* DeviceTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTabBarController.h; sourceTree = "<group>"; };
 		D0B84FD916774E79006A293B /* DeviceTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTabBarController.m; sourceTree = "<group>"; };
 		D0B84FDA16774E79006A293B /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
@@ -124,8 +127,8 @@
 			children = (
 				D0569316162C187900237899 /* SampleDeviceAppDelegate.h */,
 				D0569317162C187900237899 /* SampleDeviceAppDelegate.m */,
-				D056934C162C3B3900237899 /* Configuration.h */,
-				D056934D162C3B3900237899 /* Configuration.m */,
+				D056934C162C3B3900237899 /* Constants.h */,
+				D056934D162C3B3900237899 /* Confstants.m */,
 				D056931F162C187900237899 /* MainStoryboard.storyboard */,
 				D0808714165103BB003C197B /* SampleDevice.h */,
 				D0808715165103BC003C197B /* SampleDevice.m */,
@@ -145,6 +148,8 @@
 				D05691B5167B23520054F182 /* ParametersViewController.m */,
 				D05691B8167B27510054F182 /* EquipmentSelectorViewController.h */,
 				D05691B9167B27510054F182 /* EquipmentSelectorViewController.m */,
+				D0B00D0616845F70008EF57E /* SettingsViewController.h */,
+				D0B00D0716845F70008EF57E /* SettingsViewController.m */,
 				D056930E162C187900237899 /* Supporting Files */,
 			);
 			path = DeviceHiveDevice;
@@ -237,7 +242,7 @@
 			files = (
 				D0569314162C187900237899 /* main.m in Sources */,
 				D0569318162C187900237899 /* SampleDeviceAppDelegate.m in Sources */,
-				D056934E162C3B3900237899 /* Configuration.m in Sources */,
+				D056934E162C3B3900237899 /* Confstants.m in Sources */,
 				D0808716165103BC003C197B /* SampleDevice.m in Sources */,
 				D080871916510404003C197B /* SampleEquipment.m in Sources */,
 				D0B84FE016774E7A006A293B /* DeviceTabBarController.m in Sources */,
@@ -247,6 +252,7 @@
 				D0EABF671679FBBF008BE310 /* EquipmentViewController.m in Sources */,
 				D05691B7167B237A0054F182 /* ParametersViewController.m in Sources */,
 				D05691BA167B27510054F182 /* EquipmentSelectorViewController.m in Sources */,
+				D0B00D0816845F71008EF57E /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

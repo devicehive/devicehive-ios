@@ -135,4 +135,8 @@
                                value:device.deviceData.key];
 }
 
+- (void)cancelAllServiceRequests {
+    [self.restfulApiClient cancelAllHTTPOperations];
+}
+
 @end

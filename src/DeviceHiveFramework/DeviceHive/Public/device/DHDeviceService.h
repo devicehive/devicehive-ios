@@ -74,4 +74,9 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
               success:(DHDeviceServiceSuccessCompletionBlock) success
               failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
+/**
+ Cancel all queued requests.
+ */
+- (void)cancelAllServiceRequests;
+
 @end

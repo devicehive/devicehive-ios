@@ -9,10 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class DHDevice;
+@protocol DHDeviceService;
 
 @interface SampleDeviceAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) DHDevice* device;
+@property (nonatomic, strong, readonly) DHDevice* device;
+
++ (SampleDeviceAppDelegate *)sampleAppDelegate;
+
+- (void)registerDeviceWithService:(id<DHDeviceService>)deviceService completion:(void (^)(BOOL success))completion;
+- (void)registerDeviceWithServiceUrl:(NSString *)deviceServiceUrl completion:(void (^)(BOOL success))completion;
 
 @end

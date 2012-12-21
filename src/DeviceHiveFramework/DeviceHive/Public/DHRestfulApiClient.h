@@ -91,4 +91,16 @@ extern NSString* const DHRestfulOperationErrorDomain;
 - (void)setAuthorisationWithUsername:(NSString *)username
                             password:(NSString *)password;
 
+/** 
+ Cancel HTTP requests with given method and path.
+ @param method HTTP method of requests to be cancelled.
+ @param path Path of requests to be cancelled.
+ */
+- (void)cancelAllHTTPOperationsWithMethod:(NSString *)method path:(NSString *)path;
+
+/**
+ Cancel all HTTP requests.
+ */
+- (void)cancelAllHTTPOperations;
+
 @end

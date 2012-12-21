@@ -13,6 +13,4 @@ extern NSString* const SampleDeviceCommandKey;
 
 @interface SampleDevice : DHDevice
 
-- (id)initWithDeviceService:(id<DHDeviceService>)deviceService;
-
 @end

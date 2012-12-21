@@ -121,6 +121,18 @@ NSError* errorFromAFNetworkingError(NSError *inputError);
     return self.client.timeoutInterval;
 }
 
+- (void)cancelAllHTTPOperationsWithMethod:(NSString *)method path:(NSString *)path {
+    [self.client cancelAllHTTPOperationsWithMethod:method path:path];
+}
+
+- (void)cancelAllHTTPOperations {
+    for (NSOperation *operation in [self.client.operationQueue operations]) {
+        if ([operation isKindOfClass:[AFHTTPRequestOperation class]]) {
+            [operation cancel];
+        }
+    }
+}
+
 @end
 
 NSError* errorFromAFNetworkingError(NSError *inputError) {

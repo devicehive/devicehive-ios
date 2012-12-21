@@ -37,13 +37,11 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 @implementation DHDevice
 
 
-- (id)initWithDeviceData:(DHDeviceData*)deviceData
-           deviceService:(id<DHDeviceService>)deviceService {
+- (id)initWithDeviceData:(DHDeviceData*)deviceData {
     
     self = [super init];
     if (self) {
         _deviceData = deviceData;
-        _deviceService = deviceService;
         _isRegistered = NO;
         _isProcessingCommands = NO;
         _isCommandPollRequestInProgress = NO;
@@ -53,9 +51,13 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
     return self;
 }
 
-
-- (void)registerDeviceWithSuccess:(DHDeviceSuccessCompletionBlock) success
-                          failure:(DHDeviceFailureCompletionBlock) failure {
+- (void)registerDeviceWithDeviceService:(id<DHDeviceService>)deviceService
+                                success:(DHDeviceSuccessCompletionBlock)success
+                                failure:(DHDeviceFailureCompletionBlock)failure {
+    if (self.isRegistered) {
+        [self unregisterDevice];
+    }
+    self.deviceService = deviceService;
     [self willStartRegistration];
     DHLog(@"Registering device: %@", [self.deviceData description]);
     [self.deviceService registerDevice:self success:^(DHDeviceData* deviceData) {
@@ -86,6 +88,21 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
         [self didFailRegistrationWithError:error];
         failure(error);
     }];
+}
+
+- (void)unregisterDevice {
+    if (self.isRegistered) {
+        [self willUnregister];
+        if (self.isProcessingCommands) {
+            [self stopProcessingCommands];
+            [self.deviceService cancelAllServiceRequests];
+        }
+        self.isRegistered = NO;
+        self.commandQueue = [[DHCommandQueue alloc] init];
+        self.isCommandPollRequestInProgress = NO;
+        [self unregisterEquipment];
+        [self didUnregister];
+    }
 }
 
 - (void)sendNotification:(DHNotification*)notification
@@ -288,6 +305,14 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 
 - (void)didFailSendNotification:(DHNotification*)notification
                       withError:(NSError*)error {
+    
+}
+
+- (void)willUnregister {
+    
+}
+
+- (void)didUnregister {
     
 }
 

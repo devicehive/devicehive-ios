@@ -3,11 +3,11 @@
 //  DeviceHiveDeviceSample
 //
 //  Created by Kiselev Maxim on 11/12/12.
-//  Copyright (c) 2012 DataArt Apps. All rights reserved.
+//  Copyright (c) 2012 DataArt. All rights reserved.
 //
 
 #import "SampleDevice.h"
-#import "Configuration.h"
+#import "Constants.h"
 #import "SampleEquipment.h"
 
 NSString* const SampleDeviceDidReceiveCommandNotification = @"SampleDeviceDidReceiveCommandNotification";
@@ -15,7 +15,7 @@ NSString* const SampleDeviceCommandKey = @"SampleDeviceCommandKey";
 
 @implementation SampleDevice
 
-- (id)initWithDeviceService:(id<DHDeviceService>)deviceService {
+- (id)init {
     DHNetwork* network = [[DHNetwork alloc] initWithName:@"Test iOS Network(Device Framework)"
                                              description:@"Test iOS Device Network(Device Framework)"];
     
@@ -33,16 +33,11 @@ NSString* const SampleDeviceCommandKey = @"SampleDeviceCommandKey";
                                                     deviceClass:deviceClass
                                                       equipment:@[equipment]];
     
-    self  = [super initWithDeviceData:deviceData deviceService:deviceService];
+    self  = [super initWithDeviceData:deviceData];
     if (self) {
         
     }
     return self;
-}
-
-- (id)init {
-    [self doesNotRecognizeSelector:_cmd];
-    return nil;
 }
 
 - (void)willStartRegistration {
@@ -76,6 +71,14 @@ NSString* const SampleDeviceCommandKey = @"SampleDeviceCommandKey";
 - (void)didFailSendNotification:(DHNotification*)notification
                       withError:(NSError*)error {
     NSLog(@"SampleDevice:didFailSendNotification: (%@): withError: %@", notification.name, [error description]);
+}
+
+- (void)willUnregister {
+    NSLog(@"SampleDevice:willUnregister");
+}
+
+- (void)didUnregister {
+     NSLog(@"SampleDevice:didUnregister");
 }
 
 - (void)willExecuteCommand:(DHCommand *)command {

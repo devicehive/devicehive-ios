@@ -63,20 +63,26 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 @property (nonatomic, strong) NSString* lastCommandPollTimestamp;
 
 /**
- Init object with given parameters.
+ Init object with given device data.
  @param deviceData DHDeviceData instance.
- @param deviceService DHDeviceService implementation to be used by the device.
  */
-- (id)initWithDeviceData:(DHDeviceData*)deviceData
-           deviceService:(id<DHDeviceService>)deviceService;
+- (id)initWithDeviceData:(DHDeviceData*)deviceData;
 
 /**
- Perform device registration.
+ Perform device registration with given device service.
+@param deviceService DHDeviceService implementation to be used by the device.
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)registerDeviceWithSuccess:(DHDeviceSuccessCompletionBlock)success
-                          failure:(DHDeviceFailureCompletionBlock)failure;
+- (void)registerDeviceWithDeviceService:(id<DHDeviceService>)deviceService
+                                success:(DHDeviceSuccessCompletionBlock)success
+                                failure:(DHDeviceFailureCompletionBlock)failure;
+
+/**
+ Perform device unregistration. 
+ This method stops command processing and resets device to the state it was before registration.
+ */
+- (void)unregisterDevice;
 
 /**
  Send notification.
@@ -145,5 +151,15 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
  */
 - (void)didFailSendNotification:(DHNotification*)notification
                       withError:(NSError*)error;
+
+/**
+ Called just before the device will start unregistration process.
+ */
+- (void)willUnregister;
+
+/**
+ Called when device has just finished unregistration.
+ */
+- (void)didUnregister;
 
 @end

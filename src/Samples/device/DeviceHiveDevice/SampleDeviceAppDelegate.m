@@ -7,21 +7,31 @@
 //
 
 #import "SampleDeviceAppDelegate.h"
-#import "Configuration.h"
+#import "Constants.h"
 #import "SampleDevice.h"
 #import "DHDeviceServices.h"
+
+@interface SampleDeviceAppDelegate ()
+
+@property (nonatomic, strong, readwrite) DHDevice* device;
+
+@end
 
 @implementation SampleDeviceAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"didFinishLaunchingWithOptions");
-    id<DHDeviceService> deviceService = [DHDeviceServices restfulDeviceServiceWithUrl:[NSURL URLWithString:kServerUrl]];
-    
-    self.device = [[SampleDevice alloc] initWithDeviceService:deviceService];
-    
-    [self registerDevice:self.device];
-    
+    self.device = [[SampleDevice alloc] init];
+    if (!self.device.isRegistered) {
+        NSString* serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyServerUrl];
+        if (!serverUrl) {
+            serverUrl = kDefaultServerUrl;
+            [[NSUserDefaults standardUserDefaults] setObject:serverUrl forKey:DefaultsKeyServerUrl];
+        }
+        [self registerDeviceWithServiceUrl:serverUrl];
+    }
+
     UIViewController* rootViewController = nil;
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navCtl = (UINavigationController*)_window.rootViewController;
@@ -45,16 +55,21 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     NSLog(@"applicationDidEnterBackground");
-    if (self.device.isRegistered && self.device.isProcessingCommands) {
-        [self.device stopProcessingCommands];
+    if (self.device.isRegistered) {
+        [self.device unregisterDevice];
     }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     NSLog(@"applicationWillEnterForeground");
-    if (self.device.isRegistered && !self.device.isProcessingCommands) {
-        [self.device beginProcessingCommands];
+    if (!self.device.isRegistered) {
+        NSString* serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:DefaultsKeyServerUrl];
+        if (!serverUrl) {
+            serverUrl = kDefaultServerUrl;
+            [[NSUserDefaults standardUserDefaults] setObject:serverUrl forKey:DefaultsKeyServerUrl];
+        }
+        [self registerDeviceWithServiceUrl:serverUrl];
     }
 }
 
@@ -68,14 +83,48 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)registerDevice:(DHDevice*)device {
-    [device registerDeviceWithSuccess:^(id response) {
-        NSLog(@"Successfully registered device");
-        [device beginProcessingCommands];
+- (void)registerDeviceWithServiceUrl:(NSString *)deviceServiceUrl completion:(void (^)(BOOL success))completion {
+    id<DHDeviceService> deviceService = [DHDeviceServices restfulDeviceServiceWithUrl:[NSURL URLWithString:deviceServiceUrl]];
+    [self registerDeviceWithService:deviceService completion:completion];
+}
+
+- (void)registerDeviceWithService:(id<DHDeviceService>)deviceService completion:(void (^)(BOOL success))completion {
+    [self registerDevice:self.device withDeviceService:deviceService completion:completion];
+}
+
+- (void)registerDevice:(DHDevice*)device
+     withDeviceService:(id<DHDeviceService>)deviceService
+            completion:(void (^)(BOOL success))completion {
+    
+    if (self.device.isRegistered) {
+        [self.device unregisterDevice];
+    }
+    [device registerDeviceWithDeviceService:deviceService success:^(id response) {
+        completion(YES);
     } failure:^(NSError *error) {
-        // retry
-        [self registerDevice:device];
+        NSLog(@"Failed to register device(%@) with error: %@", device.deviceData.name, [error description]);
+        completion(NO);
     }];
+}
+
+- (void)registerDeviceWithServiceUrl:(NSString *)deviceServiceUrl {
+    [self registerDeviceWithServiceUrl:deviceServiceUrl completion:^(BOOL success) {
+        if (success) {
+            NSLog(@"Successfully registered device");
+            [self.device beginProcessingCommands];
+        } else {
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                                message:@"Failed to register device. Check server URL and try again."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }
+    }];
+}
+
++ (SampleDeviceAppDelegate *)sampleAppDelegate {
+    return (SampleDeviceAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 @end
