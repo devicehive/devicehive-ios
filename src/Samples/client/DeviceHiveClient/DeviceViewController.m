@@ -17,26 +17,6 @@
 
 @implementation DeviceViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                                                            target:self
-                                                                                                            action:@selector(refreshButtonClicked:)];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    self.tabBarController.navigationItem.rightBarButtonItem = nil;
-}
-
-- (void)refreshButtonClicked:(UIBarButtonItem *)sender {
-    [self.deviceClient reloadDeviceDataWithSuccess:^(DHDeviceData* deviceData) {
-        [self.tableView reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"Failed to reload device data: %@", [error description]);
-    }];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -87,6 +67,16 @@
     } else {
         return @"Device class";
     }
+}
+
+#pragma mark - Refreshable
+
+- (void)refresh {
+    [self.deviceClient reloadDeviceDataWithSuccess:^(DHDeviceData* deviceData) {
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"Failed to reload device data: %@", [error description]);
+    }];
 }
 
 @end

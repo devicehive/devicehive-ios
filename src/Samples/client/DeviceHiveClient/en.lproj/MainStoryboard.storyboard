@@ -655,6 +655,9 @@
     <classes>
         <class className="DeviceTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceTabBarController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="DeviceViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceViewController.h"/>
@@ -677,6 +680,10 @@
         </class>
         <class className="NetworksViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworksViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="settingsButtonClicked:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="NotificationsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotificationsViewController.h"/>
@@ -695,6 +702,7 @@
         <class className="SendCommandViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SendCommandViewController.h"/>
             <relationships>
+                <relationship kind="action" name="sendCommandButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="commandNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="parametersCountLabel" candidateClass="UILabel"/>

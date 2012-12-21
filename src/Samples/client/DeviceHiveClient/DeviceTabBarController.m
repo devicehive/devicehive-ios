@@ -33,6 +33,13 @@ NSString* const DeviceClientDidReceiveNotification = @"DeviceClientDidReceiveNot
         [selectedViewController performSelector:@selector(setDeviceClient:)
                                      withObject:self.deviceClient];
     }
+    if ([selectedViewController conformsToProtocol:@protocol(Refreshable)]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                               target:self
+                                                                                               action:@selector(refreshButtonClicked:)];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     [super setSelectedViewController:selectedViewController];
 }
 
@@ -50,6 +57,13 @@ NSString* const DeviceClientDidReceiveNotification = @"DeviceClientDidReceiveNot
 - (void)dealloc {
     [_deviceClient stopReceivingNotifications];
     _deviceClient.delegate = nil;
+}
+
+- (void)refreshButtonClicked:(UIBarButtonItem *)sender {
+    if ([self.selectedViewController conformsToProtocol:@protocol(Refreshable)]) {
+        UIViewController<Refreshable>* refreshableViewController = (UIViewController<Refreshable> *)self.selectedViewController;
+        [refreshableViewController refresh];
+    }
 }
 
 #pragma mark - DHDeviceClientDelegate

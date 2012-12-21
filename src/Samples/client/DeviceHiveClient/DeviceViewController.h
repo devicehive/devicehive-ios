@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DeviceTabBarController.h"
 
 @protocol DHClientService;
 @class DHDeviceClient;
 
-@interface DeviceViewController : UITableViewController
+@interface DeviceViewController : UITableViewController<Refreshable>
 
 @property (nonatomic, strong) DHDeviceClient* deviceClient;
 
