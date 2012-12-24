@@ -33,11 +33,6 @@ typedef void (^DHDeviceClientFailureCompletionBlock)(NSError *error);
 @interface DHDeviceClient : NSObject
 
 /**
- Device data describing device parameters.
- */
-@property (nonatomic, strong, readonly) DHDeviceData* deviceData;
-
-/**
  Corresponding DHClientService object.
  */
 @property (nonatomic, strong, readonly) id<DHClientService> clientService;
@@ -60,8 +55,7 @@ typedef void (^DHDeviceClientFailureCompletionBlock)(NSError *error);
 @property (nonatomic, weak) id<DHDeviceClientDelegate> delegate;
 
 
-- (id)initWithDevice:(DHDeviceData *)device
-       clientService:(id<DHClientService>)clientService;
+- (id)initWithClientService:(id<DHClientService>)clientService;
 
 /** Starts/Resumes notifications handling.
  Override method in order to be able to receive notifications.
@@ -73,24 +67,6 @@ Override method in order to be able to receive notifications.
  */
 - (void)stopReceivingNotifications;
 
-/**
- Send given command to the device.
- @param command DHCommand instance to be sent.
- @param success Success completion block.
- @param failure Failure completion block
- */
-- (void)sendCommand:(DHCommand *)command
-            success:(DHDeviceClientSuccessCompletionBlock)success
-            failure:(DHDeviceClientFailureCompletionBlock)failure;
-
-/**
- Reload device data from the server. Sync current device state with data from the server.
- @param success Success completion block.
- @param failure Failure completion block.
- */
-- (void)reloadDeviceDataWithSuccess:(DHDeviceClientSuccessCompletionBlock)success
-                            failure:(DHDeviceClientFailureCompletionBlock)failure;
-
 @end
 
 /**
@@ -99,13 +75,6 @@ Override method in order to be able to receive notifications.
 @protocol DHDeviceClientDelegate <NSObject>
 
 @optional
-
-/**
- Called when client receives new notification from the device.
- @param client `DHDeviceClient` instance.
- @param notification DHNotification instance.
- */
-- (void)deviceClient:(DHDeviceClient *)client didReceiveNotification:(DHNotification *)notification;
 
 /**
  Called when client is about to start receiving notifications.

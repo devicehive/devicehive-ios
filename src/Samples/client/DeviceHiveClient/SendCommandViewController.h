@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class DHDeviceClient;
+@class DHSingleDeviceClient;
 
 @interface SendCommandViewController : UITableViewController
 
-@property (nonatomic, strong) DHDeviceClient* deviceClient;
+@property (nonatomic, strong) DHSingleDeviceClient* deviceClient;
 
 @end

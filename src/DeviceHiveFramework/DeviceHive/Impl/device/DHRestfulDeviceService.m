@@ -62,6 +62,22 @@
      ];
 }
 
+- (void)getDeviceWithId:(NSString *)deviceId
+             completion:(DHDeviceServiceSuccessCompletionBlock)success
+                failure:(DHDeviceServiceFailureCompletionBlock)failure {
+    NSString* path = [NSString stringWithFormat:@"device/%@", deviceId];
+    [self.restfulApiClient get:path
+                    parameters:nil
+                       success:^(id response) {
+                           DHLog(@"Received device:%@", [response description]);
+                           success([[DHDeviceData alloc] initWithDictionary:response]);
+                       } failure:^(NSError *error) {
+                           DHLog(@"Failed to retrieve device(%@) with error:%@", deviceId, error);
+                           failure(error);
+                       }
+     ];
+}
+
 - (void)sendNotification:(DHNotification*)notification
                forDevice:(DHDevice*)device
                  success:(DHDeviceServiceSuccessCompletionBlock) success

@@ -10,10 +10,10 @@
 #import "DeviceTabBarController.h"
 
 @protocol DHClientService;
-@class DHDeviceClient;
+@class DHSingleDeviceClient;
 
 @interface DeviceViewController : UITableViewController<Refreshable>
 
-@property (nonatomic, strong) DHDeviceClient* deviceClient;
+@property (nonatomic, strong) DHSingleDeviceClient* deviceClient;
 
 @end

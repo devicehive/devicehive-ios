@@ -14,7 +14,7 @@
          commandId:(NSNumber*)commandId
         parameters:(NSDictionary*)parameters
             status:(NSString*)status
-            result:(NSString*)result
+            result:(id)result
          timestamp:(NSString*)timestamp
           lifetime:(NSNumber*)lifetime
              flags:(NSNumber*)flags;

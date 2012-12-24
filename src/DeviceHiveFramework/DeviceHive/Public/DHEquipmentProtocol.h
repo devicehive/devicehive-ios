@@ -33,4 +33,10 @@
  */
 @property (nonatomic, strong, readonly) NSString* type;
 
+/**
+ Equipment data, an object with an arbitrary structure.
+ Equipment data can only be set before device registration.
+ */
+@property (nonatomic, strong) id data;
+
 @end

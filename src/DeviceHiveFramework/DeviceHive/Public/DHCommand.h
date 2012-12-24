@@ -32,7 +32,7 @@
 /**
  Command parameters.
  */
-@property (nonatomic, strong, readonly) NSDictionary * parameters;
+@property (nonatomic, strong, readonly) id parameters;
 
 /**
  Command status.
@@ -40,9 +40,9 @@
 @property (nonatomic, strong, readonly) NSString * status;
 
 /**
- Command execution result.
+ Command execution result. Object with arbitraty structure.
  */
-@property (nonatomic, strong, readonly) NSString * result;
+@property (nonatomic, strong, readonly) id result;
 
 /**
  Command lifetime, a number of seconds until this command expires.
@@ -60,7 +60,7 @@
  @param parameters Command parameters dictionary.
  */
 - (id)initWithName:(NSString *)name
-        parameters:(NSDictionary *)parameters;
+        parameters:(id)parameters;
 
 /**
  Init object with given parameters.
@@ -70,7 +70,7 @@
  @param flags Command flags.
  */
 - (id)initWithName:(NSString *)name
-        parameters:(NSDictionary *)parameters
+        parameters:(id)parameters
           lifetime:(NSNumber *)lifetime
              flags:(NSNumber *)flags;
 

@@ -52,6 +52,12 @@
 @property (nonatomic, strong, readonly) NSArray * equipment;
 
 /**
+ Device data, a JSON object with an arbitrary structure.
+ Device data can only be set before registration.
+ */
+@property (nonatomic, strong) id data;
+
+/**
  Init object with given parameters.
  @param deviceID Device unique identifier.
  @param key Device authentication key.
@@ -59,7 +65,7 @@
  @param status Device operation status.
  @param network Associated DHNetwork object.
  @param deviceClass Associated DHDeviceClass object.
- @param equipment Array of Equipment objects.
+ @param equipment Array of equipment objects.
  */
 - (id)initWithID:(NSString*)deviceID
              key:(NSString*)key
@@ -84,5 +90,35 @@
           status:(NSString*)status
          network:(DHNetwork*)network
      deviceClass:(DHDeviceClass*)deviceClass;
+
+/**
+ Init object with given parameters. Intitially the device isn't assigned to any network.
+ @param deviceID Device unique identifier.
+ @param key Device authentication key.
+ @param name Device display name.
+ @param status Device operation status.
+ @param deviceClass Associated DHDeviceClass object.
+ */
+- (id)initWithID:(NSString*)deviceID
+             key:(NSString*)key
+            name:(NSString*)name
+          status:(NSString*)status
+     deviceClass:(DHDeviceClass*)deviceClass;
+
+/**
+ Init object with given parameters. Intitially the device isn't assigned to any network.
+ @param deviceID Device unique identifier.
+ @param key Device authentication key.
+ @param name Device display name.
+ @param status Device operation status.
+ @param deviceClass Associated DHDeviceClass object.
+ @param equipment Array of equipment objects.
+ */
+- (id)initWithID:(NSString*)deviceID
+             key:(NSString*)key
+            name:(NSString*)name
+          status:(NSString*)status
+     deviceClass:(DHDeviceClass*)deviceClass
+       equipment:(NSArray*)equipment;
 
 @end

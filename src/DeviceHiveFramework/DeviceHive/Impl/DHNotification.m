@@ -12,11 +12,11 @@
 
 @implementation DHNotification
 
-- (id)initWithName:(NSString *)name parameters:(NSDictionary *)parameters {
+- (id)initWithName:(NSString *)name parameters:(id)parameters {
     return [self initWithId:nil name:name timestamp:nil parameters:parameters];
 }
 
-- (id)initWithId:(NSString *)notificationID name:(NSString *)name timestamp:(NSString *)timestamp parameters:(NSDictionary *)parameters {
+- (id)initWithId:(NSString *)notificationID name:(NSString *)name timestamp:(NSString *)timestamp parameters:(id)parameters {
     self = [super init];
     if (self) {
         _notificationID = notificationID;

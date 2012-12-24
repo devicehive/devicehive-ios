@@ -25,6 +25,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 
 @interface DHDevice ()
 
+@property (nonatomic, strong, readwrite) DHDeviceData* deviceData;
 @property (nonatomic, strong, readwrite) id<DHDeviceService> deviceService;
 @property (nonatomic, readwrite) BOOL isRegistered;
 
@@ -121,6 +122,17 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                                  }];
 }
 
+- (void)reloadDeviceDataWithSuccess:(DHDeviceSuccessCompletionBlock)success
+                            failure:(DHDeviceFailureCompletionBlock)failure {
+    [self.deviceService getDeviceWithId:self.deviceData.deviceID
+                             completion:^(DHDeviceData* deviceData) {
+        self.deviceData = deviceData;
+        success(deviceData);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 - (void)beginProcessingCommands {
     if (!self.isRegistered) {
         NSLog(@"Device should be registered in order to be able to execute commands");
@@ -205,7 +217,8 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
         [self willExecuteCommand:command];
     }
     BOOL parametersPresent = command.parameters && (id)command.parameters != (id)[NSNull null];
-    if (!parametersPresent || !command.parameters[kDeviceEquipmentParameter]) {
+    BOOL isParametersDictionary = [command.parameters isKindOfClass:[NSDictionary class]];
+    if (!parametersPresent || !isParametersDictionary || !command.parameters[kDeviceEquipmentParameter]) {
         [self executeCommand:command onExecutor:self completion:commandCompletion];
     } else {
         DHEquipment* equipment = [self equipmentWithCode:command.parameters[kDeviceEquipmentParameter]];

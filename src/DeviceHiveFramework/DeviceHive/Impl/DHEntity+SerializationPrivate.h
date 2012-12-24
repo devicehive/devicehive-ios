@@ -16,5 +16,6 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary*)classDictionary;
 + (NSArray*)fromArrayOfDictionaries:(NSArray*)dictArray;
++ (id)fromDictionary:(NSDictionary *)dictionary;
 
 @end

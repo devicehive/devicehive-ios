@@ -94,6 +94,14 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
                  success:(DHDeviceSuccessCompletionBlock)success
                  failure:(DHDeviceFailureCompletionBlock)failure;
 
+/**
+ Reload device data from the server. Sync current device state with the data from the server.
+ @param success Success completion block.
+ @param failure Failure completion block.
+ */
+- (void)reloadDeviceDataWithSuccess:(DHDeviceSuccessCompletionBlock)success
+                            failure:(DHDeviceFailureCompletionBlock)failure;
+
 /** Starts/Resumes commands receiving/executing/updating process.
  Override DHCommandExecutor protocol methods in order to be able to handle commands.
  */

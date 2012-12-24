@@ -38,6 +38,16 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
                success:(DHDeviceServiceSuccessCompletionBlock) success
                failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
+
+/** Get device data with given device identifier. As a result this method returns DHDeviceData object.
+ @param deviceId Device identifier.
+ @param success Success completion block.
+ @param failure Failure completion block.
+ */
+- (void)getDeviceWithId:(NSString *)deviceId
+             completion:(DHDeviceServiceSuccessCompletionBlock)success
+                failure:(DHDeviceServiceFailureCompletionBlock)failure;
+
 /** Sends notification on behalf of the given device.
  @param notification Notification to be sent.
  @param device Sender DHDevice object. 

@@ -149,6 +149,52 @@
 
 }
 
+- (void)pollDevicesNotifications:(NSArray *)devices
+                           since:(NSString *)lastNotificationPollTimestamp
+                      completion:(DHClientSuccessCompletionBlock)success
+                         failure:(DHClientFailureCompletionBlock)failure {
+    NSMutableString *path = [NSMutableString stringWithFormat:@"/device/notification/poll"];
+    if (devices.count) {
+        [path appendFormat:@"?deviceGuids=%@", [self prepareGuidsString:devices]];
+    }
+    if (lastNotificationPollTimestamp && lastNotificationPollTimestamp.length > 0) {
+        [path appendString:devices.count ? @"&" : @"?"];
+        [path appendFormat:@"timestamp=%@", encodeToPercentEscapeString(lastNotificationPollTimestamp)];
+    }
+    [self.restfulApiClient get:path
+                    parameters:nil
+                       success:^(NSArray* response) {
+                           NSMutableArray* result = [NSMutableArray array];
+                           if (response) {
+                               for (NSDictionary* notificationDict in response) {
+                                   DHNotification* notification = [DHNotification fromDictionary:notificationDict];
+                                   NSString* deviceId = notificationDict[@"deviceGuid"];
+                                   [result addObject:@{@"deviceId" : deviceId,
+                                                       @"notification" : notification}];
+                               }
+                           }
+                           DHLog(@"Received notifications:%@", [result description]);
+                           success(result);
+                       } failure:^(NSError *error) {
+                           DHLog(@"Failed to retrieve notifications for device(%@) with error:%@", [devices description], error);
+                           failure(error);
+                       }
+     ];
+}
+
+- (NSString *)prepareGuidsString:(NSArray *)devices {
+    NSMutableString* guidsString = [NSMutableString string];
+    [devices enumerateObjectsUsingBlock:^(DHDeviceData* device, NSUInteger idx, BOOL *stop) {
+        if (idx == 0) {
+            [guidsString appendString:device.deviceID];
+        } else {
+            [guidsString appendFormat:@",%@", device.deviceID];
+        }
+    }];
+    return guidsString;
+}
+
+
 - (void)sendCommand:(DHCommand *)command
           forDevice:(DHDeviceData *)device
          completion:(DHClientSuccessCompletionBlock)success

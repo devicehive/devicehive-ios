@@ -28,9 +28,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) DHCommandStatus status;
 
 /**
- Command execution result.
+ Command execution result. Object with arbitrary structure.
  */
-@property (nonatomic, strong, readonly) NSString* result;
+@property (nonatomic, strong, readonly) id result;
 
 /**
  Creates object with status and result.
@@ -38,7 +38,7 @@ typedef enum : NSUInteger {
  @param result Command execution result.
  */
 + (id)commandResultWithStatus:(DHCommandStatus)status
-                       result:(NSString*)result;
+                       result:(id)result;
 
 /**
  Init object with status and result.
@@ -46,6 +46,6 @@ typedef enum : NSUInteger {
  @param result Command execution result.
  */
 - (id)initWithStatus:(DHCommandStatus)status
-              result:(NSString*)result;
+              result:(id)result;
 
 @end

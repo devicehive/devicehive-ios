@@ -9,7 +9,7 @@
 #import "EquipmentViewController.h"
 #import "DHDeviceData.h"
 #import "DHDeviceClass.h"
-#import "DHDeviceClient.h"
+#import "DHSingleDeviceClient.h"
 #import "DHEquipmentProtocol.h"
 #import "DHEquipmentState.h"
 

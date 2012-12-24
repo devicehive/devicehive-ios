@@ -32,14 +32,14 @@
 /**
  Notification parameters.
  */
-@property (nonatomic, strong, readonly) NSDictionary* parameters;
+@property (nonatomic, strong, readonly) id parameters;
 
 /**
  Init object with name and parameters.
  @param name Notification name.
  @param parameters Notification parameters.
  */
-- (id)initWithName:(NSString*)name
-        parameters:(NSDictionary*)parameters;
+- (id)initWithName:(NSString *)name
+        parameters:(id)parameters;
 
 @end

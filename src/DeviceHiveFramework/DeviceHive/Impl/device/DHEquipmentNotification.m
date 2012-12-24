@@ -10,14 +10,14 @@
 
 @implementation DHEquipmentNotification
 
-- (id)initWithName:(NSString *)name parameters:(NSDictionary *)parameters {
+- (id)initWithName:(NSString *)name parameters:(id)parameters {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
 - (id)initWithEquipmentCode:(NSString*)equipmentCode
              parametersName:(NSString*)parametersName
-                 parameters:(NSDictionary*)value {
+                 parameters:(id)value {
     self = [super initWithName:@"equipment"
                     parameters:@{@"equipment" : equipmentCode,
                                parametersName : value}];

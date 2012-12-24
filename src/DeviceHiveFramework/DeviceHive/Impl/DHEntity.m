@@ -19,4 +19,11 @@
     return [NSArray arrayWithArray:arrayOfEntities];
 }
 
++ (id)fromDictionary:(NSDictionary *)dictionary {
+    if (dictionary && (id)dictionary != [NSNull null]) {
+        return [[[self class] alloc] initWithDictionary:dictionary];
+    }
+    return nil;
+}
+
 @end

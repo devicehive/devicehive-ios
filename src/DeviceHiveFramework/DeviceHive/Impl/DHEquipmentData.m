@@ -23,6 +23,8 @@
 
 @implementation DHEquipmentData
 
+@synthesize data = _data;
+
 - (id)initWithId:(NSNumber *)equipmentID
             name:(NSString *)name
             code:(NSString *)code
@@ -44,10 +46,12 @@
 }
 
 - (id)initWithDictionary:(NSDictionary*)dictionary {
-    return [self initWithId:dictionary[@"id"]
-                       name:dictionary[@"name"]
-                       code:dictionary[@"code"]
-                       type:dictionary[@"type"]];
+    DHEquipmentData* equipmentData = [self initWithId:dictionary[@"id"]
+                                                 name:dictionary[@"name"]
+                                                 code:dictionary[@"code"]
+                                                 type:dictionary[@"type"]];
+    equipmentData.data = dictionary[@"data"];
+    return equipmentData;
 }
 
 - (NSDictionary *)classDictionary {
@@ -56,6 +60,7 @@
     [resultDict setObjectIfNotNull:self.name forKey:@"name"];
     [resultDict setObjectIfNotNull:self.code forKey:@"code"];
     [resultDict setObjectIfNotNull:self.type forKey:@"type"];
+    [resultDict setObjectIfNotNull:self.data forKey:@"data"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
 }
 

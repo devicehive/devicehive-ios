@@ -25,14 +25,14 @@ static NSDateFormatter* defaultDateFormatter = nil;
     });
 }
 
-- (id)initWithName:(NSString*)name
-         commandId:(NSNumber*)commandId
-        parameters:(NSDictionary*)parameters
-            status:(NSString*)status
-            result:(NSString*)result
-         timestamp:(NSString*)timestamp
-          lifetime:(NSNumber*)lifetime
-             flags:(NSNumber*)flags {
+- (id)initWithName:(NSString *)name
+         commandId:(NSNumber *)commandId
+        parameters:(id)parameters
+            status:(NSString *)status
+            result:(id)result
+         timestamp:(NSString *)timestamp
+          lifetime:(NSNumber *)lifetime
+             flags:(NSNumber *)flags {
     self = [super init];
     if (self) {
         _name = name;
@@ -48,15 +48,15 @@ static NSDateFormatter* defaultDateFormatter = nil;
     
 }
 
-- (id)initWithName:(NSString*)name
-        parameters:(NSDictionary*)parameters {
+- (id)initWithName:(NSString *)name
+        parameters:(id)parameters {
     return [self initWithName:name parameters:parameters lifetime:nil flags:nil];
 }
 
-- (id)initWithName:(NSString*)name
-        parameters:(NSDictionary*)parameters
-          lifetime:(NSNumber*)lifetime
-             flags:(NSNumber*)flags {
+- (id)initWithName:(NSString *)name
+        parameters:(NSDictionary *)parameters
+          lifetime:(NSNumber *)lifetime
+             flags:(NSNumber *)flags {
     return [self initWithName:name commandId:nil parameters:parameters status:nil result:nil timestamp:nil lifetime:lifetime flags:flags];
 }
 

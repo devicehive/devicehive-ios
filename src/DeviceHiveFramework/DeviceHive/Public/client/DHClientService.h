@@ -77,6 +77,18 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
                      completion:(DHClientSuccessCompletionBlock)success
                         failure:(DHClientFailureCompletionBlock)failure;
 
+/** Poll notifications sent from given devices starting from given date timestamp. Returns an array of following structure [{"deviceId":deviceId1, "notification" : DHNotification}, {"deviceId":deviceId2, "notification" : DHNotification}].
+ In the case when no notifications were found, the server doesn't return response until new notification is received. The blocking period is limited.
+ @param devices Array of DHDeviceData objects which represents devices to receive notifications from.
+ @param lastNotificationPollTimestamp Timestamp of the last received notification from the device. If not specified, server timestamp will be used instead.
+ @param success Success completion block.
+ @param failure Failure completion block.
+ */
+- (void)pollDevicesNotifications:(NSArray *)devices
+                           since:(NSString *)lastNotificationPollTimestamp
+                      completion:(DHClientSuccessCompletionBlock)success
+                         failure:(DHClientFailureCompletionBlock)failure;
+
 /** Get notifications sent from given device starting from given date timestamp. Returns array of DHNotification.
  The server returns results immediately regardless of whether any notifications were sent from the device since given date.
  @param device DHDeviceData object which represent target device to receive notifications from.

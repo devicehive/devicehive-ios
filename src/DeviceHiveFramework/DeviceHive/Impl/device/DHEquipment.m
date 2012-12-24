@@ -82,6 +82,14 @@
     return self.equipmentData.type;
 }
 
+- (id)data {
+    return self.equipmentData.data;
+}
+
+- (void)setData:(id)data {
+    self.equipmentData.data = data;
+}
+
 
 #pragma mark - DHCommandExecutor
 

@@ -7,7 +7,7 @@
 //
 
 #import "SendCommandViewController.h"
-#import "DHDeviceClient.h"
+#import "DHSingleDeviceClient.h"
 #import "DHCommand.h"
 #import "EquipmentSelectorViewController.h"
 #import "DHEquipmentProtocol.h"

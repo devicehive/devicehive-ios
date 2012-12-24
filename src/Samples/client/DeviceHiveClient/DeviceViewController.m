@@ -9,7 +9,7 @@
 #import "DeviceViewController.h"
 #import "DHDeviceData.h"
 #import "DHDeviceClass.h"
-#import "DHDeviceClient.h"
+#import "DHSingleDeviceClient.h"
 
 @interface DeviceViewController ()
 

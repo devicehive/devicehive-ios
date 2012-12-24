@@ -47,14 +47,34 @@
     return [self initWithID:deviceID key:key name:name status:status network:network deviceClass:deviceClass];
 }
 
+- (id)initWithID:(NSString*)deviceID
+             key:(NSString*)key
+            name:(NSString*)name
+          status:(NSString*)status
+     deviceClass:(DHDeviceClass*)deviceClass {
+    return [self initWithID:deviceID key:key name:name status:status deviceClass:deviceClass equipment:nil];
+}
+
+
+- (id)initWithID:(NSString*)deviceID
+             key:(NSString*)key
+            name:(NSString*)name
+          status:(NSString*)status
+     deviceClass:(DHDeviceClass*)deviceClass
+       equipment:(NSArray*)equipment {
+    return [self initWithID:deviceID key:key name:name status:status network:nil deviceClass:deviceClass equipment:equipment];
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
-    return [self initWithID:dictionary[@"id"]
-                        key:dictionary[@"key"]
-                       name:dictionary[@"name"]
-                     status:dictionary[@"status"]
-                    network:[[DHNetwork alloc] initWithDictionary:dictionary[@"network"]]
-                deviceClass:[[DHDeviceClass alloc] initWithDictionary:dictionary[@"deviceClass"]]
-                  equipment:[DHEquipmentData equipmentsFromArrayOfDictionaries:dictionary[@"equipment"]]];
+    DHDeviceData* deviceData = [self initWithID:dictionary[@"id"]
+                                            key:dictionary[@"key"]
+                                           name:dictionary[@"name"]
+                                         status:dictionary[@"status"]
+                                        network:[DHNetwork fromDictionary:dictionary[@"network"]]
+                                    deviceClass:[DHDeviceClass fromDictionary:dictionary[@"deviceClass"]]
+                                      equipment:[DHEquipmentData equipmentsFromArrayOfDictionaries:dictionary[@"equipment"]]];
+    deviceData.data = dictionary[@"data"];
+    return deviceData;
 }
 
 - (NSDictionary *)classDictionary {
@@ -70,6 +90,7 @@
     [resultDict setObjectIfNotNull:networkDict forKey:@"network"];
     [resultDict setObjectIfNotNull:deviceClassDict forKey:@"deviceClass"];
     [resultDict setObjectIfNotNull:equipmentsDictArray forKey:@"equipment"];
+    [resultDict setObjectIfNotNull:self.data forKey:@"data"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
 }
 

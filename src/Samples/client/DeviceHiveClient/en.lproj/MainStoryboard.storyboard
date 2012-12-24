@@ -564,7 +564,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL" minimumFontSize="17" id="2FB-RN-fAh">
                                                     <rect key="frame" x="15" y="7" width="265" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -655,9 +655,6 @@
     <classes>
         <class className="DeviceTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceTabBarController.h"/>
-            <relationships>
-                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="DeviceViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DeviceViewController.h"/>
@@ -680,10 +677,6 @@
         </class>
         <class className="NetworksViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworksViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="refreshButtonClicked:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="settingsButtonClicked:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="NotificationsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotificationsViewController.h"/>
@@ -694,15 +687,12 @@
         <class className="ParametersViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ParametersViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addButtonClicked:"/>
-                <relationship kind="action" name="doneButtonClicked:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
             </relationships>
         </class>
         <class className="SendCommandViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SendCommandViewController.h"/>
             <relationships>
-                <relationship kind="action" name="sendCommandButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="commandNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="parametersCountLabel" candidateClass="UILabel"/>

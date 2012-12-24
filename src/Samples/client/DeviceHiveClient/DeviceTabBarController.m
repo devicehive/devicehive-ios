@@ -8,13 +8,12 @@
 
 #import "DeviceTabBarController.h"
 #import "DHDeviceData.h"
-#import "DHDeviceClient.h"
-#import "DHDeviceClient.h"
+#import "DHSingleDeviceClient.h"
 #import "DHCommand.h"
 
 NSString* const DeviceClientDidReceiveNotification = @"DeviceClientDidReceiveNotification";
 
-@interface DeviceTabBarController () <UITabBarControllerDelegate, DHDeviceClientDelegate>
+@interface DeviceTabBarController () <UITabBarControllerDelegate, DHSingleDeviceClientDelegate>
 
 @end
 
@@ -43,7 +42,7 @@ NSString* const DeviceClientDidReceiveNotification = @"DeviceClientDidReceiveNot
     [super setSelectedViewController:selectedViewController];
 }
 
-- (void)setDeviceClient:(DHDeviceClient *)deviceClient {
+- (void)setDeviceClient:(DHSingleDeviceClient *)deviceClient {
     if (_deviceClient.deviceData != deviceClient.deviceData) {
         [_deviceClient stopReceivingNotifications];
         _deviceClient = deviceClient;
@@ -66,7 +65,7 @@ NSString* const DeviceClientDidReceiveNotification = @"DeviceClientDidReceiveNot
     }
 }
 
-#pragma mark - DHDeviceClientDelegate
+#pragma mark - DHSingleDeviceClientDelegate
 
 
 - (void)deviceClient:(DHDeviceClient *)client didReceiveNotification:(DHNotification *)notification {

@@ -77,6 +77,13 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
         [alertView show];
+    } else if (![NSURL URLWithString:self.serverUrlTextField.text]) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                            message:@"Server url is invalid"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
     } else {
         [self.delegate settingsViewController:self
                            didChangeServerURL:self.serverUrlTextField.text

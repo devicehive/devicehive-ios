@@ -12,11 +12,11 @@
 
 @implementation DHCommandResult
 
-+ (id)commandResultWithStatus:(DHCommandStatus)status result:(NSString*)result {
++ (id)commandResultWithStatus:(DHCommandStatus)status result:(id)result {
     return [[[self class] alloc] initWithStatus:status result:result];
 }
 
-- (id)initWithStatus:(DHCommandStatus)status result:(NSString*)result {
+- (id)initWithStatus:(DHCommandStatus)status result:(id)result {
     self = [super init];
     if (self) {
         _status = status;

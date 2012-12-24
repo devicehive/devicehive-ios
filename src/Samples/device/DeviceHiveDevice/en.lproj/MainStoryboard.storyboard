@@ -474,7 +474,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL" minimumFontSize="17" id="lql-Wc-UXr">
                                                     <rect key="frame" x="15" y="7" width="265" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -513,10 +513,6 @@
         </class>
         <class className="EquipmentSelectorViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentSelectorViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonClicked:"/>
-                <relationship kind="action" name="doneButtonClicked:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="EquipmentViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentViewController.h"/>
@@ -524,15 +520,12 @@
         <class className="ParametersViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ParametersViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addButtonClicked:"/>
-                <relationship kind="action" name="doneButtonClicked:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
             </relationships>
         </class>
         <class className="SendNotificationViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SendNotificationViewController.h"/>
             <relationships>
-                <relationship kind="action" name="sendNotificationButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="equipmentCodeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="notificationNameTextField" candidateClass="UITextField"/>

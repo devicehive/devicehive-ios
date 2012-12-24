@@ -12,7 +12,7 @@
 #import "DHDeviceClass.h"
 #import "DHClientService.h"
 #import "DeviceViewController.h"
-#import "DHDeviceClient.h"
+#import "DHSingleDeviceClient.h"
 
 @interface NetworkDevicesViewController ()
 
@@ -37,7 +37,7 @@
         DHDeviceData* deviceData = [self.devices objectAtIndex:[[self.tableView indexPathForCell:sender] row]];
         if ([segue.destinationViewController respondsToSelector:@selector(setDeviceClient:)]) {
             [segue.destinationViewController performSelector:@selector(setDeviceClient:)
-                                                  withObject:[[DHDeviceClient alloc] initWithDevice:deviceData
+                                                  withObject:[[DHSingleDeviceClient alloc] initWithDevice:deviceData
                                                clientService:self.clientService]];
         }
     }

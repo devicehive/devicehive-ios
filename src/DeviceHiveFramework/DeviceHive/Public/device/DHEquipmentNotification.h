@@ -21,6 +21,6 @@
  */
 - (id)initWithEquipmentCode:(NSString *)equipmentCode
              parametersName:(NSString *)name
-                 parameters:(NSDictionary *)value;
+                 parameters:(id)value;
 
 @end

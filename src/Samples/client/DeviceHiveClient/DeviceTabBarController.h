@@ -11,7 +11,7 @@
 extern NSString* const DeviceClientDidReceiveNotification;
 
 @class DHDeviceData;
-@class DHDeviceClient;
+@class DHSingleDeviceClient;
 @protocol DHClientService;
 
 @protocol Refreshable <NSObject>
@@ -23,6 +23,6 @@ extern NSString* const DeviceClientDidReceiveNotification;
 
 @interface DeviceTabBarController : UITabBarController
 
-@property (nonatomic, strong) DHDeviceClient* deviceClient;
+@property (nonatomic, strong) DHSingleDeviceClient* deviceClient;
 
 @end

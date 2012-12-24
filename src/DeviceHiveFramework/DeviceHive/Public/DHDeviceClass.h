@@ -40,6 +40,12 @@
 @property (nonatomic, strong, readonly) NSString * version;
 
 /**
+ Device class data, a JSON object with an arbitrary structure.
+ Device class data can only be set before registration.
+ */
+@property (nonatomic, strong) id data;
+
+/**
  Init object with given parameters.
  @param name Device display name.
  @param version Device class version.

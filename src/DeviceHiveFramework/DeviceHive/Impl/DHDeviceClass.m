@@ -41,11 +41,13 @@
 }
 
 - (id)initWithDictionary:(NSDictionary*)dictionary {
-    return [self initWithId:dictionary[@"id"]
-                       name:dictionary[@"name"]
-                    version:dictionary[@"version"]
-             offlineTimeout:dictionary[@"offlineTimeout"]
-                  permanent:[dictionary[@"isPermanent"] boolValue]];
+    DHDeviceClass* deviceClass = [self initWithId:dictionary[@"id"]
+                                             name:dictionary[@"name"]
+                                          version:dictionary[@"version"]
+                                   offlineTimeout:dictionary[@"offlineTimeout"]
+                                        permanent:[dictionary[@"isPermanent"] boolValue]];
+    deviceClass.data = dictionary[@"data"];
+    return deviceClass;
 }
 
 - (NSDictionary *)classDictionary {
@@ -55,6 +57,7 @@
     [resultDict setObjectIfNotNull:self.version forKey:@"version"];
     [resultDict setObjectIfNotNull:self.offlineTimeout forKey:@"offlineTimeout"];
     [resultDict setObjectIfNotNull:[NSNumber numberWithBool:self.isPermanent] forKey:@"isPermanent"];
+    [resultDict setObjectIfNotNull:self.data forKey:@"data"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
 }
 

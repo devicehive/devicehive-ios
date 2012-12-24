@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D012A27C1678920E0075D632 /* DHRestfulApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D012A27B1678920E0075D632 /* DHRestfulApiClient.m */; };
 		D018A5171656341100B4DF29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D018A5161656341100B4DF29 /* QuartzCore.framework */; };
+		D044A4DD1688961700AD6DE7 /* DHMultipleDeviceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D044A4DB1688961700AD6DE7 /* DHMultipleDeviceClient.m */; };
+		D044A4DE1688961700AD6DE7 /* DHSingleDeviceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D044A4DC1688961700AD6DE7 /* DHSingleDeviceClient.m */; };
 		D05A7A231655166F0074078A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05A7A221655166F0074078A /* Foundation.framework */; };
 		D05A7A83165517460074078A /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A711655171F0074078A /* AFHTTPClient.m */; };
 		D05A7A84165517460074078A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D05A7A731655171F0074078A /* AFHTTPRequestOperation.m */; };
@@ -59,6 +61,11 @@
 /* Begin PBXFileReference section */
 		D012A27B1678920E0075D632 /* DHRestfulApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHRestfulApiClient.m; sourceTree = "<group>"; };
 		D018A5161656341100B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D044A4D8168895EF00AD6DE7 /* DHMultipleDeviceClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHMultipleDeviceClient.h; sourceTree = "<group>"; };
+		D044A4D9168895F000AD6DE7 /* DHSingleDeviceClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHSingleDeviceClient.h; sourceTree = "<group>"; };
+		D044A4DB1688961700AD6DE7 /* DHMultipleDeviceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHMultipleDeviceClient.m; sourceTree = "<group>"; };
+		D044A4DC1688961700AD6DE7 /* DHSingleDeviceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSingleDeviceClient.m; sourceTree = "<group>"; };
+		D044A4DF1688972200AD6DE7 /* DHDeviceClient+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DHDeviceClient+Private.h"; sourceTree = "<group>"; };
 		D05691BB167B2ABD0054F182 /* DHEquipmentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHEquipmentProtocol.h; sourceTree = "<group>"; };
 		D05A7A1F1655166F0074078A /* libDeviceHiveFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeviceHiveFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05A7A221655166F0074078A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -275,6 +282,9 @@
 			children = (
 				D0D77012166CDC64005816C0 /* DHClientServices.m */,
 				D0D77013166CDC64005816C0 /* DHDeviceClient.m */,
+				D044A4DF1688972200AD6DE7 /* DHDeviceClient+Private.h */,
+				D044A4DB1688961700AD6DE7 /* DHMultipleDeviceClient.m */,
+				D044A4DC1688961700AD6DE7 /* DHSingleDeviceClient.m */,
 				D0D77014166CDC64005816C0 /* DHRestfulClientService.h */,
 				D0D77015166CDC64005816C0 /* DHRestfulClientService.m */,
 			);
@@ -324,6 +334,8 @@
 				D0D77038166CDC64005816C0 /* DHClientServices.h */,
 				D0D77039166CDC64005816C0 /* DHDeviceClient.h */,
 				D0D7703A166CDC64005816C0 /* DHEquipmentState.h */,
+				D044A4D8168895EF00AD6DE7 /* DHMultipleDeviceClient.h */,
+				D044A4D9168895F000AD6DE7 /* DHSingleDeviceClient.h */,
 			);
 			path = client;
 			sourceTree = "<group>";
@@ -427,6 +439,8 @@
 				D0D77062166CDC64005816C0 /* DHUtils.m in Sources */,
 				D0D77063166CDC64005816C0 /* NSMutableDictionary+DHEntitySerialization.m in Sources */,
 				D012A27C1678920E0075D632 /* DHRestfulApiClient.m in Sources */,
+				D044A4DD1688961700AD6DE7 /* DHMultipleDeviceClient.m in Sources */,
+				D044A4DE1688961700AD6DE7 /* DHSingleDeviceClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
