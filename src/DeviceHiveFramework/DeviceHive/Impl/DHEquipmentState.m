@@ -13,7 +13,7 @@
 
 - (id)initWithEquipmentCode:(NSString *)code
                   timestamp:(NSString *)timestamp
-                 parameters:(NSDictionary *)parameters {
+                 parameters:(id)parameters {
     self = [super init];
     if (self) {
         _code = code;

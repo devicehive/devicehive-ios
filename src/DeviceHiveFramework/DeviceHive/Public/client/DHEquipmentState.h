@@ -26,7 +26,7 @@
 /**
  Equipment state parameters.
  */
-@property (nonatomic, strong, readonly) NSDictionary* parameters;
+@property (nonatomic, strong, readonly) id parameters;
 
 
 @end

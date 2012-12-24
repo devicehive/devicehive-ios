@@ -58,7 +58,7 @@
     } else {
         DHEquipmentState* state = [self equipmentStateForEquipment:eq];
         cell.textLabel.text = @"State";
-        cell.detailTextLabel.text = state.parameters.count > 0 ? [state.parameters description] : @"--";
+        cell.detailTextLabel.text = state.parameters ? [state.parameters description] : @"--";
     }
     return cell;
 }
