@@ -20,7 +20,7 @@ typedef void (^DHDeviceServiceSuccessCompletionBlock)(id response);
  */
 typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 
-@class DHDevice, DHNotification, DHCommand;
+@class DHDeviceData, DHNotification, DHCommand;
 
 @class DHCommandResult;
 
@@ -30,56 +30,56 @@ typedef void (^DHDeviceServiceFailureCompletionBlock)(NSError *error);
 @protocol DHDeviceService <NSObject>
 
 /** Issues a registration request for the given device.
- @param device DHDevice to be registered.
+ @param device DHDeviceData to be registered.
  @param success Success completion block. Response object is a DHDeviceData instance.
  @param failure Failure completion block.
  */
-- (void)registerDevice:(DHDevice *)device
+- (void)registerDevice:(DHDeviceData *)device
                success:(DHDeviceServiceSuccessCompletionBlock) success
                failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
 
-/** Get device data with given device identifier. As a result this method returns DHDeviceData object.
- @param deviceId Device identifier.
+/** Retrieve device data form the server for given device. As a result this method returns DHDeviceData object.
+ @param device DHDeviceData object describing current device.
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)getDeviceWithId:(NSString *)deviceId
-             completion:(DHDeviceServiceSuccessCompletionBlock)success
-                failure:(DHDeviceServiceFailureCompletionBlock)failure;
+- (void)getDeviceData:(DHDeviceData *)device
+           completion:(DHDeviceServiceSuccessCompletionBlock)success
+              failure:(DHDeviceServiceFailureCompletionBlock)failure;
 
 /** Sends notification on behalf of the given device.
  @param notification Notification to be sent.
- @param device Sender DHDevice object. 
+ @param device Sender DHDeviceData object. 
  @param success Success completion block. 
  @param failure Failure completion block
  */
 - (void)sendNotification:(DHNotification *)notification
-               forDevice:(DHDevice *)device
+               forDevice:(DHDeviceData *)device
                  success:(DHDeviceServiceSuccessCompletionBlock) success
                  failure:(DHDeviceServiceFailureCompletionBlock) failure;
 
 /** Poll for commands for given device starting from given date timestamp. Returns an array of DHCommand.
  In the case when no commands were found, the server doesn't return response until a new command is received. The blocking period is limited.
- @param device DHDevice object which represent target device to receive commands for.
+ @param device DHDeviceData object which represent target device to receive commands for.
  @param lastCommandPollTimestamp Timestamp of the last received command. If not specified, server timestamp will be used instead.
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)pollCommandsForDevice:(DHDevice *)device
+- (void)pollCommandsForDevice:(DHDeviceData *)device
                         since:(NSString *)lastCommandPollTimestamp
                    completion:(DHDeviceServiceSuccessCompletionBlock)success
                       failure:(DHDeviceServiceFailureCompletionBlock)failure;
 
 /** Update status of given command with given DHCommandResult.
  @param command DHCommand to be updated.
- @param device DHDevice object which represents target device.
+ @param device DHDeviceData object which represents target device.
  @param result DHCommandResult instance reperesenting command execution result.
  @param success Success completion block.
  @param failure Failure completion block.
  */
 - (void)updateCommand:(DHCommand *)command
-            forDevice:(DHDevice *)device
+            forDevice:(DHDeviceData *)device
            withResult:(DHCommandResult *)result
               success:(DHDeviceServiceSuccessCompletionBlock) success
               failure:(DHDeviceServiceFailureCompletionBlock) failure;

@@ -61,7 +61,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
     self.deviceService = deviceService;
     [self willStartRegistration];
     DHLog(@"Registering device: %@", [self.deviceData description]);
-    [self.deviceService registerDevice:self success:^(DHDeviceData* deviceData) {
+    [self.deviceService registerDevice:self.deviceData success:^(DHDeviceData* deviceData) {
         DHLog(@"Registration request finished:%@", [deviceData description]);
         DHLog(@"Sending device status notification");
         [self sendNotification:[DHDeviceStatusNotification onlineStatusNotification]
@@ -111,7 +111,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                  failure:(DHDeviceFailureCompletionBlock)failure {
     [self willSendNotification:notification];
     [self.deviceService sendNotification:notification
-                               forDevice:self
+                               forDevice:self.deviceData
                                  success:^(id response) {
                                      [self didSendNotification:notification];
                                      success(response);
@@ -124,13 +124,23 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 
 - (void)reloadDeviceDataWithSuccess:(DHDeviceSuccessCompletionBlock)success
                             failure:(DHDeviceFailureCompletionBlock)failure {
-    [self.deviceService getDeviceWithId:self.deviceData.deviceID
-                             completion:^(DHDeviceData* deviceData) {
-        self.deviceData = deviceData;
-        success(deviceData);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    [self.deviceService getDeviceData:self.deviceData
+                           completion:^(DHDeviceData* deviceData) {
+                               [self updateDeviceData:deviceData];
+                               success(deviceData);
+                           } failure:^(NSError *error) {
+                               failure(error);
+                           }];
+}
+
+- (void)updateDeviceData:(DHDeviceData *)deviceData {
+    self.deviceData = [[DHDeviceData alloc] initWithID:self.deviceData.deviceID
+                                                   key:self.deviceData.key
+                                                  name:deviceData.name
+                                                status:deviceData.status
+                                               network:deviceData.network
+                                           deviceClass:deviceData.deviceClass
+                                             equipment:self.deviceData.equipment];
 }
 
 - (void)beginProcessingCommands {
@@ -178,7 +188,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
         DHLog(@"Poll next command for device: %@ starting from date: (%@)",
               self.deviceData.name, self.lastCommandPollTimestamp);
         self.isCommandPollRequestInProgress = YES;
-        [self.deviceService pollCommandsForDevice:self
+        [self.deviceService pollCommandsForDevice:self.deviceData
                                             since:self.lastCommandPollTimestamp
                                        completion:^(NSArray* commands) {
             DHLog(@"Got commands: %@", [commands description]);
@@ -202,7 +212,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
     
     DHCommandCompletionBlock commandCompletion = ^(DHCommandResult* result) {
         [self.deviceService updateCommand:command
-                                forDevice:self
+                                forDevice:self.deviceData
                                withResult:result
                                   success:^(id response) {
                                       completion(result);

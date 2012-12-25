@@ -8,9 +8,6 @@
 
 #import "DHRestfulDeviceService.h"
 #import "DHDefaultRestfulApiClient.h"
-#import "DHDevice.h"
-#import "DHEquipment.h"
-#import "DHEquipmentData.h"
 #import "DHNotification.h"
 #import "DHCommand.h"
 #import "DHEntity+SerializationPrivate.h"
@@ -43,15 +40,15 @@
     return self;
 }
 
-- (void)registerDevice:(DHDevice*)device
+- (void)registerDevice:(DHDeviceData*)device
                success:(DHDeviceServiceSuccessCompletionBlock) success
                failure:(DHDeviceServiceFailureCompletionBlock) failure {
     
-    NSString* path = [NSString stringWithFormat:@"device/%@", device.deviceData.deviceID];
+    NSString* path = [NSString stringWithFormat:@"device/%@", device.deviceID];
     [self setupAuthenticationForDevice:device];
-    DHLog(@"Registering device: %@", [[device.deviceData classDictionary] description]);
+    DHLog(@"Registering device: %@", [[device classDictionary] description]);
     [self.restfulApiClient put:path
-                    parameters:[device.deviceData classDictionary]
+                    parameters:[device classDictionary]
                        success:^(id response) {
                            DHLog(@"Registration request finished:%@", [response description]);
                            success([[DHDeviceData alloc] initWithDictionary:response]);
@@ -62,29 +59,30 @@
      ];
 }
 
-- (void)getDeviceWithId:(NSString *)deviceId
-             completion:(DHDeviceServiceSuccessCompletionBlock)success
-                failure:(DHDeviceServiceFailureCompletionBlock)failure {
-    NSString* path = [NSString stringWithFormat:@"device/%@", deviceId];
+- (void)getDeviceData:(DHDeviceData *)device
+           completion:(DHDeviceServiceSuccessCompletionBlock)success
+              failure:(DHDeviceServiceFailureCompletionBlock)failure {
+    NSString* path = [NSString stringWithFormat:@"device/%@", device.deviceID];
+    [self setupAuthenticationForDevice:device];
     [self.restfulApiClient get:path
                     parameters:nil
                        success:^(id response) {
                            DHLog(@"Received device:%@", [response description]);
                            success([[DHDeviceData alloc] initWithDictionary:response]);
                        } failure:^(NSError *error) {
-                           DHLog(@"Failed to retrieve device(%@) with error:%@", deviceId, error);
+                           DHLog(@"Failed to retrieve device(%@) with error:%@", device.deviceID, error);
                            failure(error);
                        }
      ];
 }
 
 - (void)sendNotification:(DHNotification*)notification
-               forDevice:(DHDevice*)device
+               forDevice:(DHDeviceData*)device
                  success:(DHDeviceServiceSuccessCompletionBlock) success
                  failure:(DHDeviceServiceFailureCompletionBlock) failure {
     
     [self setupAuthenticationForDevice:device];
-    NSString* path = [NSString stringWithFormat:@"device/%@/notification", device.deviceData.deviceID];
+    NSString* path = [NSString stringWithFormat:@"device/%@/notification", device.deviceID];
     [self.restfulApiClient post:path
                      parameters:[notification classDictionary]
                         success:^(id response) {
@@ -98,14 +96,14 @@
 }
 
 - (void)updateCommand:(DHCommand*)command
-            forDevice:(DHDevice*)device
+            forDevice:(DHDeviceData*)device
            withResult:(DHCommandResult*)result
               success:(DHDeviceServiceSuccessCompletionBlock) success
               failure:(DHDeviceServiceFailureCompletionBlock) failure {
     
     [self setupAuthenticationForDevice:device];
     
-    NSString* path = [NSString stringWithFormat:@"device/%@/command/%@", device.deviceData.deviceID, command.commandID];
+    NSString* path = [NSString stringWithFormat:@"device/%@/command/%@", device.deviceID, command.commandID];
     [self.restfulApiClient put:path
                     parameters:[result classDictionary]
                        success:^(id response) {
@@ -118,7 +116,7 @@
      ];
 }
 
-- (void)pollCommandsForDevice:(DHDevice *)device
+- (void)pollCommandsForDevice:(DHDeviceData *)device
                         since:(NSString *)lastCommandPollTimestamp
                    completion:(DHDeviceServiceSuccessCompletionBlock)success
                       failure:(DHDeviceServiceFailureCompletionBlock)failure {
@@ -126,9 +124,9 @@
     if (lastCommandPollTimestamp) {
         path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
                 //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                device.deviceData.deviceID, encodeToPercentEscapeString(lastCommandPollTimestamp)];
+                device.deviceID, encodeToPercentEscapeString(lastCommandPollTimestamp)];
     } else {
-        path = [NSString stringWithFormat:@"device/%@/command/poll", device.deviceData.deviceID];
+        path = [NSString stringWithFormat:@"device/%@/command/poll", device.deviceID];
     }
     [self.restfulApiClient get:path
                     parameters:nil
@@ -144,11 +142,11 @@
     
 }
 
-- (void)setupAuthenticationForDevice:(DHDevice*)device {
+- (void)setupAuthenticationForDevice:(DHDeviceData*)device {
     [self.restfulApiClient setHeader:@"Auth-DeviceID"
-                               value:device.deviceData.deviceID];
+                               value:device.deviceID];
     [self.restfulApiClient setHeader:@"Auth-DeviceKey"
-                               value:device.deviceData.key];
+                               value:device.key];
 }
 
 - (void)cancelAllServiceRequests {
