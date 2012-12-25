@@ -25,7 +25,7 @@
 
 - (id)initWithDevices:(NSArray *)devices
        clientService:(id<DHClientService>)clientService {
-    self = [super init];
+    self = [super initWithClientService:clientService];
     if (self) {
         _devices = devices;
     }

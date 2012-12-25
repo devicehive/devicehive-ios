@@ -153,7 +153,7 @@
                            since:(NSString *)lastNotificationPollTimestamp
                       completion:(DHClientSuccessCompletionBlock)success
                          failure:(DHClientFailureCompletionBlock)failure {
-    NSMutableString *path = [NSMutableString stringWithFormat:@"/device/notification/poll"];
+    NSMutableString *path = [NSMutableString stringWithFormat:@"device/notification/poll"];
     if (devices.count) {
         [path appendFormat:@"?deviceGuids=%@", [self prepareGuidsString:devices]];
     }
