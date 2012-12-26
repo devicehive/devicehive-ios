@@ -167,7 +167,7 @@
                            NSMutableArray* result = [NSMutableArray array];
                            if (response) {
                                for (NSDictionary* notificationDict in response) {
-                                   DHNotification* notification = [DHNotification fromDictionary:notificationDict];
+                                   DHNotification* notification = [DHNotification fromDictionary:notificationDict[@"notification"]];
                                    NSString* deviceId = notificationDict[@"deviceGuid"];
                                    [result addObject:@{@"deviceId" : deviceId,
                                                        @"notification" : notification}];
