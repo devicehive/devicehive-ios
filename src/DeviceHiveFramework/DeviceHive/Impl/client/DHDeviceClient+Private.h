@@ -1,5 +1,5 @@
 //
-//  DHDeviceClient.h
+//  DHDeviceClient+Private.h
 //  DeviceHiveFramework
 //
 //  Created by Kiselev Maxim on 12/25/12.

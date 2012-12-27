@@ -1,8 +1,8 @@
 //
-//  DHDeviceService.h
-//  DeviceHiveDevice
+//  DHRestfulDeviceService.h
+//  DeviceHiveFramework
 //
-//  Created by Maxim Kiselv on 11/07/12.
+//  Created by Maxim Kiselev on 11/07/12.
 //  Copyright (c) 2012 DataArt Apps. All rights reserved.
 //
 

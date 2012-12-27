@@ -1,8 +1,8 @@
 //
 //  DHCommandResult.m
-//  DeviceHiveDevice
+//  DeviceHiveFramework
 //
-//  Created by Alex Maydanik on 10/27/12.
+//  Created by Maxim Kiselev on 10/27/12.
 //  Copyright (c) 2012 DataArt Apps. All rights reserved.
 //
 

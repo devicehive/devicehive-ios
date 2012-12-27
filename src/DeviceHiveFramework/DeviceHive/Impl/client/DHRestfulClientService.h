@@ -1,5 +1,5 @@
 //
-//  DHClient.h
+//  DHRestfulClientService.h
 //  DeviceHiveFramework
 //
 //  Created by Kiselev Maxim on 11/30/12.

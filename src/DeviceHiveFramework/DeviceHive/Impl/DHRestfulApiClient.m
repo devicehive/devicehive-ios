@@ -1,6 +1,6 @@
 //
-//  DHDeviceApi.m
-//  DeviceHiveDevice
+//  DHRestfulApiClient.m
+//  DeviceHiveFramework
 //
 //  Created by Kiselev Maxim on 12/12/12.
 //  Copyright (c) 2012 DataArt Apps. All rights reserved.
