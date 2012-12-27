@@ -35,7 +35,6 @@
 /**
  Send given command to the device.
  @param command DHCommand instance to be sent.
- @param device Target device to send command.
  @param success Success completion block.
  @param failure Failure completion block
  */

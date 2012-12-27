@@ -64,7 +64,7 @@
  Called when multiple device client receives new notification from one of the device.
  @param client `DHMultipleDeviceClient` instance.
  @param notification DHNotification instance.
- @param deviceData Device-sender of the notification.
+ @param deviceId Identifier of device-sender of the notification.
  */
 - (void)deviceClient:(DHMultipleDeviceClient *)client didReceiveNotification:(DHNotification *)notification fromDeviceWithId:(NSString *)deviceId;
 
