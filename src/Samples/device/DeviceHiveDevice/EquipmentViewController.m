@@ -39,7 +39,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,9 +51,12 @@
     if (indexPath.row == 0) {
         cell.textLabel.text = @"Code";
         cell.detailTextLabel.text = eq.code;
-    } else {
+    } else if (indexPath.row == 1) {
         cell.textLabel.text = @"Type";
         cell.detailTextLabel.text = eq.type;
+    } else {
+        cell.textLabel.text = @"Data";
+        cell.detailTextLabel.text = eq.data ? [eq.data description] : @"--";
     }
     return cell;
 }

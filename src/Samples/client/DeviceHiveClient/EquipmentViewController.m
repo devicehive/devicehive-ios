@@ -40,7 +40,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,6 +55,9 @@
     } else if (indexPath.row == 1){
         cell.textLabel.text = @"Type";
         cell.detailTextLabel.text = eq.type;
+    } else if (indexPath.row == 2) {
+        cell.textLabel.text = @"Data";
+        cell.detailTextLabel.text = eq.data ? [eq.data description] : @"--";
     } else {
         DHEquipmentState* state = [self equipmentStateForEquipment:eq];
         cell.textLabel.text = @"State";
