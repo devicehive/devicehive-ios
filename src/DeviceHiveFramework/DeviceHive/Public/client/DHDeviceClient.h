@@ -27,8 +27,8 @@ typedef void (^DHDeviceClientFailureCompletionBlock)(NSError *error);
 
 
 /**
- Class intended to be used as a device client. 
- It is able to send commands and receive notifications from particular device.
+ Abstract class which provides common functionality for its descendants. This class isn't intended to be used directly. Use
+ DHSingleDeviceClient and DHMultipleDeviceClient instead.
  */
 @interface DHDeviceClient : NSObject
 

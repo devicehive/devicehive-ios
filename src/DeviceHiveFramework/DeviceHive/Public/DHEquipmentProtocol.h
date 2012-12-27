@@ -35,6 +35,7 @@
 
 /**
  Equipment data, an object with an arbitrary structure.
+ It can be built of NSDictionaries, NSArrays and primitive types.
  Equipment data can only be set before device registration.
  */
 @property (nonatomic, strong) id data;

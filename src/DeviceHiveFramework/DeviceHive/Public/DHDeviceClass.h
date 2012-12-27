@@ -40,7 +40,8 @@
 @property (nonatomic, strong, readonly) NSString * version;
 
 /**
- Device class data, a JSON object with an arbitrary structure.
+ Device class data, an object with an arbitrary structure.
+ It can be built of NSDictionaries, NSArrays and primitive types.
  Device class data can only be set before registration.
  */
 @property (nonatomic, strong) id data;

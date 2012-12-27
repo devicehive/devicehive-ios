@@ -52,7 +52,8 @@
 @property (nonatomic, strong, readonly) NSArray * equipment;
 
 /**
- Device data, a JSON object with an arbitrary structure.
+ Device data, an object with an arbitrary structure. 
+ It can be built of NSDictionaries, NSArrays and primitive types.
  Device data can only be set before registration.
  */
 @property (nonatomic, strong) id data;

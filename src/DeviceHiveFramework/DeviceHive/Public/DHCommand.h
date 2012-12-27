@@ -30,7 +30,8 @@
 @property (nonatomic, strong, readonly) NSString * name;
 
 /**
- Command parameters.
+ Command parameters. An object with an arbitrary structure.
+ It can be built of NSDictionaries, NSArrays and primitive types.
  */
 @property (nonatomic, strong, readonly) id parameters;
 
@@ -57,7 +58,7 @@
 /**
  Init object with given parameters.
  @param name Command name.
- @param parameters Command parameters dictionary.
+ @param parameters Command parameters. 
  */
 - (id)initWithName:(NSString *)name
         parameters:(id)parameters;

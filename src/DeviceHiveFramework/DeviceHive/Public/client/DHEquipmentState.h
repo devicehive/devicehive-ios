@@ -25,6 +25,8 @@
 
 /**
  Equipment state parameters.
+ An object with an arbitrary structure.
+ It can be built of NSDictionaries, NSArrays and primitive types.
  */
 @property (nonatomic, strong, readonly) id parameters;
 
