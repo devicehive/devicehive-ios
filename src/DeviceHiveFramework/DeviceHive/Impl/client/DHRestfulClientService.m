@@ -234,6 +234,25 @@
 
 }
 
+- (void)getCommandWithId:(NSNumber *)commandId
+            sentToDevice:(DHDeviceData *)device
+              completion:(DHClientSuccessCompletionBlock)success
+                 failure:(DHClientFailureCompletionBlock)failure {
+    
+    NSString *path = [NSMutableString stringWithFormat:@"device/%@/command/%@", device.deviceID, commandId];
+    [self.restfulApiClient get:path
+                    parameters:nil
+                       success:^(id response) {
+                           DHCommand* command = [[DHCommand alloc] initWithDictionary:response];
+                           DHLog(@"Received command: %@", command);
+                           success(command);
+                       } failure:^(NSError *error) {
+                           DHLog(@"Failed to retrieve command with id(%@) for device(%@) with error:%@", commandId, device.deviceID, error);
+                           failure(error);
+                       }
+     ];
+}
+
 
 
 @end

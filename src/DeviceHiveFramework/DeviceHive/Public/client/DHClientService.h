@@ -121,4 +121,15 @@ typedef void (^DHClientFailureCompletionBlock)(NSError *error);
                        completion:(DHClientSuccessCompletionBlock)success
                           failure:(DHClientFailureCompletionBlock)failure;
 
+/** Get command sent to given device. Returns DHCommand object retrieved from the server with current status and result.
+ @param commandId Command identifier.
+ @param device DHDevice object which represents a device.
+ @param success Success completion block.
+ @param failure Failure completion block.
+ */
+- (void)getCommandWithId:(NSNumber *)commandId
+            sentToDevice:(DHDeviceData *)device
+              completion:(DHClientSuccessCompletionBlock)success
+                 failure:(DHClientFailureCompletionBlock)failure;
+
 @end

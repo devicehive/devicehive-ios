@@ -9,18 +9,16 @@
 #import "DHNotification.h"
 
 /**
- Represents a notification which is usually sent by an equipment.
+ Represents a notification which is usually sent by an equipment to update its state.
  */
 @interface DHEquipmentNotification : DHNotification
 
 /**
  Init object with given parameters.
  @param equipmentCode Equipment code.
- @param name Parameters key name in the `Notification`'s parameters.
- @param value Equipment parameters.
+ @param parameters Additional equipment parameters.
  */
 - (id)initWithEquipmentCode:(NSString *)equipmentCode
-             parametersName:(NSString *)name
-                 parameters:(id)value;
+                 parameters:(NSDictionary *)parameters;
 
 @end

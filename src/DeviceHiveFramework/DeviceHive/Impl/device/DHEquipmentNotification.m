@@ -15,12 +15,12 @@
     return nil;
 }
 
-- (id)initWithEquipmentCode:(NSString*)equipmentCode
-             parametersName:(NSString*)parametersName
-                 parameters:(id)value {
+- (id)initWithEquipmentCode:(NSString *)equipmentCode
+                 parameters:(NSDictionary *)parameters {
+    NSMutableDictionary* mutableParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    mutableParameters[@"equipment"] = equipmentCode;
     self = [super initWithName:@"equipment"
-                    parameters:@{@"equipment" : equipmentCode,
-                               parametersName : value}];
+                    parameters:mutableParameters];
     if (self ) {
         
     }
