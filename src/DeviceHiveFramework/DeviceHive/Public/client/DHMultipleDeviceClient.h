@@ -41,6 +41,16 @@
             success:(DHDeviceClientSuccessCompletionBlock)success
             failure:(DHDeviceClientFailureCompletionBlock)failure;
 
+/**
+ Reload device data from the server. Sync current device state with data from the server.
+ @param deviceData Device data to be reloaded.
+ @param success Success completion block.
+ @param failure Failure completion block.
+ */
+- (void)reloadDeviceData:(DHDeviceData *)deviceData
+                 success:(DHDeviceClientSuccessCompletionBlock)success
+                 failure:(DHDeviceClientFailureCompletionBlock)failure;
+
 @end
 
 /**

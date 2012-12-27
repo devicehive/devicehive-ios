@@ -81,4 +81,28 @@
     [super sendCommand:command forDevice:device success:success failure:failure];
 }
 
+- (void)reloadDeviceData:(DHDeviceData *)deviceData
+                 success:(DHDeviceClientSuccessCompletionBlock)success
+                 failure:(DHDeviceClientFailureCompletionBlock)failure {
+    [self.clientService getDeviceWithId:deviceData.deviceID
+                             completion:^(DHDeviceData* newDeviceData) {
+        NSMutableArray* devices = [NSMutableArray arrayWithArray:self.devices];
+        [devices removeObject:deviceData];
+        [devices addObject:newDeviceData];
+        self.devices = devices;
+        success(deviceData);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+- (DHDeviceData *)getDeviceDataWithId:(NSString *)deviceId {
+    for (DHDeviceData* deviceData in self.devices) {
+        if ([deviceData.deviceID isEqualToString:deviceId]) {
+            return deviceData;
+        }
+    }
+    return nil;
+}
+
 @end
