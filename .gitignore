@@ -1,0 +1,12 @@
+# Mac OS X
+.DS_Store
+
+# Xcode
+
+# ignore everything inside *.xcodeproj except the project.pbxproj and xcshareddata
+*.xcodeproj/
+!*.xcodeproj/project.pbxproj
+!xcshareddata
+
+# ignore xcuserdata files
+xcuserdata
