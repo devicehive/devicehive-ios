@@ -9,6 +9,8 @@
 #import "DHDefaultRestfulApiClient.h"
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
+#import "NSError+PrivateAdditions.h"
+#import "DHErrors.h"
 
 @interface DHHttpClient : AFHTTPClient 
 
@@ -27,8 +29,6 @@
 }
 
 @end
-
-NSError* errorFromAFNetworkingError(NSError *inputError);
 
 
 @interface DHDefaultRestfulApiClient()
@@ -68,7 +68,7 @@ NSError* errorFromAFNetworkingError(NSError *inputError);
                      success(responseObject);
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     failure(errorFromAFNetworkingError(error));
+                     failure([NSError errorWithAFNetworkingError:error]);
                  }];
 }
 
@@ -83,7 +83,7 @@ NSError* errorFromAFNetworkingError(NSError *inputError);
                       success(responseObject);
                   }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      failure(errorFromAFNetworkingError(error));
+                      failure([NSError errorWithAFNetworkingError:error]);
                   }];
 }
 
@@ -98,7 +98,7 @@ NSError* errorFromAFNetworkingError(NSError *inputError);
                      success(responseObject);
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     failure(errorFromAFNetworkingError(error));
+                     failure([NSError errorWithAFNetworkingError:error]);
                  }];
 }
 
@@ -134,18 +134,3 @@ NSError* errorFromAFNetworkingError(NSError *inputError);
 }
 
 @end
-
-NSError* errorFromAFNetworkingError(NSError *inputError) {
-    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
-    
-    [userInfo setValue:inputError.userInfo[AFNetworkingOperationFailingURLRequestErrorKey]
-                forKey:DHRestfulOperationFailingUrlRequestErrorKey];
-    
-    [userInfo setValue:inputError.userInfo[AFNetworkingOperationFailingURLResponseErrorKey]
-                forKey:DHRestfulOperationFailingUrlResponseErrorKey];
-    
-    return [NSError errorWithDomain:DHRestfulOperationErrorDomain
-                               code:inputError.code
-                           userInfo:userInfo];
-}
-

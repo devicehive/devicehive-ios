@@ -18,6 +18,7 @@
 #import "DHDeviceService.h"
 #import "DHDeviceData.h"
 #import "DHCommandQueue.h"
+#import "NSError+PrivateAdditions.h"
 
 NSString* const kDeviceEquipmentParameter = @"equipment";
 
@@ -76,8 +77,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
                                success(deviceData);
                            } else {
                                DHLog(@"Failed to register equipment");
-                               // TODO: construct proper NSError
-                               failure(nil);
+                               failure([NSError equipmentErrorWithUserInfo:@{ NSLocalizedDescriptionKey : @"Failed to register equipment" }]);
                            }
                        } failure:^(NSError *error) {
                            DHLog(@"Registration request failed with error:%@", error);

@@ -12,6 +12,7 @@
 #import "DHCommand.h"
 #import "DHEquipment+Private.h"
 #import "DHEquipmentNotification.h"
+#import "NSError+PrivateAdditions.h"
 
 @interface DHEquipment ()
 
@@ -42,8 +43,7 @@
                               }];
     } else {
         DHLog(@"Equipment should be attached to a device in order to be able to send notifications");
-        // TODO: construct NSError here
-        failure(nil);
+        failure([NSError equipmentErrorWithUserInfo:@{ NSLocalizedDescriptionKey : @"Equipment should be attached to a device" }]);
     }
 }
 

@@ -9,6 +9,7 @@
 #import "NetworksViewController.h"
 #import "DHClientService.h"
 #import "DHNetwork.h"
+#import "DHErrors.h"
 #import "NetworkDevicesViewController.h"
 #import "SettingsViewController.h"
 #import "DHAppDelegate.h"
