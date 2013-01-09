@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D001A948169D7F9B0078B1AE /* NSError+PrivateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D001A947169D7F9B0078B1AE /* NSError+PrivateAdditions.m */; };
+		D001A94C169D7FDE0078B1AE /* DHErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = D001A94B169D7FDE0078B1AE /* DHErrors.m */; };
 		D012A27C1678920E0075D632 /* DHRestfulApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D012A27B1678920E0075D632 /* DHRestfulApiClient.m */; };
 		D018A5171656341100B4DF29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D018A5161656341100B4DF29 /* QuartzCore.framework */; };
 		D044A4DD1688961700AD6DE7 /* DHMultipleDeviceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D044A4DB1688961700AD6DE7 /* DHMultipleDeviceClient.m */; };
@@ -59,6 +61,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D001A946169D7F9B0078B1AE /* NSError+PrivateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+PrivateAdditions.h"; sourceTree = "<group>"; };
+		D001A947169D7F9B0078B1AE /* NSError+PrivateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+PrivateAdditions.m"; sourceTree = "<group>"; };
+		D001A94A169D7FAE0078B1AE /* DHErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHErrors.h; sourceTree = "<group>"; };
+		D001A94B169D7FDE0078B1AE /* DHErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHErrors.m; sourceTree = "<group>"; };
 		D012A27B1678920E0075D632 /* DHRestfulApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHRestfulApiClient.m; sourceTree = "<group>"; };
 		D018A5161656341100B4DF29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D044A4D8168895EF00AD6DE7 /* DHMultipleDeviceClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHMultipleDeviceClient.h; sourceTree = "<group>"; };
@@ -261,6 +267,9 @@
 				D0D77026166CDC64005816C0 /* DHDeviceData.m */,
 				D0D77027166CDC64005816C0 /* DHEntity+SerializationPrivate.h */,
 				D0D77028166CDC64005816C0 /* DHEntity.m */,
+				D001A946169D7F9B0078B1AE /* NSError+PrivateAdditions.h */,
+				D001A947169D7F9B0078B1AE /* NSError+PrivateAdditions.m */,
+				D001A94B169D7FDE0078B1AE /* DHErrors.m */,
 				D0D77029166CDC64005816C0 /* DHEquipmentData+Private.h */,
 				D0D7702A166CDC64005816C0 /* DHEquipmentData.m */,
 				D0D7702B166CDC64005816C0 /* DHEquipmentState.m */,
@@ -318,6 +327,7 @@
 				D0D77046166CDC64005816C0 /* DHDeviceClass.h */,
 				D0D77047166CDC64005816C0 /* DHDeviceData.h */,
 				D0D77048166CDC64005816C0 /* DHEntity.h */,
+				D001A94A169D7FAE0078B1AE /* DHErrors.h */,
 				D0D77049166CDC64005816C0 /* DHEquipmentData.h */,
 				D05691BB167B2ABD0054F182 /* DHEquipmentProtocol.h */,
 				D0D7704A166CDC64005816C0 /* DHNetwork.h */,
@@ -441,6 +451,8 @@
 				D012A27C1678920E0075D632 /* DHRestfulApiClient.m in Sources */,
 				D044A4DD1688961700AD6DE7 /* DHMultipleDeviceClient.m in Sources */,
 				D044A4DE1688961700AD6DE7 /* DHSingleDeviceClient.m in Sources */,
+				D001A948169D7F9B0078B1AE /* NSError+PrivateAdditions.m in Sources */,
+				D001A94C169D7FDE0078B1AE /* DHErrors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
