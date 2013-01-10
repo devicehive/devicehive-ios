@@ -13,6 +13,7 @@
 #import "DHEntity+SerializationPrivate.h"
 #import "DHNotification.h"
 #import "DHDeviceClient+Private.h"
+#import "DHApiInfo.h"
 
 
 @interface DHDeviceClient ()
@@ -66,7 +67,7 @@
                     [self handleNextNotification];
                 });
             } else {
-                [self pollNextNotificationsWithCompletion:^(BOOL success) {
+                [self pollNextNotificationsWithCompletionInternal:^(BOOL success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self handleNextNotification];
                     });
@@ -78,6 +79,33 @@
 
 - (void)didReceiveNotification:(id)notification {
     
+}
+
+- (void)pollNextNotificationsWithCompletionInternal:(DHNotificationPollCompletionBlock)completion {
+    // we already have one poll request in progress just wait for it to finish
+    if (!self.isNotificationsPollRequestInProgress) {
+        self.isNotificationsPollRequestInProgress = YES;
+        if (!self.lastNotificationPollTimestamp) {
+            // timestamp wasn't specified. Request and use server timestamp instead.
+            [self.clientService getApiInfoWithSuccess:^(DHApiInfo* apiInfo) {
+                self.lastNotificationPollTimestamp = apiInfo.serverTimestamp;
+                [self pollNextNotificationsWithCompletion:^(BOOL success) {
+                    self.isNotificationsPollRequestInProgress = NO;
+                    completion(success);
+                }];
+            } failure:^(NSError *error) {
+                DHLog(@"Failed to get service info with error: %@", [error description]);
+                self.isNotificationsPollRequestInProgress = NO;
+                completion(NO);
+            }];
+        } else {
+            [self pollNextNotificationsWithCompletion:^(BOOL success) {
+                self.isNotificationsPollRequestInProgress = NO;
+                completion(success);
+            }];
+        }
+
+    }
 }
 
 - (void)pollNextNotificationsWithCompletion:(DHNotificationPollCompletionBlock)completion {

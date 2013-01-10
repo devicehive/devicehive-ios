@@ -15,7 +15,6 @@ typedef void (^DHNotificationPollCompletionBlock)(BOOL success);
 @interface DHDeviceClient(Private)
 
 @property (nonatomic, readwrite) BOOL isReceivingNotifications;
-@property (nonatomic) BOOL isNotificationsPollRequestInProgress;
 @property (nonatomic, strong, readonly) DHQueue* notificationQueue;
 
 - (void)sendCommand:(DHCommand* )command
