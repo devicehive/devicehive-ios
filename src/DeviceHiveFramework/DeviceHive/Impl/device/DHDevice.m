@@ -19,6 +19,7 @@
 #import "DHDeviceData.h"
 #import "DHCommandQueue.h"
 #import "NSError+PrivateAdditions.h"
+#import "DHApiInfo.h"
 
 NSString* const kDeviceEquipmentParameter = @"equipment";
 
@@ -185,26 +186,43 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
 - (void)pollNextCommandWithCompletion:(DHCommandPollCompletionBlock)completion {
     // we already have one poll request in progress just wait for it to finish
     if (!self.isCommandPollRequestInProgress) {
-        DHLog(@"Poll next command for device: %@ starting from date: (%@)",
-              self.deviceData.name, self.lastCommandPollTimestamp);
         self.isCommandPollRequestInProgress = YES;
-        [self.deviceService pollCommandsForDevice:self.deviceData
-                                            since:self.lastCommandPollTimestamp
-                                       completion:^(NSArray* commands) {
-            DHLog(@"Got commands: %@", [commands description]);
-            if (commands.count > 0) {
-                self.lastCommandPollTimestamp = [[commands lastObject] timeStamp];
-            }
-            NSUInteger enqueuedCommandCount = [self.commandQueue enqueueAllNotCompleted:commands];
-            DHLog(@"Enqueued commands count: %d", enqueuedCommandCount);
-            self.isCommandPollRequestInProgress = NO;
-            completion(YES);
-        } failure:^(NSError *error) {
-            DHLog(@"Failed to poll commands with error:%@", error);
-            self.isCommandPollRequestInProgress = NO;
-            completion(NO);
-        }];
+        if (!self.lastCommandPollTimestamp) {
+            // timestamp wasn't specified. Request and use server timestamp instead.
+            [self.deviceService getApiInfoWithSuccess:^(DHApiInfo* apiInfo) {
+                self.lastCommandPollTimestamp = apiInfo.serverTimestamp;
+                [self doPollNextCommandWithCompletion:completion];
+            } failure:^(NSError *error) {
+                DHLog(@"Failed to get service info with error: %@", [error description]);
+                self.isCommandPollRequestInProgress = NO;
+                completion(NO);
+            }];
+        } else {
+            [self doPollNextCommandWithCompletion:completion];
+        }
     }
+}
+
+- (void)doPollNextCommandWithCompletion:(DHCommandPollCompletionBlock)completion {
+    DHLog(@"Poll next command for device: %@ starting from date: (%@)",
+          self.deviceData.name, self.lastCommandPollTimestamp);
+    [self.deviceService pollCommandsForDevice:self.deviceData
+                                        since:self.lastCommandPollTimestamp
+                                   completion:^(NSArray* commands) {
+                                       DHLog(@"Got commands: %@", [commands description]);
+                                       if (commands.count > 0) {
+                                           self.lastCommandPollTimestamp = [[commands lastObject] timeStamp];
+                                       }
+                                       NSUInteger enqueuedCommandCount = [self.commandQueue enqueueAllNotCompleted:commands];
+                                       DHLog(@"Enqueued commands count: %d", enqueuedCommandCount);
+                                       self.isCommandPollRequestInProgress = NO;
+                                       completion(YES);
+                                   } failure:^(NSError *error) {
+                                       DHLog(@"Failed to poll commands with error:%@", error);
+                                       self.isCommandPollRequestInProgress = NO;
+                                       completion(NO);
+                                   }];
+    
 }
 
 
