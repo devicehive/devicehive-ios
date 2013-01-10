@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "DHClientService.h"
-#import "DHRestfulApiClient.h"
+#import "DHRestfulService.h"
 
 
-@interface DHRestfulClientService : NSObject<DHClientService>
-
-- (id)initWithApiClient:(id<DHRestfulApiClient>)restfulApiClient;
+@interface DHRestfulClientService : DHRestfulService<DHClientService>
 
 @end

@@ -20,22 +20,18 @@
 #import "DHUtils.h"
 
 @interface DHRestfulClientService ()
-@property (nonatomic, strong) id<DHRestfulApiClient> restfulApiClient;
 
 @end
 
 @implementation DHRestfulClientService
 
-- (id)initWithApiClient:(id<DHRestfulApiClient>)restfulApiClient {
-    self = [super init];
-    if (self) {
-        _restfulApiClient = restfulApiClient;
-    }
-    return self;
+- (id)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
-- (void)getNetworksWithCompletion:(DHClientSuccessCompletionBlock)success
-                          failure:(DHClientFailureCompletionBlock)failure {
+- (void)getNetworksWithCompletion:(DHServiceSuccessCompletionBlock)success
+                          failure:(DHServiceFailureCompletionBlock)failure {
     
     [self.restfulApiClient get:@"network"
                     parameters:nil
@@ -51,8 +47,8 @@
 }
 
 - (void)getDevicesOfNetwork:(DHNetwork *)network
-                 completion:(DHClientSuccessCompletionBlock)success
-                    failure:(DHClientFailureCompletionBlock)failure {
+                 completion:(DHServiceSuccessCompletionBlock)success
+                    failure:(DHServiceFailureCompletionBlock)failure {
     
     NSString* path = [NSString stringWithFormat:@"network/%@", network.networkID];
     [self.restfulApiClient get:path
@@ -69,8 +65,8 @@
 }
 
 - (void)getDeviceWithId:(NSString *)deviceId
-             completion:(DHClientSuccessCompletionBlock)success
-                failure:(DHClientFailureCompletionBlock)failure {
+             completion:(DHServiceSuccessCompletionBlock)success
+                failure:(DHServiceFailureCompletionBlock)failure {
     
     NSString* path = [NSString stringWithFormat:@"device/%@", deviceId];
     [self.restfulApiClient get:path
@@ -86,8 +82,8 @@
 }
 
 - (void)getEquipmentOfDeviceClass:(DHDeviceClass *)deviceClass
-                       completion:(DHClientSuccessCompletionBlock)success
-                          failure:(DHClientFailureCompletionBlock)failure {
+                       completion:(DHServiceSuccessCompletionBlock)success
+                          failure:(DHServiceFailureCompletionBlock)failure {
     
     NSString* path = [NSString stringWithFormat:@"device/class/%@", deviceClass.deviceClassID];
     [self.restfulApiClient get:path
@@ -106,8 +102,8 @@
 
 - (void)pollDeviceNotifications:(DHDeviceData *)device
                           since:(NSString *)lastNotificationPollTimestamp
-                     completion:(DHClientSuccessCompletionBlock)success
-                        failure:(DHClientFailureCompletionBlock)failure {
+                     completion:(DHServiceSuccessCompletionBlock)success
+                        failure:(DHServiceFailureCompletionBlock)failure {
     
     NSMutableString *path = [NSMutableString stringWithFormat:@"device/%@/notification/poll", device.deviceID];
     if (lastNotificationPollTimestamp && lastNotificationPollTimestamp.length > 0) {
@@ -128,8 +124,8 @@
 
 - (void)getDeviceNotifications:(DHDeviceData *)device
                          since:(NSString *)lastNotificationPollTimestamp
-                    completion:(DHClientSuccessCompletionBlock)success
-                       failure:(DHClientFailureCompletionBlock)failure {
+                    completion:(DHServiceSuccessCompletionBlock)success
+                       failure:(DHServiceFailureCompletionBlock)failure {
     
     NSMutableString *path = [NSMutableString stringWithFormat:@"device/%@/notification", device.deviceID];
     if (lastNotificationPollTimestamp && lastNotificationPollTimestamp.length > 0) {
@@ -151,8 +147,8 @@
 
 - (void)pollDevicesNotifications:(NSArray *)devices
                            since:(NSString *)lastNotificationPollTimestamp
-                      completion:(DHClientSuccessCompletionBlock)success
-                         failure:(DHClientFailureCompletionBlock)failure {
+                      completion:(DHServiceSuccessCompletionBlock)success
+                         failure:(DHServiceFailureCompletionBlock)failure {
     NSMutableString *path = [NSMutableString stringWithFormat:@"device/notification/poll"];
     if (devices.count) {
         [path appendFormat:@"?deviceGuids=%@", [self prepareGuidsString:devices]];
@@ -197,8 +193,8 @@
 
 - (void)sendCommand:(DHCommand *)command
           forDevice:(DHDeviceData *)device
-         completion:(DHClientSuccessCompletionBlock)success
-            failure:(DHClientFailureCompletionBlock)failure {
+         completion:(DHServiceSuccessCompletionBlock)success
+            failure:(DHServiceFailureCompletionBlock)failure {
     
     NSString* path = [NSString stringWithFormat:@"device/%@/command", device.deviceID];
     [self.restfulApiClient post:path
@@ -216,8 +212,8 @@
 }
 
 - (void)getEquipmentStateOfDevice:(DHDeviceData *)device
-                       completion:(DHClientSuccessCompletionBlock)success
-                          failure:(DHClientFailureCompletionBlock)failure {
+                       completion:(DHServiceSuccessCompletionBlock)success
+                          failure:(DHServiceFailureCompletionBlock)failure {
     
     NSString *path = [NSMutableString stringWithFormat:@"device/%@/equipment", device.deviceID];
     [self.restfulApiClient get:path
@@ -236,8 +232,8 @@
 
 - (void)getCommandWithId:(NSNumber *)commandId
             sentToDevice:(DHDeviceData *)device
-              completion:(DHClientSuccessCompletionBlock)success
-                 failure:(DHClientFailureCompletionBlock)failure {
+              completion:(DHServiceSuccessCompletionBlock)success
+                 failure:(DHServiceFailureCompletionBlock)failure {
     
     NSString *path = [NSMutableString stringWithFormat:@"device/%@/command/%@", device.deviceID, commandId];
     [self.restfulApiClient get:path
@@ -252,7 +248,5 @@
                        }
      ];
 }
-
-
 
 @end

@@ -7,10 +7,8 @@
 //
 
 #import "DHDeviceService.h"
-#import "DHRestfulApiClient.h"
+#import "DHRestfulService.h"
 
-@interface DHRestfulDeviceService : NSObject<DHDeviceService>
-
-- (id)initWithApiClient:(id<DHRestfulApiClient>)restfulApiClient;
+@interface DHRestfulDeviceService : DHRestfulService<DHDeviceService>
 
 @end
