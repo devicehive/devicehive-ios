@@ -108,16 +108,19 @@
 
 - (void)pollCommandsForDevice:(DHDeviceData *)device
                         since:(NSString *)lastCommandPollTimestamp
+                  waitTimeout:(NSNumber *)waitTimeout
                    completion:(DHServiceSuccessCompletionBlock)success
                       failure:(DHServiceFailureCompletionBlock)failure {
-    NSString* path = nil;
-    if (lastCommandPollTimestamp) {
-        path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                device.deviceID, encodeToPercentEscapeString(lastCommandPollTimestamp)];
-    } else {
-        path = [NSString stringWithFormat:@"device/%@/command/poll", device.deviceID];
+    NSMutableString* path = [NSMutableString stringWithFormat:@"device/%@/command/poll", device.deviceID];
+    if (lastCommandPollTimestamp.length > 0) {
+        [path appendFormat:@"?timestamp=%@",
+         encodeToPercentEscapeString(lastCommandPollTimestamp)];
     }
+    if (waitTimeout) {
+        [path appendString:lastCommandPollTimestamp.length > 0 ? @"&" : @"?"];
+        [path appendFormat:@"waitTimeout=%@", waitTimeout];
+    }
+    
     [self.restfulApiClient get:path
                     parameters:nil
                        success:^(id response) {

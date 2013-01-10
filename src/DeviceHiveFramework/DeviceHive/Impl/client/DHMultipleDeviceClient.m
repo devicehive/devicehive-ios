@@ -52,6 +52,7 @@
           [self.devices description], self.lastNotificationPollTimestamp);
     [self.clientService pollDevicesNotifications:self.devices
                                            since:self.lastNotificationPollTimestamp
+                                     waitTimeout:self.notificationPollWaitTimeout
                                       completion:^(NSArray* notifications) {
                                           DHLog(@"Got notifications: %@", [notifications description]);
                                           if (notifications.count > 0) {

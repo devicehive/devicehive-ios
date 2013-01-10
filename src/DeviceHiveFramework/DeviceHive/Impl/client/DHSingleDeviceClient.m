@@ -50,6 +50,7 @@
           self.deviceData.name, self.lastNotificationPollTimestamp);
     [self.clientService pollDeviceNotifications:self.deviceData
                                           since:self.lastNotificationPollTimestamp
+                                    waitTimeout:self.notificationPollWaitTimeout
                                      completion:^(id response) {
                                          DHLog(@"Got notifications: %@", [response description]);
                                          NSArray* notifications = response;

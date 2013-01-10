@@ -57,11 +57,13 @@
  In the case when no notifications were found, the server doesn't return response until new notification is received. The blocking period is limited.
  @param device DHDeviceData object which represent target device to receive notifications from.
  @param lastNotificationPollTimestamp Timestamp of the last received notification from the device. If not specified, server timestamp will be used instead.
+ @param waitTimeout Waiting timeout in seconds (default: 30 seconds, maximum: 60 seconds). Specify 0 to disable waiting.
  @param success Success completion block.
  @param failure Failure completion block.
  */
 - (void)pollDeviceNotifications:(DHDeviceData *)device
                           since:(NSString *)lastNotificationPollTimestamp
+                    waitTimeout:(NSNumber *)waitTimeout
                      completion:(DHServiceSuccessCompletionBlock)success
                         failure:(DHServiceFailureCompletionBlock)failure;
 
@@ -69,11 +71,13 @@
  In the case when no notifications were found, the server doesn't return response until new notification is received. The blocking period is limited.
  @param devices Array of DHDeviceData objects which represents devices to receive notifications from.
  @param lastNotificationPollTimestamp Timestamp of the last received notification from the device. If not specified, server timestamp will be used instead.
+ @param waitTimeout Waiting timeout in seconds (default: 30 seconds, maximum: 60 seconds). Specify 0 to disable waiting.
  @param success Success completion block.
  @param failure Failure completion block.
  */
 - (void)pollDevicesNotifications:(NSArray *)devices
                            since:(NSString *)lastNotificationPollTimestamp
+                     waitTimeout:(NSNumber *)waitTimeout
                       completion:(DHServiceSuccessCompletionBlock)success
                          failure:(DHServiceFailureCompletionBlock)failure;
 

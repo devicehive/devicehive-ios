@@ -208,6 +208,7 @@ typedef void (^DHCommandPollCompletionBlock)(BOOL success);
           self.deviceData.name, self.lastCommandPollTimestamp);
     [self.deviceService pollCommandsForDevice:self.deviceData
                                         since:self.lastCommandPollTimestamp
+                                  waitTimeout:self.commandPollWaitTimeout
                                    completion:^(NSArray* commands) {
                                        DHLog(@"Got commands: %@", [commands description]);
                                        if (commands.count > 0) {

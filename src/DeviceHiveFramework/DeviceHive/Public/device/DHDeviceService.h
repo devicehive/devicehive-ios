@@ -52,11 +52,13 @@
  In the case when no commands were found, the server doesn't return response until a new command is received. The blocking period is limited.
  @param device DHDeviceData object which represent target device to receive commands for.
  @param lastCommandPollTimestamp Timestamp of the last received command. If not specified, server timestamp will be used instead.
+ @param waitTimeout Waiting timeout in seconds (default: 30 seconds, maximum: 60 seconds). Specify 0 to disable waiting.
  @param success Success completion block.
  @param failure Failure completion block.
  */
 - (void)pollCommandsForDevice:(DHDeviceData *)device
                         since:(NSString *)lastCommandPollTimestamp
+                  waitTimeout:(NSNumber *)waitTimeout
                    completion:(DHServiceSuccessCompletionBlock)success
                       failure:(DHServiceFailureCompletionBlock)failure;
 

@@ -102,12 +102,18 @@
 
 - (void)pollDeviceNotifications:(DHDeviceData *)device
                           since:(NSString *)lastNotificationPollTimestamp
+                    waitTimeout:(NSNumber *)waitTimeout
                      completion:(DHServiceSuccessCompletionBlock)success
                         failure:(DHServiceFailureCompletionBlock)failure {
     
     NSMutableString *path = [NSMutableString stringWithFormat:@"device/%@/notification/poll", device.deviceID];
-    if (lastNotificationPollTimestamp && lastNotificationPollTimestamp.length > 0) {
+    if (lastNotificationPollTimestamp.length > 0) {
         [path appendFormat:@"?timestamp=%@", encodeToPercentEscapeString(lastNotificationPollTimestamp)];
+    }
+    
+    if (waitTimeout) {
+        [path appendString:lastNotificationPollTimestamp.length > 0 ? @"&" : @"?"];
+        [path appendFormat:@"waitTimeout=%@", waitTimeout];
     }
     [self.restfulApiClient get:path
                     parameters:nil
@@ -147,16 +153,23 @@
 
 - (void)pollDevicesNotifications:(NSArray *)devices
                            since:(NSString *)lastNotificationPollTimestamp
+                     waitTimeout:(NSNumber *)waitTimeout
                       completion:(DHServiceSuccessCompletionBlock)success
                          failure:(DHServiceFailureCompletionBlock)failure {
     NSMutableString *path = [NSMutableString stringWithFormat:@"device/notification/poll"];
     if (devices.count) {
         [path appendFormat:@"?deviceGuids=%@", [self prepareGuidsString:devices]];
     }
-    if (lastNotificationPollTimestamp && lastNotificationPollTimestamp.length > 0) {
+    if (lastNotificationPollTimestamp.length > 0) {
         [path appendString:devices.count ? @"&" : @"?"];
         [path appendFormat:@"timestamp=%@", encodeToPercentEscapeString(lastNotificationPollTimestamp)];
     }
+    
+    if (waitTimeout) {
+        [path appendString:(lastNotificationPollTimestamp.length > 0 || devices.count) ? @"&" : @"?"];
+        [path appendFormat:@"waitTimeout=%@", waitTimeout];
+    }
+    
     [self.restfulApiClient get:path
                     parameters:nil
                        success:^(NSArray* response) {
