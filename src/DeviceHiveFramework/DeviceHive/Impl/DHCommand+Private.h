@@ -19,6 +19,4 @@
           lifetime:(NSNumber*)lifetime
              flags:(NSNumber*)flags;
 
-+ (NSDateFormatter*)defaultTimestampFormatter;
-
 @end

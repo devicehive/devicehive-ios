@@ -11,19 +11,7 @@
 #import "NSMutableDictionary+DHEntitySerialization.h"
 #import "DHCommand+Private.h"
 
-static NSDateFormatter* defaultDateFormatter = nil;
-
 @implementation DHCommand
-
-+ (void)initialize {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        defaultDateFormatter = [[NSDateFormatter alloc] init];
-        NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-        [defaultDateFormatter setTimeZone:gmt];
-        [defaultDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.'SSSSSS"];
-    });
-}
 
 - (id)initWithName:(NSString *)name
          commandId:(NSNumber *)commandId
@@ -82,10 +70,6 @@ static NSDateFormatter* defaultDateFormatter = nil;
     [resultDict setObjectIfNotNull:self.flags forKey:@"flags"];
     [resultDict setObjectIfNotNull:self.timeStamp forKey:@"timestamp"];
     return [NSDictionary dictionaryWithDictionary:resultDict];
-}
-
-+ (NSDateFormatter*)defaultTimestampFormatter {
-    return defaultDateFormatter;
 }
 
 - (NSString*)description {
