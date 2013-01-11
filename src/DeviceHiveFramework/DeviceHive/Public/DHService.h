@@ -27,6 +27,8 @@ typedef void (^DHServiceFailureCompletionBlock)(NSError *error);
 
 /**
  Get meta-information of the current API. Returns `DHApiInfo` instance as a result.
+ @param success Success completion block.
+ @param failure Failure completion block.
  */
 - (void)getApiInfoWithSuccess:(DHServiceSuccessCompletionBlock)success
                       failure:(DHServiceFailureCompletionBlock)failure;

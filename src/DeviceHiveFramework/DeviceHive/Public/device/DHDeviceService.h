@@ -41,7 +41,7 @@
  @param notification Notification to be sent.
  @param device Sender DHDeviceData object. 
  @param success Success completion block. 
- @param failure Failure completion block
+ @param failure Failure completion block.
  */
 - (void)sendNotification:(DHNotification *)notification
                forDevice:(DHDeviceData *)device
