@@ -8,4 +8,4 @@
 
 #import "Configuration.h"
 
-NSString* const kServerUrl = @"http://ecloud.dataart.com/ecapi6";
+NSString* const kServerUrl = @"http://ecloud.dataart.com/ecapi7";

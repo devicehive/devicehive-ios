@@ -63,6 +63,11 @@ typedef void (^DHDeviceFailureCompletionBlock)(NSError *error);
 @property (nonatomic, strong) NSString* lastCommandPollTimestamp;
 
 /**
+ Command poll waiting timeout in seconds (default: 30 seconds, maximum: 60 seconds). Specify 0 to disable waiting.
+ */
+@property (nonatomic, strong) NSNumber* commandPollWaitTimeout;
+
+/**
  Init object with given device data.
  @param deviceData DHDeviceData instance.
  */

@@ -60,7 +60,7 @@
     DHNotification* notification = [[DHNotification alloc] initWithName:notificationName parameters:parameters];
     [self.device sendNotification:notification success:^(id response) {
         NSLog(@"Notification has been sent");
-        self.logTextView.text = [NSString stringWithFormat:@"%@\n%@", self.logTextView.text, [notification description]];
+        self.logTextView.text = [NSString stringWithFormat:@"%@\nSent notificaion: %@", self.logTextView.text, [notification description]];
     } failure:^(NSError *error) {
         NSLog(@"Failed to send notification: %@", [error description]);
         self.logTextView.text = [NSString stringWithFormat:@"%@Failed to send notification:\n%@", self.logTextView.text, [error description]];

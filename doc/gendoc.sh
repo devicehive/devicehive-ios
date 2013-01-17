@@ -10,7 +10,7 @@ appledoc \
 --no-repeat-first-par \
 --no-warn-invalid-crossref \
 --ignore "Impl" \
-../Source/DeviceHiveFramework/DeviceHive
+../src/DeviceHiveFramework/DeviceHive
 
 # --keep-undocumented-objects \
 # --keep-undocumented-members \

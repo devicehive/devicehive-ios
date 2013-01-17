@@ -69,7 +69,7 @@
     DHCommand* command = [[DHCommand alloc] initWithName:commandName parameters:parameters];
     [self.deviceClient sendCommand:command success:^(id response) {
         NSLog(@"Command has been sent");
-        self.logTextView.text = [NSString stringWithFormat:@"%@\n%@", self.logTextView.text, [command description]];
+        self.logTextView.text = [NSString stringWithFormat:@"%@\nSent command: %@", self.logTextView.text, [command description]];
     } failure:^(NSError *error) {
         NSLog(@"Failed to send command: %@", [error description]);
         self.logTextView.text = [NSString stringWithFormat:@"%@Failed to send command:\n%@", self.logTextView.text, [error description]];

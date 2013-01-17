@@ -48,30 +48,24 @@
 }
 
 - (void)pollNextNotificationsWithCompletion:(DHNotificationPollCompletionBlock)completion {
-    // we already have one poll request in progress just wait for it to finish
-    if (!self.isNotificationsPollRequestInProgress) {
-        DHLog(@"Poll next notification for devices: %@ starting from date: (%@)",
-              [self.devices description], self.lastNotificationPollTimestamp);
-        self.isNotificationsPollRequestInProgress = YES;
-        [self.clientService pollDevicesNotifications:self.devices
-                                               since:self.lastNotificationPollTimestamp
-                                          completion:^(NSArray* notifications) {
-                                              DHLog(@"Got notifications: %@", [notifications description]);
-                                              if (notifications.count > 0) {
-                                                  DHNotification* lastNotification = [notifications lastObject][@"notification"];
-                                                  self.lastNotificationPollTimestamp = lastNotification.timestamp;
-                                                  [self.notificationQueue enqueueAllObjects:notifications];
-                                              }
-                                              DHLog(@"Enqueued notifications count: %d", notifications.count);
-                                              self.isNotificationsPollRequestInProgress = NO;
-                                              completion(YES);
-                                          } failure:^(NSError *error) {
-                                              DHLog(@"Failed to poll notifications with error:%@", error);
-                                              self.isNotificationsPollRequestInProgress = NO;
-                                              completion(NO);
-                                          }];
-    }
-
+    DHLog(@"Poll next notification for devices: %@ starting from date: (%@)",
+          [self.devices description], self.lastNotificationPollTimestamp);
+    [self.clientService pollDevicesNotifications:self.devices
+                                           since:self.lastNotificationPollTimestamp
+                                     waitTimeout:self.notificationPollWaitTimeout
+                                      completion:^(NSArray* notifications) {
+                                          DHLog(@"Got notifications: %@", [notifications description]);
+                                          if (notifications.count > 0) {
+                                              DHNotification* lastNotification = [notifications lastObject][@"notification"];
+                                              self.lastNotificationPollTimestamp = lastNotification.timestamp;
+                                              [self.notificationQueue enqueueAllObjects:notifications];
+                                          }
+                                          DHLog(@"Enqueued notifications count: %d", notifications.count);
+                                          completion(YES);
+                                      } failure:^(NSError *error) {
+                                          DHLog(@"Failed to poll notifications with error:%@", error);
+                                          completion(NO);
+                                      }];
 }
 
 - (void)sendCommand:(DHCommand* )command

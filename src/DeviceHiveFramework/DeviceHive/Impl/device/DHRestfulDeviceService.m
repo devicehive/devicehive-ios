@@ -21,8 +21,6 @@
 
 @interface DHRestfulDeviceService ()
 
-@property (nonatomic, strong) id<DHRestfulApiClient> restfulApiClient;
-
 @end
 
 @implementation DHRestfulDeviceService
@@ -32,17 +30,9 @@
     return nil;
 }
 
-- (id)initWithApiClient:(id<DHRestfulApiClient>)restfulApiClient {
-    self = [super init];
-    if (self) {
-        _restfulApiClient = restfulApiClient;
-    }
-    return self;
-}
-
 - (void)registerDevice:(DHDeviceData*)device
-               success:(DHDeviceServiceSuccessCompletionBlock) success
-               failure:(DHDeviceServiceFailureCompletionBlock) failure {
+               success:(DHServiceSuccessCompletionBlock) success
+               failure:(DHServiceFailureCompletionBlock) failure {
     
     NSString* path = [NSString stringWithFormat:@"device/%@", device.deviceID];
     [self setupAuthenticationForDevice:device];
@@ -60,8 +50,8 @@
 }
 
 - (void)getDeviceData:(DHDeviceData *)device
-           completion:(DHDeviceServiceSuccessCompletionBlock)success
-              failure:(DHDeviceServiceFailureCompletionBlock)failure {
+           completion:(DHServiceSuccessCompletionBlock)success
+              failure:(DHServiceFailureCompletionBlock)failure {
     NSString* path = [NSString stringWithFormat:@"device/%@", device.deviceID];
     [self setupAuthenticationForDevice:device];
     [self.restfulApiClient get:path
@@ -78,8 +68,8 @@
 
 - (void)sendNotification:(DHNotification*)notification
                forDevice:(DHDeviceData*)device
-                 success:(DHDeviceServiceSuccessCompletionBlock) success
-                 failure:(DHDeviceServiceFailureCompletionBlock) failure {
+                 success:(DHServiceSuccessCompletionBlock) success
+                 failure:(DHServiceFailureCompletionBlock) failure {
     
     [self setupAuthenticationForDevice:device];
     NSString* path = [NSString stringWithFormat:@"device/%@/notification", device.deviceID];
@@ -98,8 +88,8 @@
 - (void)updateCommand:(DHCommand*)command
             forDevice:(DHDeviceData*)device
            withResult:(DHCommandResult*)result
-              success:(DHDeviceServiceSuccessCompletionBlock) success
-              failure:(DHDeviceServiceFailureCompletionBlock) failure {
+              success:(DHServiceSuccessCompletionBlock) success
+              failure:(DHServiceFailureCompletionBlock) failure {
     
     [self setupAuthenticationForDevice:device];
     
@@ -118,16 +108,19 @@
 
 - (void)pollCommandsForDevice:(DHDeviceData *)device
                         since:(NSString *)lastCommandPollTimestamp
-                   completion:(DHDeviceServiceSuccessCompletionBlock)success
-                      failure:(DHDeviceServiceFailureCompletionBlock)failure {
-    NSString* path = nil;
-    if (lastCommandPollTimestamp) {
-        path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                //path = [NSString stringWithFormat:@"device/%@/command/poll?timestamp=%@",
-                device.deviceID, encodeToPercentEscapeString(lastCommandPollTimestamp)];
-    } else {
-        path = [NSString stringWithFormat:@"device/%@/command/poll", device.deviceID];
+                  waitTimeout:(NSNumber *)waitTimeout
+                   completion:(DHServiceSuccessCompletionBlock)success
+                      failure:(DHServiceFailureCompletionBlock)failure {
+    NSMutableString* path = [NSMutableString stringWithFormat:@"device/%@/command/poll", device.deviceID];
+    if (lastCommandPollTimestamp.length > 0) {
+        [path appendFormat:@"?timestamp=%@",
+         encodeToPercentEscapeString(lastCommandPollTimestamp)];
     }
+    if (waitTimeout) {
+        [path appendString:lastCommandPollTimestamp.length > 0 ? @"&" : @"?"];
+        [path appendFormat:@"waitTimeout=%@", waitTimeout];
+    }
+    
     [self.restfulApiClient get:path
                     parameters:nil
                        success:^(id response) {
@@ -147,10 +140,6 @@
                                value:device.deviceID];
     [self.restfulApiClient setHeader:@"Auth-DeviceKey"
                                value:device.key];
-}
-
-- (void)cancelAllServiceRequests {
-    [self.restfulApiClient cancelAllHTTPOperations];
 }
 
 @end
